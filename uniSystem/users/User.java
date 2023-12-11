@@ -22,6 +22,8 @@ public class User implements Comparable<User> {
     private UserFactory userFactory;
     private Observer observer;
     private Comment comment;
+    
+    public User (String)
 
     public User(String firstName, String lastName, String password, String login, String userId, UserType userType,
                 ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
