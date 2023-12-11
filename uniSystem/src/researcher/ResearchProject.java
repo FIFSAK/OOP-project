@@ -1,130 +1,42 @@
 package researcher;
 
-public class ResearchProject {
-    
-    /**
-    * @generated
-    */
-    private String topic;
-    
-    /**
-    * @generated
-    */
-    private ResearchPaper  publishedPapers;
-    
-    /**
-    * @generated
-    */
-    private Researcher participant;
-    
-    
-    /**
-    * @generated
-    */
-    private ResearcherDecorator researcherDecorator;
-    
-    /**
-    * @generated
-    */
-    private ResearcherDecorator researcherDecorator;
-    
-    /**
-    * @generated
-    */
-    private ResearchPaper researchPaper;
-    
-    
+import java.util.Vector;
 
-    /**
-    * @generated
-    */
-    public String getTopic() {
-        return this.topic;
+public class ResearchProject {
+
+	public String topic;
+	public Vector<ResearchPaper> publishedPapers = new Vector<ResearchPaper>();
+	public Vector<ResearcherDecorator> participants = new Vector<ResearcherDecorator>();;
+    
+    
+	
+    public ResearchProject(String topic, Vector<ResearchPaper> publishedPapers, Vector<ResearcherDecorator> participants) {
+    	this.topic = topic;
+    	this.publishedPapers = publishedPapers;
+    	this.participants = participants;
     }
     
-    /**
-    * @generated
-    */
-    public String setTopic(String topic) {
-        this.topic = topic;
+    public String toString() {
+    	return "Topic: " + topic + "publishedPapers: " + publishedPapers + "participant"  + participants.toString();
     }
     
-    
-    /**
-    * @generated
-    */
-    public ResearchPaper get publishedPapers() {
-        return this. publishedPapers;
+    public Vector<ResearchPaper> getPapers() {
+    	return publishedPapers;
     }
     
-    /**
-    * @generated
-    */
-    public ResearchPaper set publishedPapers(ResearchPaper  publishedPapers) {
-        this. publishedPapers =  publishedPapers;
+    public void addPaper(ResearchPaper rp) {
+    	publishedPapers.add(rp);
     }
     
-    
-    /**
-    * @generated
-    */
-    public Researcher getParticipant() {
-        return this.participant;
+    public void addParticipant(ResearcherDecorator rd) throws NoResearcherException {
+    	if(rd.getClass().getSimpleName() == "ResearcherDecorator") {
+    		participants.add(rd);
+    		return;
+    	}
+    	throw new NoResearcherException("No Researcher");
+    	
     }
-    
-    /**
-    * @generated
-    */
-    public Researcher setParticipant(Researcher participant) {
-        this.participant = participant;
-    }
-    
-    
-    
-    /**
-    * @generated
-    */
-    public ResearcherDecorator getResearcherDecorator() {
-        return this.researcherDecorator;
-    }
-    
-    /**
-    * @generated
-    */
-    public ResearcherDecorator setResearcherDecorator(ResearcherDecorator researcherDecorator) {
-        this.researcherDecorator = researcherDecorator;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public ResearcherDecorator getResearcherDecorator() {
-        return this.researcherDecorator;
-    }
-    
-    /**
-    * @generated
-    */
-    public ResearcherDecorator setResearcherDecorator(ResearcherDecorator researcherDecorator) {
-        this.researcherDecorator = researcherDecorator;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public ResearchPaper getResearchPaper() {
-        return this.researchPaper;
-    }
-    
-    /**
-    * @generated
-    */
-    public ResearchPaper setResearchPaper(ResearchPaper researchPaper) {
-        this.researchPaper = researchPaper;
-    }
-    
+     
     
     
 }

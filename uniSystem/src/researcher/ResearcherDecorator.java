@@ -1,257 +1,95 @@
 package researcher;
 
-public class ResearcherDecorator {
-	public class ResearcherDecorator implements Exception hindex3, Researcher {
-	   
+import java.util.Collections;
+import java.util.Set;
+import java.util.Vector;
+
+import enums.Format;
+import users.Student;
+import users.User;
+import users.Employee;
+
+public class ResearcherDecorator implements Researcher {	   
 	    private User user;
 	    
-	    /**
-	    * @generated
-	    */
-	    private vector<ResearchProject> projects;
+	    public Vector<ResearchProject> projects;
 	    
-	    /**
-	    * @generated
-	    */
-	    private double hindex;
+	    public Vector<ResearchPaper> papers;
 	    
+	    public double hindex;
 	    
+	    public ResearcherDecorator () {}
 	    
-
-	    /**
-	    * @generated
-	    */
-	    private user getUser() {
-	        return this.user;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    private user setUser(user user) {
-	        this.user = user;
+	    public ResearcherDecorator (User u) {
+	    	user = u;
 	    }
 	    
 	    
-	    /**
-	    * @generated
-	    */
-	    public vector<ResearchProject> getProjects() {
-	        return this.projects;
+	    public User getWrappedUser(){
+	    	return user;
 	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public vector<ResearchProject> setProjects(vector<ResearchProject> projects) {
-	        this.projects = projects;
+	    public Student getWrappedStudent(){
+	    	return (Student) user;
 	    }
-	    
-	    
-	    /**
-	    * @generated
-	    */
-	    public double getHindex() {
-	        return this.hindex;
+	    public Employee getWrappedEmployee(){
+	    	return (Employee) user;
 	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public double setHindex(double hindex) {
-	        this.hindex = hindex;
-	    }
-	    
-	    
-	    
-	    
-
-	    //                          Operations                                  
-	    
-	    /**
-	    * @generated
-	    */
-	    public int compareTo() {
-	        //TODO
-	        return 0;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public int hashCode() {
-	        //TODO
-	        return 0;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public String toString() {
-	        //TODO
-	        return "";
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public boolean equals() {
-	        //TODO
-	        return false;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public void update() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public void logout() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public void login() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public String genearteUserId() {
-	        //TODO
-	        return "";
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public String getLogin() {
-	        //TODO
-	        return "";
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public String viewTranscript() {
-	        //TODO
-	        return "";
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public Mark viewMarks() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public void rateTeacher() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public Reject Orders viewCourses() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public String viewSchedule() {
-	        //TODO
-	        return "";
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public void registerToCourse() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public vector<Student> infoAboutStudent() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public vector<Teacher> infoAboutTeacher() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public boolean assignCourse() {
-	        //TODO
-	        return false;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public void academicReportPerformance() {
-	        //TODO
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public Student viewStudent() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public Set<Course> viewCourses() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public Student InfoAboutStudents() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    /**
-	    * @generated
-	    */
-	    public Employee getDepartment() {
-	        //TODO
-	        return null;
-	    }
-	    
-	    
-	}
+		@Override
+		public void addProject(ResearchProject researchProject) {
+			// TODO Auto-generated method stub
+			projects.add(researchProject);
+			
+		}
+		@Override
+		public String printPapers(String sortType) {
+			if(sortType == "by citations") {				
+				Collections.sort(papers, new PaperCitationComparator());
+			}
+			String p = "";
+			for(ResearchPaper cur: papers) {
+				p += cur.toString();
+			}
+			return p;
+		}
+		@Override
+		public void calculateHIndex() {
+			Set<ResearchPaper> s = null;
+			int minimalCitations = Integer.MAX_VALUE;
+			for(ResearchProject project: projects) {
+				for(ResearchPaper paper: project.getPapers()) {
+					s.add(paper);
+					if (paper.getCitation(Format.PLAIN_TEXT).size() < minimalCitations) {
+						minimalCitations = paper.getCitation(Format.PLAIN_TEXT).size();
+					}
+				}
+			}
+			hindex = minimalCitations;
+			if(hindex < 3) {
+				new LowHIndex("your hindex lesser than 3");
+			}
+		}
+		
+		public String toString() {
+			if(user instanceof Student) {
+				user = (Student) user;
+			}
+			else if(user instanceof Employee) {
+				user = (Employee) user;
+			}
+			return user.toString() + " projects: " + projects.toString() + " hindex: " +hindex;
+		}
+		
+		public void newProject(String topic, Vector<ResearchPaper> publishedPapers, Vector<ResearcherDecorator> participants) {
+			projects.add(new ResearchProject(topic, publishedPapers, participants));
+		}
+		public void newPaper(String name, 
+				Vector<ResearchPaper> citations,
+				Vector<ResearcherDecorator> authors, 
+				int pages, String journal) {
+			papers.add(new ResearchPaper(name, citations, authors, pages, journal));
+			
+		}
+		
+		
 
 }
