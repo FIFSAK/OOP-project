@@ -1,311 +1,126 @@
 package users;
 
-public class Student extends User {
-    
-    /**
-    * @generated
-    */
-    private Faculties faculty;
-    
-    /**
-    * @generated
-    */
-    private Faculties faculty;
-    
-    /**
-    * @generated
-    */
-    private int yearOfStudy;
-    
-    /**
-    * @generated
-    */
-    private StudentOrganisations organisation;
-    
-    /**
-    * @generated
-    */
-    private HashMap<Course, Mark> courseInfo;
-    
-    
-    /**
-    * @generated
-    */
-    private Teacher teacher;
-    
-    /**
-    * @generated
-    */
-    private Course course;
-    
-    /**
-    * @generated
-    */
-    private StudentOrganization studentOrganization;
-    
-    /**
-    * @generated
-    */
-    private ResearcherDecorator researcherDecorator;
-    
-    /**
-    * @generated
-    */
-    private Manager manager;
-    
-    /**
-    * @generated
-    */
-    private Data data;
-    
-    /**
-    * @generated
-    */
-    private Mark mark;
-    
-    
+import java.util.Date;
+import java.util.HashMap;
 
-    /**
-    * @generated
-    */
-    private Faculties getFaculty() {
-        return this.faculty;
+import javax.xml.crypto.Data;
+
+import additional.*;
+import course.Course;
+import course.Mark;
+import enums.Faculties;
+import researcher.ResearcherDecorator;
+
+public class Student extends User {
+
+    private Faculties faculty;
+    private int yearOfStudy;
+    private StudentOrganisation organisation;
+    private HashMap<Course, Mark> courseInfo;
+    private Teacher teacher;
+    private Course course;
+    private StudentOrganisation studentOrganization;
+    private ResearcherDecorator researcherDecorator;
+    private Manager manager;
+    private Data data;
+    private Mark mark;
+
+    public Student(String login, String password) {
+        super(login, password);
+        this.faculty = Faculties.BS;
+        this.yearOfStudy = 1;
     }
-    
-    /**
-    * @generated
-    */
-    private Faculties setFaculty(Faculties faculty) {
-        this.faculty = faculty;
-    }
-    
-    
-    /**
-    * @generated
-    */
+
+
     public Faculties getFaculty() {
-        return this.faculty;
+        return faculty;
     }
-    
-    /**
-    * @generated
-    */
-    public Faculties setFaculty(Faculties faculty) {
+
+    public void setFaculty(Faculties faculty) {
         this.faculty = faculty;
     }
-    
-    
-    /**
-    * @generated
-    */
+
     public int getYearOfStudy() {
-        return this.yearOfStudy;
+        return yearOfStudy;
     }
-    
-    /**
-    * @generated
-    */
-    public int setYearOfStudy(Integer yearOfStudy) {
+
+    public void setYearOfStudy(int yearOfStudy) {
         this.yearOfStudy = yearOfStudy;
     }
-    
-    
-    /**
-    * @generated
-    */
-    private StudentOrganisations getOrganisation() {
-        return this.organisation;
+
+    public StudentOrganisation getOrganisation() {
+        return organisation;
     }
-    
-    /**
-    * @generated
-    */
-    private StudentOrganisations setOrganisation(StudentOrganisations organisation) {
+
+    public void setOrganisation(StudentOrganisation organisation) {
         this.organisation = organisation;
     }
-    
-    
-    /**
-    * @generated
-    */
+
     public HashMap<Course, Mark> getCourseInfo() {
-        return this.courseInfo;
+        return courseInfo;
     }
-    
-    /**
-    * @generated
-    */
-    public HashMap<Course, Mark> setCourseInfo(HashMap<Course, Mark> courseInfo) {
+
+    public void setCourseInfo(HashMap<Course, Mark> courseInfo) {
         this.courseInfo = courseInfo;
     }
-    
-    
-    
-    /**
-    * @generated
-    */
-    public ResearcherDecorator getResearcherDecorator() {
-        return this.researcherDecorator;
-    }
-    
-    /**
-    * @generated
-    */
-    public ResearcherDecorator setResearcherDecorator(ResearcherDecorator researcherDecorator) {
-        this.researcherDecorator = researcherDecorator;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public Data getData() {
-        return this.data;
-    }
-    
-    /**
-    * @generated
-    */
-    public Data setData(Data data) {
-        this.data = data;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public Mark getMark() {
-        return this.mark;
-    }
-    
-    /**
-    * @generated
-    */
-    public Mark setMark(Mark mark) {
-        this.mark = mark;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public Course getCourse() {
-        return this.course;
-    }
-    
-    /**
-    * @generated
-    */
-    public Course setCourse(Course course) {
-        this.course = course;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public StudentOrganization getStudentOrganization() {
-        return this.studentOrganization;
-    }
-    
-    /**
-    * @generated
-    */
-    public StudentOrganization setStudentOrganization(StudentOrganization studentOrganization) {
-        this.studentOrganization = studentOrganization;
-    }
-    
-    
-    /**
-    * @generated
-    */
+
     public Teacher getTeacher() {
-        return this.teacher;
+        return teacher;
     }
-    
-    /**
-    * @generated
-    */
-    public Teacher setTeacher(Teacher teacher) {
+
+    public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
-    
-    
-    /**
-    * @generated
-    */
-    public Manager getManager() {
-        return this.manager;
+
+    public Course getCourse() {
+        return course;
     }
-    
-    /**
-    * @generated
-    */
-    public Manager setManager(Manager manager) {
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public StudentOrganisation getStudentOrganization() {
+        return studentOrganization;
+    }
+
+    public void setStudentOrganization(StudentOrganisation studentOrganization) {
+        this.studentOrganization = studentOrganization;
+    }
+
+    public ResearcherDecorator getResearcherDecorator() {
+        return researcherDecorator;
+    }
+
+    public void setResearcherDecorator(ResearcherDecorator researcherDecorator) {
+        this.researcherDecorator = researcherDecorator;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
         this.manager = manager;
     }
-    
-    
-    
 
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
-    public String viewTranscript() {
-        //TODO
-        return "";
+    public Data getData() {
+        return data;
     }
-    
-    /**
-    * @generated
-    */
-    public Mark viewMarks() {
-        //TODO
-        return null;
+
+    public void setData(Data data) {
+        this.data = data;
     }
-    
-    /**
-    * @generated
-    */
-    public void rateTeacher() {
-        //TODO
-        return null;
+
+    public Mark getMark() {
+        return mark;
     }
-    
-    /**
-    * @generated
-    */
-    public Reject Orders viewCourses() {
-        //TODO
-        return null;
+
+    public void setMark(Mark mark) {
+        this.mark = mark;
     }
-    
-    /**
-    * @generated
-    */
-    public String viewSchedule() {
-        //TODO
-        return "";
-    }
-    
-    /**
-    * @generated
-    */
-    public void registerToCourse() {
-        //TODO
-        return null;
-    }
-    
-    /**
-    * @generated
-    */
-    public String viewInfoAboutTeachers() {
-        //TODO
-        return "";
-    }
-    
-    
+
+    // Additional methods and operations
+    // Implement the remaining methods based on project requirements
+//     TODO: Implement viewTranscript, viewMarks, rateTeacher, viewCourses, viewSchedule, registerToCourse, viewInfoAboutTeachers
 }
-

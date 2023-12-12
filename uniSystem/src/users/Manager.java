@@ -1,14 +1,36 @@
 package users;
 
+import java.util.Date;
 import java.util.Vector;
+
+
+import additional.News;
+import course.Course;
+import enums.FamilyStatus;
+import enums.Gender;
+import enums.ManagerType;
+import researcher.ResearchPaper;
 
 public class Manager extends Employee {
 
-    private ManagerType type;
+    public Manager(String firstName, String lastName, String password, String login, String userId,
+			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
+			Gender category, String nationality, FamilyStatus familyStatus) {
+		super(firstName, lastName, password, login, userId, subscribedJournals, name, dateOfBirth, phoneNumber, iin, category,
+				nationality, familyStatus);
+		// TODO Auto-generated constructor stub
+	}
+
+	public Manager(String login, String password) {
+		super(login, password);
+		// TODO Auto-generated constructor stub
+	}
+
+	private ManagerType type;
     private Course course;
     private Teacher teacher;
     private News news;
-    private Data data;
+    private Date data;
     private Student student;
 
     public ManagerType getType() {
@@ -19,11 +41,11 @@ public class Manager extends Employee {
         this.type = type;
     }
 
-    public Data getData() {
+    public Date getData() {
         return this.data;
     }
 
-    public void setData(Data data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

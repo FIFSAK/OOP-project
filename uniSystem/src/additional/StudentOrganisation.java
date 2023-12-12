@@ -1,6 +1,10 @@
 package additional;
 
-public class StudentOrganization {
+import java.util.Vector;
+
+import users.Student;
+
+public class StudentOrganisation {
     
     /**
     * @generated
@@ -10,7 +14,7 @@ public class StudentOrganization {
     /**
     * @generated
     */
-    private vector<Student> members;
+    private Vector<Student> members;
     
     
     /**
@@ -30,7 +34,7 @@ public class StudentOrganization {
     /**
     * @generated
     */
-    public Student setHead(Student head) {
+    public void setHead(Student head) {
         this.head = head;
     }
     
@@ -38,14 +42,14 @@ public class StudentOrganization {
     /**
     * @generated
     */
-    public vector<Student> getMembers() {
+    public Vector<Student> getMembers() {
         return this.members;
     }
     
     /**
     * @generated
     */
-    public vector<Student> setMembers(vector<Student> members) {
+    public void setMembers(Vector<Student> members) {
         this.members = members;
     }
     
@@ -61,7 +65,7 @@ public class StudentOrganization {
     /**
     * @generated
     */
-    public Student setStudent(Student student) {
+    public void setStudent(Student student) {
         this.student = student;
     }
     
