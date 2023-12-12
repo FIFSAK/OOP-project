@@ -1,87 +1,61 @@
 package additional;
 
-public class UniversityJournal implements Observable {
-    
-    /**
-    * @generated
-    */
-    private List<Observer> observers;
-    
-    /**
-    * @generated
-    */
-    private String latestPaper;
-    
-    
-    
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-    /**
-    * @generated
-    */
-    private List<Observer> getObservers() {
-        return this.observers;
+public class UniversityJournal implements Observer {
+
+    private List<Observer> observers;
+    private String latestPaper;
+
+    public UniversityJournal() {
+        this.observers = new ArrayList<>();
+        // Subscribe all users by default
+        // Add your logic to get all users and subscribe them
     }
-    
-    /**
-    * @generated
-    */
-    private List<Observer> setObservers(List<Observer> observers) {
+
+    public List<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(List<Observer> observers) {
         this.observers = observers;
     }
-    
-    
-    /**
-    * @generated
-    */
-    private String getLatestPaper() {
-        return this.latestPaper;
+
+    public String getLatestPaper() {
+        return latestPaper;
     }
-    
-    /**
-    * @generated
-    */
-    private String setLatestPaper(String latestPaper) {
+
+    public void setLatestPaper(String latestPaper) {
         this.latestPaper = latestPaper;
     }
-    
-    
-    
-    
 
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
-    public void publishNewPaper() {
-        //TODO
-        return null;
+    // Operations
+
+    public void publishNewPaper(String paper) {
+        this.latestPaper = paper;
+        notifyObservers();
     }
-    
-    /**
-    * @generated
-    */
-    public void addObserver() {
-        //TODO
-        return null;
+
+    public void addObserver(Observer observer) {
+        observers.add(observer);
     }
-    
-    /**
-    * @generated
-    */
-    public void removeObserver() {
-        //TODO
-        return null;
+
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
     }
-    
-    /**
-    * @generated
-    */
+
     public void notifyObservers() {
-        //TODO
-        return null;
+        for (Observer observer : observers) {
+            observer.update(this, latestPaper);
+        }
     }
-    
-    
-}
 
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+}

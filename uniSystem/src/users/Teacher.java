@@ -1,35 +1,48 @@
 package users;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.Vector;
 
+import course.Course;
+import enums.FamilyStatus;
+import enums.Gender;
+import enums.TeacherType;
+import researcher.ResearchPaper;
+import researcher.ResearcherDecorator;
+
 public class Teacher extends Employee {
 
-    private Set<Course> courses;
+    public Teacher(String firstName, String lastName, String password, String login, String userId,
+			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
+			Gender category, String nationality, FamilyStatus familyStatus) {
+		super(firstName, lastName, password, login, userId, subscribedJournals, name, dateOfBirth, phoneNumber, iin, category,
+				nationality, familyStatus);
+		// TODO Auto-generated constructor stub
+	}
+
+	public Teacher(String login, String password) {
+		super(login, password);
+		// TODO Auto-generated constructor stub
+	}
+
+	private Set<Course> courses;
     private Student viewStudents;
     private TeacherType post;
     private Vector<Student> students;
     private Course course;
     private ResearcherDecorator researcherDecorator;
     private Manager manager;
-    private Data data;
+    private Date data;
     private Student student;
-    private EmployeeFactory employeeFactory;
+	private String viewCourses;
 
     public String getViewCourses() {
-        return this.viewCourses;
+        return this.getViewCourses();
     }
 
     public void setViewCourses(String viewCourses) {
         this.viewCourses = viewCourses;
-    }
-
-    public String getAttribute() {
-        return this.attribute;
-    }
-
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
     }
 
     private Set<Course> getCourses() {
@@ -72,11 +85,11 @@ public class Teacher extends Employee {
         this.researcherDecorator = researcherDecorator;
     }
 
-    public Data getData() {
+    public Date getData() {
         return this.data;
     }
 
-    public void setData(Data data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
@@ -86,14 +99,6 @@ public class Teacher extends Employee {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public EmployeeFactory getEmployeeFactory() {
-        return this.employeeFactory;
-    }
-
-    public void setEmployeeFactory(EmployeeFactory employeeFactory) {
-        this.employeeFactory = employeeFactory;
     }
 
     public Manager getManager() {

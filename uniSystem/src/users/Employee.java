@@ -1,44 +1,53 @@
 package users;
 
+import java.util.Date;
+
+import enums.FamilyStatus;
+import enums.Gender;
+import researcher.ResearchPaper;
+
 public class Employee extends User {
     
-    private String workDepartment;
+    public Employee(String firstName, String lastName, String password, String login, String userId,
+			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
+			Gender category, String nationality, FamilyStatus familyStatus) {
+		super(firstName, lastName, password, login, userId, subscribedJournals, name, dateOfBirth, phoneNumber, iin, category,
+				nationality, familyStatus);
+		// TODO Auto-generated constructor stub
+	}
+
+	public Employee(String login, String password) {
+		super(login, password);
+		// TODO Auto-generated constructor stub
+	}
+
+	private String workDepartment;
     private int salary;
-    private Data data;
-    private EmployeeFactory employeeFactory;
+    private Date data;
     
     private String getWorkDepartment() {
         return this.workDepartment;
     }
   
-    private String setWorkDepartment(String workDepartment) {
+    private void setWorkDepartment(String workDepartment) {
         this.workDepartment = workDepartment;
     }
 
-    private  getSalary() {
+    private  int getSalary() {
         return this.salary;
     }
 
-    private int  setSalary(int salary) {
+    private void  setSalary(int salary) {
         this.salary = salary;
     }
  
-    public Data getData() {
+    public Date getData() {
         return this.data;
     }
 
-    public Data setData(Data data) {
+    public void setData(Date data) {
         this.data = data;
     }
-
-    public EmployeeFactory getEmployeeFactory() {
-        return this.employeeFactory;
-    }
-
-    public EmployeeFactory setEmployeeFactory(EmployeeFactory employeeFactory) {
-        this.employeeFactory = employeeFactory;
-    }
-    
     
     
 }

@@ -1,75 +1,50 @@
 package additional;
 
+import users.GraduateStudent;
+
 public class DissertationProject {
     
-    /**
-    * @generated
-    */
     private String thesis;
-    
-    /**
-    * @generated
-    */
     private String main;
-    
-    
-    /**
-    * @generated
-    */
     private GraduateStudent graduateStudent;
     
-    
-
-    /**
-    * @generated
-    */
-    private String getThesis() {
-        return this.thesis;
-    }
-    
-    /**
-    * @generated
-    */
-    private String setThesis(String thesis) {
+    public DissertationProject(String thesis, String main, GraduateStudent graduateStudent) {
         this.thesis = thesis;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    private String getMain() {
-        return this.main;
-    }
-    
-    /**
-    * @generated
-    */
-    private String setMain(String main) {
         this.main = main;
-    }
-    
-    
-    
-    /**
-    * @generated
-    */
-    public GraduateStudent getGraduateStudent() {
-        return this.graduateStudent;
-    }
-    
-    /**
-    * @generated
-    */
-    public GraduateStudent setGraduateStudent(GraduateStudent graduateStudent) {
         this.graduateStudent = graduateStudent;
     }
-    
-    
-    
 
-    //                          Operations                                  
-    
-    
+    public String getThesis() {
+        return thesis;
+    }
+
+    public void setThesis(String thesis) {
+        this.thesis = thesis;
+    }
+
+    public String getMain() {
+        return main;
+    }
+
+    public void setMain(String main) {
+        this.main = main;
+    }
+
+    public GraduateStudent getGraduateStudent() {
+        return graduateStudent;
+    }
+
+    public void setGraduateStudent(GraduateStudent graduateStudent) {
+        this.graduateStudent = graduateStudent;
+    }
+
+    // Additional operations based on project requirements
+    public void submitThesis() {
+        // TODO: Implement logic to submit the thesis
+    }
+
+    public String reviewThesis() {
+        // TODO: Implement logic to review the thesis
+        return "";
+    }
 }
-

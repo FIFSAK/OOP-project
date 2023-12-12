@@ -1,55 +1,49 @@
 package additional;
 
-public class UserFactory {
+import users.User;
 
+import enums.UserType;
+import users.Employee;
+import users.Student;
+import users.User;
+
+public class UserFactory {
     private User user;
     private static int studentCount = 1;
     private static int employeeCount = 1;
 
-    public User getUser() {
-        return this.user;
-    }
+    public User createUser(String login, String password) {
+        // Determine user type based on the login
+        UserType userType = determineUserType(login);
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User createUser() {
-        // Check user type and create the appropriate user
-        if (user != null) {
-            return user;
-        } else {
-            return null; // Handle appropriately
-        }
-    }
-
-    public String generateUserId() {
-        String year = ""; // Extract the year based on your logic
-        String userId = "";
-
-        // Generate user ID based on the UserType
-        switch (user.getUserType()) {
+        // Create the appropriate user
+        switch (userType) {
             case STUDENT:
-                userId = year + "B" + studentCount;
-                studentCount++;
-                break;
-            case MASTER:
-                userId = year.substring(2) + "M" + studentCount;
-                studentCount++;
-                break;
-            case PHD:
-                userId = year.substring(2) + "P" + studentCount;
-                studentCount++;
+                user = new Student(login, password);
                 break;
             case EMPLOYEE:
-                userId = year + "E" + employeeCount;
-                employeeCount++;
+                user = new Employee(login, password);
                 break;
             default:
                 // Handle default case or throw an exception
                 break;
         }
 
-        return userId;
+        // Set user type and generate user ID
+        user.setUserType(userType);
+        user.generateUserId(userType);
+
+        return user;
+    }
+
+    private UserType determineUserType(String login) {
+        if (login.contains(".")) {
+            return UserType.EMPLOYEE;
+        } else if (login.contains("_")) {
+            return UserType.STUDENT;
+        } else {
+            // Default UserType or handle as needed
+            return UserType.DEFAULT;
+        }
     }
 }

@@ -1,290 +1,62 @@
 package data;
 
 
-/**
-* @generated
-*/
-private Data instance;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-/**
-* @generated
-*/
-private vector<Students> students;
+import course.*;
+import users.*;
 
-/**
-* @generated
-*/
-private vector<Employee> employee;
+public class Data {
+    // Singleton instance
+    private static Data instance;
 
-/**
-* @generated
-*/
-private vector<Teacher>... teacher;
+    // Database storage
+    private Map<String, User> userDatabase;
+    private Map<String, Course> courseDatabase;
 
-/**
-* @generated
-*/
-private vector<Manager> manager;
+    // Private constructor to prevent instantiation
+    private Data() {
+        userDatabase = new HashMap<>();
+        courseDatabase = new HashMap<>();
+    }
 
-/**
-* @generated
-*/
-private  graduateStudent;
+    // Public method to get the singleton instance
+    public static Data getInstance() {
+        if (instance == null) {
+            instance = new Data();
+        }
+        return instance;
+    }
 
-/**
-* @generated
-*/
-private vector<Dean> dean;
+    // Public method to get all users
+    public List<User> getAllUsers() {
+        return new ArrayList<>(userDatabase.values());
+    }
 
-/**
-* @generated
-*/
-private vector<techSupportSpecialist> techSupportSpecialist;
+    // Public method to get all courses
+    public List<Course> getAllCourses() {
+        return new ArrayList<>(courseDatabase.values());
+    }
 
-/**
-* @generated
-*/
-private vector<Researcher> researcher;
+    // Public method to get user by ID
+    public User getUserById(String userId) {
+        return userDatabase.get(userId);
+    }
 
+    // Public method to get course by ID
+    public Course getCourseById(String courseId) {
+        return courseDatabase.get(courseId);
+    }
 
-/**
-* @generated
-*/
-private Dean dean2;
+    // Public method to add user to the database
+    public void addUser(User user) {
+        userDatabase.put(user.getUserId(), user);
+    }}
 
-/**
-* @generated
-*/
-private Manager manager2;
-
-/**
-* @generated
-*/
-private Employee employee2;
-
-/**
-* @generated
-*/
-private Student student;
-
-/**
-* @generated
-*/
-private Teacher teacher2;
-
-
-
-/**
-* @generated
-*/
-private Data getInstance() {
-    return this.instance;
-}
-
-/**
-* @generated
-*/
-private Data setInstance(Data instance) {
-    this.instance = instance;
-}
-
-
-/**
-* @generated
-*/
-private vector<Students> getStudents() {
-    return this.students;
-}
-
-/**
-* @generated
-*/
-private vector<Students> setStudents(vector<Students> students) {
-    this.students = students;
-}
-
-
-/**
-* @generated
-*/
-private vector<Employee> getEmployee() {
-    return this.employee;
-}
-
-/**
-* @generated
-*/
-private vector<Employee> setEmployee(vector<Employee> employee) {
-    this.employee = employee;
-}
-
-
-/**
-* @generated
-*/
-private vector<Teacher>... getTeacher() {
-    return this.teacher;
-}
-
-/**
-* @generated
-*/
-private vector<Teacher>... setTeacher(vector<Teacher>... teacher) {
-    this.teacher = teacher;
-}
-
-
-/**
-* @generated
-*/
-private vector<Manager> getManager() {
-    return this.manager;
-}
-
-/**
-* @generated
-*/
-private vector<Manager> setManager(vector<Manager> manager) {
-    this.manager = manager;
-}
-
-
-/**
-* @generated
-*/
-private  getGraduateStudent() {
-    return this.graduateStudent;
-}
-
-/**
-* @generated
-*/
-private  setGraduateStudent(invalid graduateStudent) {
-    this.graduateStudent = graduateStudent;
-}
-
-
-/**
-* @generated
-*/
-private vector<Dean> getDean() {
-    return this.dean;
-}
-
-/**
-* @generated
-*/
-private vector<Dean> setDean(vector<Dean> dean) {
-    this.dean = dean;
-}
-
-
-/**
-* @generated
-*/
-private vector<techSupportSpecialist> getTechSupportSpecialist() {
-    return this.techSupportSpecialist;
-}
-
-/**
-* @generated
-*/
-private vector<techSupportSpecialist> setTechSupportSpecialist(vector<techSupportSpecialist> techSupportSpecialist) {
-    this.techSupportSpecialist = techSupportSpecialist;
-}
-
-
-/**
-* @generated
-*/
-private vector<Researcher> getResearcher() {
-    return this.researcher;
-}
-
-/**
-* @generated
-*/
-private vector<Researcher> setResearcher(vector<Researcher> researcher) {
-    this.researcher = researcher;
-}
-
-
-
-/**
-* @generated
-*/
-public Dean getDean2() {
-    return this.dean2;
-}
-
-/**
-* @generated
-*/
-public Dean setDean2(Dean dean2) {
-    this.dean2 = dean2;
-}
-
-
-/**
-* @generated
-*/
-public Teacher getTeacher2() {
-    return this.teacher2;
-}
-
-/**
-* @generated
-*/
-public Teacher setTeacher2(Teacher teacher2) {
-    this.teacher2 = teacher2;
-}
-
-
-/**
-* @generated
-*/
-public Employee getEmployee2() {
-    return this.employee2;
-}
-
-/**
-* @generated
-*/
-public Employee setEmployee2(Employee employee2) {
-    this.employee2 = employee2;
-}
-
-
-/**
-* @generated
-*/
-public Manager getManager2() {
-    return this.manager2;
-}
-
-/**
-* @generated
-*/
-public Manager setManager2(Manager manager2) {
-    this.manager2 = manager2;
-}
-
-
-/**
-* @generated
-*/
-public Student getStudent() {
-    return this.student;
-}
-
-/**
-* @generated
-*/
-public Student setStudent(Student student) {
-    this.student = student;
-}
-
-
-
-}
-
+    // Public method to add course to the database
+//    public void addCourse(Course course) {
+//        courseDatabase.put(course.getCourseId(), course);
+//    }

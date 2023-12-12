@@ -1,75 +1,48 @@
 package users;
 
-public class GraduateStudent extends Student implements Researcher {
-    
-    /**
-    * @generated
-    */
-    private GraduateStudentType studentType;
-    
-    /**
-    * @generated
-    */
-    private DissertationProject dissertationProject ;
-    
-    
-    /**
-    * @generated
-    */
-    private DissertationProject dissertationProject;
-    
-    
+import additional.DissertationProject;
+import enums.GraduateStudentType;
+import researcher.ResearchProject;
+import researcher.Researcher;
 
-    /**
-    * @generated
-    */
+public class GraduateStudent extends Student implements Researcher {
+
+    private GraduateStudentType studentType;
+    private DissertationProject dissertationProject;
+
+    public GraduateStudent(String login, String password) {
+        super(login, password);
+    }
+
     private GraduateStudentType getStudentType() {
         return this.studentType;
     }
-    
-    /**
-    * @generated
-    */
-    private GraduateStudentType setStudentType(GraduateStudentType studentType) {
+
+    private void setStudentType(GraduateStudentType studentType) {
         this.studentType = studentType;
     }
-    
-    
-    /**
-    * @generated
-    */
-    private DissertationProject getDissertationProject () {
-        return this.dissertationProject ;
-    }
-    
-    /**
-    * @generated
-    */
-    private DissertationProject setDissertationProject (DissertationProject dissertationProject ) {
-        this.dissertationProject  = dissertationProject ;
-    }
-    
-    
-    
-    /**
-    * @generated
-    */
-    public DissertationProject getDissertationProject() {
+
+    private DissertationProject getDissertationProject() {
         return this.dissertationProject;
     }
-    
-    /**
-    * @generated
-    */
-    public DissertationProject setDissertationProject(DissertationProject dissertationProject) {
+
+    private void setDissertationProject(DissertationProject dissertationProject) {
         this.dissertationProject = dissertationProject;
     }
-    
-    
-    
 
-    //                          Operations                                  
-    
-    
+    @Override
+    public void addProject(ResearchProject researchProject) {
+        // TODO: Implement
+    }
+
+    @Override
+    public String printPapers(String sortType) {
+        // TODO: Implement
+        return null;
+    }
+
+    @Override
+    public void calculateHIndex() {
+        // TODO: Implement
+    }
 }
-

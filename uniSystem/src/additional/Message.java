@@ -1,190 +1,77 @@
 package additional;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import users.*;
+
 public class Message {
     
-    /**
-    * @generated
-    */
     private User sender;
-    
-    /**
-    * @generated
-    */
     private User receiver;
-    
-    /**
-    * @generated
-    */
     private String content;
-    
-    /**
-    * @generated
-    */
     private Date dateSent;
+    private List<Attachment> attachments;
     
-    /**
-    * @generated
-    */
-    private List<Attachments> attachments;
-    
-    
-    /**
-    * @generated
-    */
-    private User user;
-    
-    
-
-    /**
-    * @generated
-    */
-    private User getSender() {
-        return this.sender;
-    }
-    
-    /**
-    * @generated
-    */
-    private User setSender(User sender) {
+    public Message(User sender, User receiver, String content, Date dateSent, List<Attachment> attachments) {
         this.sender = sender;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    private User getReceiver() {
-        return this.receiver;
-    }
-    
-    /**
-    * @generated
-    */
-    private User setReceiver(User receiver) {
         this.receiver = receiver;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    private String getContent() {
-        return this.content;
-    }
-    
-    /**
-    * @generated
-    */
-    private String setContent(String content) {
         this.content = content;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    private Date getDateSent() {
-        return this.dateSent;
-    }
-    
-    /**
-    * @generated
-    */
-    private Date setDateSent(Date dateSent) {
         this.dateSent = dateSent;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    private List<Attachments> getAttachments() {
-        return this.attachments;
-    }
-    
-    /**
-    * @generated
-    */
-    private List<Attachments> setAttachments(List<Attachments> attachments) {
         this.attachments = attachments;
     }
-    
-    
-    
-    /**
-    * @generated
-    */
-    public User getUser() {
-        return this.user;
-    }
-    
-    /**
-    * @generated
-    */
-    public User setUser(User user) {
-        this.user = user;
-    }
-    
-    
-    
 
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
     public User getSender() {
-        //TODO
-        return null;
+        return sender;
     }
-    
-    /**
-    * @generated
-    */
-    public User gerReceiver() {
-        //TODO
-        return null;
+
+    public void setSender(User sender) {
+        this.sender = sender;
     }
-    
-    /**
-    * @generated
-    */
+
+    public User getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
+    }
+
     public String getContent() {
-        //TODO
-        return "";
+        return content;
     }
-    
-    /**
-    * @generated
-    */
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public Date getDateSent() {
-        //TODO
-        return new Date();
+        return dateSent;
     }
-    
-    /**
-    * @generated
-    */
-    public List<Attachments> getAttachments() {
-        //TODO
-        return null;
+
+    public void setDateSent(Date dateSent) {
+        this.dateSent = dateSent;
     }
-    
-    /**
-    * @generated
-    */
-    public void addAttachments(attachment: Attachment)() {
-        //TODO
-        return null;
+
+    public List<Attachment> getAttachments() {
+        return attachments;
     }
-    
-    /**
-    * @generated
-    */
-    public void removeAttachment(attachment: Attachment)() {
-        //TODO
-        return null;
+
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
     }
-    
-    
+
+    public void addAttachment(Attachment attachment) {
+        if (this.attachments == null) {
+            this.attachments = new ArrayList<>();
+        }
+        this.attachments.add(attachment);
+    }
+
+    public void removeAttachment(Attachment attachment) {
+        if (this.attachments != null) {
+            this.attachments.remove(attachment);
+        }
+    }
 }

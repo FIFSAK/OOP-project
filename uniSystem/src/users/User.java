@@ -1,7 +1,12 @@
 package users;
 
 import java.util.Date;
+import java.util.Observer;
+
+import additional.Comment;
+import additional.UserFactory;
 import enums.*;
+import researcher.ResearchPaper;
 
 public class User implements Comparable<User> {
 
@@ -20,21 +25,24 @@ public class User implements Comparable<User> {
     private String nationality;
     private FamilyStatus familyStatus;
     private UserFactory userFactory;
-    private Observer observer;
+    @SuppressWarnings("deprecation")
+	private Observer observer;
     private Comment comment;
     
-    public User (String)
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
 
-    public User(String firstName, String lastName, String password, String login, String userId, UserType userType,
-                ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
-                Gender category, String nationality, FamilyStatus familyStatus, UserFactory userFactory,
-                Observer observer, Comment comment) {
+    public User(String firstName, String lastName, String password, String login, String userId,
+            ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber,
+            int iin, Gender category, String nationality, FamilyStatus familyStatus) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.login = login;
         this.userId = userId;
-        this.userType = userType;
+//        this.userType = userType;
         this.subscribedJournals = subscribedJournals;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -43,21 +51,6 @@ public class User implements Comparable<User> {
         this.category = category;
         this.nationality = nationality;
         this.familyStatus = familyStatus;
-        this.userFactory = userFactory;
-        this.observer = observer;
-        this.comment = comment;
-    }
-    
-    public User(UserFactory userFactory) {
-        this.login = userFactory.generateUserId();
-        if (login.contains(".")) {
-            this.userType = UserType.EMPLOYEE;
-        } else if (login.contains("_")) {
-            this.userType = UserType.STUDENT;
-        } else {
-            // Default UserType or handle as needed
-            this.userType = UserType.DEFAULT;
-        }
     }
 
     // Getters and Setters
