@@ -1,223 +1,63 @@
 package course;
 
+import users.*;
+import enums.*;
+import researcher.*;
+import additional.*;
+import course.*;
+
 public class Mark {
     
-    /**
-    * @generated
-    */
-    private  secondAttestation;
+    private double secondAttestation;
+    private double firstAttestation;
+    private double finalExam;
+    private double GPA;
+    private Grade grade;
+    private Course course;
     
-    /**
-    * @generated
-    */
-    private  firstAttestation;
-    
-    /**
-    * @generated
-    */
-    private  finalExam;
-    
-    /**
-    * @generated
-    */
-    private  GPA;
-    
-    /**
-    * @generated
-    */
-    private  grade;
-    
-    /**
-    * @generated
-    */
-    private  credits;
-    
-    /**
-    * @generated
-    */
-    private String courseId;
-    
-    
-    /**
-    * @generated
-    */
-    private ResearcherDecorator researcherDecorator;
-    
-    /**
-    * @generated
-    */
-    private Transcript transcript;
-    
-    /**
-    * @generated
-    */
-    private Student student;
-    
-    
-
-    /**
-    * @generated
-    */
-    private  getSecondAttestation() {
+    public double getSecondAttestation() {
         return this.secondAttestation;
     }
-    
-    /**
-    * @generated
-    */
-    private  setSecondAttestation(invalid secondAttestation) {
+
+    public void setSecondAttestation(double secondAttestation) {
         this.secondAttestation = secondAttestation;
     }
-    
-    
-    /**
-    * @generated
-    */
-    private  getFirstAttestation() {
+
+    public double getFirstAttestation() {
         return this.firstAttestation;
     }
-    
-    /**
-    * @generated
-    */
-    private  setFirstAttestation(invalid firstAttestation) {
+
+    public void setFirstAttestation(double firstAttestation) {
         this.firstAttestation = firstAttestation;
     }
-    
-    
-    /**
-    * @generated
-    */
-    private  getFinalExam() {
+
+    public double getFinalExam() {
         return this.finalExam;
     }
-    
-    /**
-    * @generated
-    */
-    private  setFinalExam(invalid finalExam) {
+
+    public void setFinalExam(double finalExam) {
         this.finalExam = finalExam;
     }
-    
-    
-    /**
-    * @generated
-    */
-    private  getGPA() {
+
+    public double getGPA() {
         return this.GPA;
     }
-    
-    /**
-    * @generated
-    */
-    private  setGPA(invalid GPA) {
+
+    public void setGPA(double GPA) {
         this.GPA = GPA;
     }
-    
-    
-    /**
-    * @generated
-    */
-    private  getGrade() {
+
+    public Grade getGrade() {
         return this.grade;
     }
-    
-    /**
-    * @generated
-    */
-    private  setGrade(invalid grade) {
+
+    public void setGrade(Grade grade) {
         this.grade = grade;
     }
-    
-    
-    /**
-    * @generated
-    */
-    private  getCredits() {
-        return this.credits;
-    }
-    
-    /**
-    * @generated
-    */
-    private  setCredits(invalid credits) {
-        this.credits = credits;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    private String getCourseId() {
-        return this.courseId;
-    }
-    
-    /**
-    * @generated
-    */
-    private String setCourseId(String courseId) {
-        this.courseId = courseId;
-    }
-    
-    
-    
-    /**
-    * @generated
-    */
-    public ResearcherDecorator getResearcherDecorator() {
-        return this.researcherDecorator;
-    }
-    
-    /**
-    * @generated
-    */
-    public ResearcherDecorator setResearcherDecorator(ResearcherDecorator researcherDecorator) {
-        this.researcherDecorator = researcherDecorator;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public Transcript getTranscript() {
-        return this.transcript;
-    }
-    
-    /**
-    * @generated
-    */
-    public Transcript setTranscript(Transcript transcript) {
-        this.transcript = transcript;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public Student getStudent() {
-        return this.student;
-    }
-    
-    /**
-    * @generated
-    */
-    public Student setStudent(Student student) {
-        this.student = student;
-    }
-    
-    
-    
 
-    //                          Operations                                  
+
     
-    /**
-    * @generated
-    */
-    public double getGPA() {
-        //TODO
-        return null;
+    public double calculateGPA() {
+        return 0.0;
     }
-    
-    
 }
-
