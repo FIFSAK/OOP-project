@@ -3,6 +3,6 @@ package researcher;
 public interface Researcher {
 	public void addProject(ResearchProject researchProject);
 	public String printPapers(String sortType);
-	public void calculateHIndex();
+	public void calculateHIndex() throws LowHIndex;
 	
 }

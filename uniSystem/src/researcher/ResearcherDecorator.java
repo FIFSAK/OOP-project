@@ -1,8 +1,11 @@
 package researcher;
 
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Set;
 import java.util.Vector;
+
+import javax.security.auth.login.LoginException;
 
 import enums.Format;
 import users.Student;
@@ -12,9 +15,9 @@ import users.Employee;
 public class ResearcherDecorator implements Researcher {	   
 	    private User user;
 	    
-	    public Vector<ResearchProject> projects;
+	    public Vector<ResearchProject> projects = new Vector<ResearchProject>();
 	    
-	    public Vector<ResearchPaper> papers;
+	    public Vector<ResearchPaper> papers = new Vector<ResearchPaper>();
 	    
 	    public double hindex;
 	    
@@ -52,7 +55,7 @@ public class ResearcherDecorator implements Researcher {
 			return p;
 		}
 		@Override
-		public void calculateHIndex() {
+		public void calculateHIndex() throws LowHIndex {
 			Set<ResearchPaper> s = null;
 			int minimalCitations = Integer.MAX_VALUE;
 			for(ResearchProject project: projects) {
@@ -65,7 +68,7 @@ public class ResearcherDecorator implements Researcher {
 			}
 			hindex = minimalCitations;
 			if(hindex < 3) {
-				new LowHIndex("your hindex lesser than 3");
+				System.out.println(new LowHIndex("your hindex lesser than 3"));
 			}
 		}
 		
@@ -84,10 +87,32 @@ public class ResearcherDecorator implements Researcher {
 		}
 		public void newPaper(String name, 
 				Vector<ResearchPaper> citations,
-				Vector<ResearcherDecorator> authors, 
 				int pages, String journal) {
-			papers.add(new ResearchPaper(name, citations, authors, pages, journal));
+			papers.add(new ResearchPaper(name, citations, pages, journal));
 			
+		}
+		public void newPaper(ResearchPaper rp) {
+			papers.add(rp);
+			
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(hindex, papers, projects, user);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			ResearcherDecorator other = (ResearcherDecorator) obj;
+			return Double.doubleToLongBits(hindex) == Double.doubleToLongBits(other.hindex)
+					&& Objects.equals(papers, other.papers) && Objects.equals(projects, other.projects)
+					&& Objects.equals(user, other.user);
 		}
 		
 		
