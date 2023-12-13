@@ -85,6 +85,11 @@ public class ResearcherDecorator implements Researcher {
 		public void newProject(String topic, Vector<ResearchPaper> publishedPapers, Vector<ResearcherDecorator> participants) {
 			projects.add(new ResearchProject(topic, publishedPapers, participants));
 		}
+		
+		public void newProject(ResearchProject rp) {
+			projects.add(rp);
+		}
+		
 		public void newPaper(String name, 
 				Vector<ResearchPaper> citations,
 				int pages, String journal) {
