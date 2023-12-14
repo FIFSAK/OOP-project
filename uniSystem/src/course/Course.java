@@ -20,6 +20,7 @@ public class Course {
     private Faculties faculty;
     private String description;
     private int creditsAmount;
+
     // Конструктор, геттеры и сеттеры
 
     public Course(String codeCourse, String nameCourse, Faculties faculty) {
