@@ -1,345 +1,139 @@
 package course;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import enums.DayOfWeek;
+import enums.Faculties;
+import enums.LessonType;
+import users.*;
+
+
 public class Course {
-    
-    /**
-    * @generated
-    */
-    private  attribute;
-    
-    /**
-    * @generated
-    */
     private String codeCourse;
-    
-    /**
-    * @generated
-    */
     private String nameCourse;
-    
-    /**
-    * @generated
-    */
-    private  instructors;
-    
-    /**
-    * @generated
-    */
+    private List<Course> prerequisites; // Список курсов-пререквизитов
+    private List<Lesson> lessons;
     private Faculties faculty;
-    
-    /**
-    * @generated
-    */
-    private String duration;
-    
-    /**
-    * @generated
-    */
     private String description;
-    
-    /**
-    * @generated
-    */
-    private  prerequisite;
-    
-    /**
-    * @generated
-    */
     private int creditsAmount;
-    
-    /**
-    * @generated
-    */
-    private Lesson courseLessons;
-    
-    /**
-    * @generated
-    */
-    private Lesson courseLesson;
-    
-    
-    /**
-    * @generated
-    */
-    private Teacher teacher;
-    
-    /**
-    * @generated
-    */
-    private Manager manager;
-    
-    /**
-    * @generated
-    */
-    private Lesson lesson;
-    
-    /**
-    * @generated
-    */
-    private Student student;
-    
-    /**
-    * @generated
-    */
-    private Lesson lessons;
+    // Конструктор, геттеры и сеттеры
 
-	private invalid instructors;
-    
-    
-
-    /**
-    * @generated
-    */
-    private  getAttribute() {
-        return this.attribute;
-    }
-    
-    /**
-    * @generated
-    */
-    private  setAttribute(invalid attribute) {
-        this.attribute = attribute;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    private String getCodeCourse() {
-        return this.codeCourse;
-    }
-    
-    /**
-    * @generated
-    */
-    private String setCodeCourse(String codeCourse) {
+    public Course(String codeCourse, String nameCourse, Faculties faculty) {
         this.codeCourse = codeCourse;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public String getNameCourse() {
-        return this.nameCourse;
-    }
-    
-    /**
-    * @generated
-    */
-    private String setNameCourse(String nameCourse) {
-        this.nameCourse = nameCourse;
-    }
-    
-    
-    /**
-    * @return 
-     * @generated
-    */
-    public  Object getInstructors() {
-        return this.getInstructors();
-    }
-    
-    /**
-    * @return 
-     * @generated
-    */
-    public  void setInstructors(instructors) {
-        this.instructors = instructors;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    private Faculties getFaculty() {
-        return this.faculty;
-    }
-    
-    /**
-    * @generated
-    */
-    private Faculties setFaculty(Faculties  faculty) {
         this.faculty = faculty;
+        this.instructors = new ArrayList<>();
+        this.lessons = new ArrayList<>();
     }
     
-    
-    /**
-    * @generated
-    */
-    private String getDuration() {
-        return this.duration;
+    public Course(String codeCourse, String nameCourse, Faculties faculty, 
+    		int creditsAmount, List<Course> prerequisites, List<Teacher> instructors) {
+        this(codeCourse, nameCourse, faculty);
+        this.creditsAmount = creditsAmount;
+        this.prerequisites = new ArrayList<>(prerequisites);
+        this.instructors = new ArrayList<>(instructors);
     }
-    
-    /**
-    * @generated
-    */
-    private String setDuration(String duration) {
-        this.duration = duration;
+
+    public String getCodeCourse() {
+        return codeCourse;
     }
-    
-    
-    /**
-    * @generated
-    */
-    private String getDescription() {
-        return this.description;
+
+    public String getNameCourse() {
+        return nameCourse;
     }
-    
-    /**
-    * @generated
-    */
-    private String setDescription(String description) {
+
+    public List<Course> getPrerequisites() {
+        return new ArrayList<>(prerequisites);
+    }
+
+    public void setPrerequisites(List<Course> prerequisites) {
+        this.prerequisites = new ArrayList<>(prerequisites);
+    }
+
+    public List<Lesson> getLessons() {
+        return new ArrayList<>(lessons);
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = new ArrayList<>(lessons);
+    }
+
+    public Faculties getFaculty() {
+        return faculty;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
         this.description = description;
     }
-    
-    
-    /**
-    * @generated
-    */
-    private  getPrerequisite() {
-        return this.prerequisite;
+
+    public int getCreditsAmount() {
+        return creditsAmount;
     }
-    
-    /**
-    * @generated
-    */
-    private  setPrerequisite(invalid prerequisite) {
-        this.prerequisite = prerequisite;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    private int getCreditsAmount() {
-        return this.creditsAmount;
-    }
-    
-    /**
-    * @generated
-    */
-    private int setCreditsAmount(Integer creditsAmount) {
+
+    public void setCreditsAmount(int creditsAmount) {
         this.creditsAmount = creditsAmount;
     }
-    
-    
-    /**
-    * @generated
-    */
-    public Lesson getCourseLessons() {
-        return this.courseLessons;
-    }
-    
-    /**
-    * @generated
-    */
-    public Lesson setCourseLessons(Lesson courseLessons) {
-        this.courseLessons = courseLessons;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public Lesson getCourseLesson() {
-        return this.courseLesson;
-    }
-    
-    /**
-    * @generated
-    */
-    public Lesson setCourseLesson(Lesson courseLesson) {
-        this.courseLesson = courseLesson;
-    }
-    
-    
-    
-    /**
-    * @generated
-    */
-    public Lesson getLessons() {
-        return this.lessons;
-    }
-    
-    /**
-    * @generated
-    */
-    public Lesson setLessons(Lesson lessons) {
-        this.lessons = lessons;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public Teacher getTeacher() {
-        return this.teacher;
-    }
-    
-    /**
-    * @generated
-    */
-    public Teacher setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public Manager getManager() {
-        return this.manager;
-    }
-    
-    /**
-    * @generated
-    */
-    public Manager setManager(Manager manager) {
-        this.manager = manager;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public Lesson getLesson() {
-        return this.lesson;
-    }
-    
-    /**
-    * @generated
-    */
-    public Lesson setLesson(Lesson lesson) {
-        this.lesson = lesson;
-    }
-    
-    
-    /**
-    * @generated
-    */
-    public Student getStudent() {
-        return this.student;
-    }
-    
-    /**
-    * @generated
-    */
-    public Student setStudent(Student student) {
-        this.student = student;
-    }
-    
-    
-    
 
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
-    public void addStudent() {
-        //TODO
+    public List<Teacher> getInstructors() {
+        return new ArrayList<>(instructors);
+    }
+
+    public void setInstructors(List<Teacher> instructors) {
+        this.instructors = new ArrayList<>(instructors);
+    }
+
+    // Операции
+
+    public void addInstructor(Teacher instructor) {
+        this.instructors.add(instructor);
     }
     
+    public int getTotalDuration() {
+        int totalDuration = 0;
+        for (Lesson lesson : lessons) {
+            totalDuration += lesson.getTotalDuration();
+        }
+        return totalDuration;
+    }
     
+    public void addLessonInfo() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            System.out.println("Enter lesson information:");
+
+            System.out.print("Lesson Type (lecture/seminar/laboratory): ");
+            LessonType lessonType = LessonType.valueOf(reader.readLine().toUpperCase());
+
+            System.out.print("Lesson Duration (in minutes): ");
+            int duration = Integer.parseInt(reader.readLine());
+
+            System.out.print("Lesson Frequency (times per week): ");
+            int frequency = Integer.parseInt(reader.readLine());
+
+            System.out.print("Days of the week (comma-separated): ");
+            String[] daysOfWeek = reader.readLine().split(",");
+            List<DayOfWeek> lessonDays = new ArrayList<>();
+            for (String day : daysOfWeek) {
+                lessonDays.add(DayOfWeek.valueOf(day.trim().toUpperCase()));
+            }
+
+            // Создание нового Lesson и добавление его в lessons
+            Lesson lesson = new Lesson(lessonType, duration, frequency, lessonDays);
+            lessons.add(lesson);
+
+            System.out.println("Lesson information added successfully!");
+        } catch (IOException | IllegalArgumentException e) {
+            e.printStackTrace();  // Обработка ошибок (возможно, нужно её улучшить)
+        }
+    }
+
+    // Другие методы, если необходимо
 }
