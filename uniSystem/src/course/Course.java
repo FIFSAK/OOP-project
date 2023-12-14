@@ -82,6 +82,8 @@ public class Course {
     * @generated
     */
     private Lesson lessons;
+
+	private invalid instructors;
     
     
 
@@ -118,7 +120,7 @@ public class Course {
     /**
     * @generated
     */
-    private String getNameCourse() {
+    public String getNameCourse() {
         return this.nameCourse;
     }
     
@@ -131,16 +133,18 @@ public class Course {
     
     
     /**
-    * @generated
+    * @return 
+     * @generated
     */
-    public  getInstructors() {
-        return this.instructors;
+    public  Object getInstructors() {
+        return this.getInstructors();
     }
     
     /**
-    * @generated
+    * @return 
+     * @generated
     */
-    public  setInstructors(invalid instructors) {
+    public  void setInstructors(instructors) {
         this.instructors = instructors;
     }
     
