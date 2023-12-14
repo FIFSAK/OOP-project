@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
 
 import course.*;
+import researcher.ResearcherDecorator;
 import users.*;
 
 public class Data {
@@ -16,7 +19,7 @@ public class Data {
     // Database storage
     private Map<String, User> userDatabase;
     private Map<String, Course> courseDatabase;
-
+    private Vector<ResearcherDecorator> researcherDatabase = new Vector<ResearcherDecorator>();
     // Private constructor to prevent instantiation
     private Data() {
         userDatabase = new HashMap<>();
@@ -54,7 +57,15 @@ public class Data {
     // Public method to add user to the database
     public void addUser(User user) {
         userDatabase.put(user.getUserId(), user);
-    }}
+    }
+
+	public Vector<ResearcherDecorator> getResearcherDatabase() {
+		return researcherDatabase;
+	}
+
+	public void addResearcherDatabase(ResearcherDecorator researcherDatabase) {
+		this.researcherDatabase.add(researcherDatabase);
+	}}
 
     // Public method to add course to the database
 //    public void addCourse(Course course) {
