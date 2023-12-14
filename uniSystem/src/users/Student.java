@@ -105,7 +105,7 @@ public class Student extends User {
         for (HashMap.Entry<Course, Mark> entry : courseInfo.entrySet()) {
             Course course = entry.getKey();
             Mark mark = entry.getValue();
-            transcript.addCourseMark(course.getNameCourse(), mark);
+            transcript.addMark(course, mark);
         }
         return transcript;
     }
@@ -169,7 +169,7 @@ public class Student extends User {
     	 if (studentOrganization != null) {
              studentOrganization.removeMember(this);
          } 
-    	
+    }
     public void becomeHeadOfOrganization(StudentOrganisation organization) {
     	this.studentOrganization=organization;
         organization.setHead(this);
