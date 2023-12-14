@@ -21,6 +21,7 @@ public class Course {
     private String description;
     private int creditsAmount;
     private List<Teacher> instructors;
+    private Manager manage;
 
     // Конструктор, геттеры и сеттеры
 
