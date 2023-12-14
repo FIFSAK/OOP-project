@@ -68,6 +68,18 @@ public class StudentOrganisation {
     public void setStudent(Student student) {
         this.student = student;
     }
+
+	public void addMember(Student student2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void removeMember(Student student2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
     
     
     
