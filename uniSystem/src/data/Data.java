@@ -9,24 +9,26 @@ import java.util.Set;
 import java.util.Vector;
 
 import course.*;
-import researcher.ResearcherDecorator;
+import researcher.*;
 import users.*;
 
 public class Data {
     // Singleton instance
     private static Data instance;
 
-    // Database storage
-    private Map<String, User> userDatabase;
-    private Map<String, Course> courseDatabase;
+    private Vector<User> userDatabase = new Vector<User>();
+    private Vector<Student> studentDatabase = new Vector<Student>();
+    private Vector<Teacher> teacherDatabase = new Vector<Teacher>();
+    private Vector <Course> courseDatabase;
     private Vector<ResearcherDecorator> researcherDatabase = new Vector<ResearcherDecorator>();
-    // Private constructor to prevent instantiation
+    
     private Data() {
-        userDatabase = new HashMap<>();
-        courseDatabase = new HashMap<>();
+        userDatabase = new Vector<>();
+        studentDatabase = new Vector<>();
+        teacherDatabase = new Vector<>();
+        
     }
 
-    // Public method to get the singleton instance
     public static Data getInstance() {
         if (instance == null) {
             instance = new Data();
@@ -34,30 +36,18 @@ public class Data {
         return instance;
     }
 
-    // Public method to get all users
-    public List<User> getAllUsers() {
-        return new ArrayList<>(userDatabase.values());
+    public Vector<User> getAllUsers() {
+        return userDatabase;
     }
 
-    // Public method to get all courses
-    public List<Course> getAllCourses() {
-        return new ArrayList<>(courseDatabase.values());
+    public Vector<Student> getAllStudent() {
+        return studentDatabase;
+    }
+    
+    public Vector<Teacher> getAllTeacher() {
+        return teacherDatabase;
     }
 
-    // Public method to get user by ID
-    public User getUserById(String userId) {
-        return userDatabase.get(userId);
-    }
-
-    // Public method to get course by ID
-    public Course getCourseById(String courseId) {
-        return courseDatabase.get(courseId);
-    }
-
-    // Public method to add user to the database
-    public void addUser(User user) {
-        userDatabase.put(user.getUserId(), user);
-    }
 
 	public Vector<ResearcherDecorator> getResearcherDatabase() {
 		return researcherDatabase;
@@ -66,8 +56,3 @@ public class Data {
 	public void addResearcherDatabase(ResearcherDecorator researcherDatabase) {
 		this.researcherDatabase.add(researcherDatabase);
 	}}
-
-    // Public method to add course to the database
-//    public void addCourse(Course course) {
-//        courseDatabase.put(course.getCourseId(), course);
-//    }
