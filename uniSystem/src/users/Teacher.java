@@ -133,5 +133,9 @@ public class Teacher extends Employee {
     public Employee getDepartment() {
         return null;
     }
+
+	public Object receiveRating(double rating) {
+		return null;
+	}
 }
 

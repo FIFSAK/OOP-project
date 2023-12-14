@@ -28,15 +28,18 @@ public class ResearcherDecorator implements Researcher {
 	    }
 	    
 	    
-	    public User getWrappedUser(){
+
+	    public User getWrapped(){
+	    	if(user instanceof Student) {	    		
+	    		return (Student) user;
+	    	}
+	    	if(user instanceof Employee) {	    		
+	    		return (Employee) user;
+	    	}
+	    	
 	    	return user;
 	    }
-	    public Student getWrappedStudent(){
-	    	return (Student) user;
-	    }
-	    public Employee getWrappedEmployee(){
-	    	return (Employee) user;
-	    }
+
 		@Override
 		public void addProject(ResearchProject researchProject) {
 			// TODO Auto-generated method stub

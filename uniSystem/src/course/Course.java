@@ -20,13 +20,11 @@ public class Course {
     private Faculties faculty;
     private String description;
     private int creditsAmount;
-    private List<Teacher> instructors;
 
     // Конструктор, геттеры и сеттеры
 
     public Course(String codeCourse, String nameCourse, Faculties faculty) {
         this.codeCourse = codeCourse;
-        this.nameCourse = nameCourse;
         this.faculty = faculty;
         this.instructors = new ArrayList<>();
         this.lessons = new ArrayList<>();
