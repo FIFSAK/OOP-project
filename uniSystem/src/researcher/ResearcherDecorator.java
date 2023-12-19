@@ -59,16 +59,12 @@ public class ResearcherDecorator implements Researcher {
 		}
 		@Override
 		public void calculateHIndex() throws LowHIndex {
-			Set<ResearchPaper> s = null;
 			int minimalCitations = Integer.MAX_VALUE;
-			for(ResearchProject project: projects) {
-				for(ResearchPaper paper: project.getPapers()) {
-					s.add(paper);
+				for(ResearchPaper paper: papers) {
 					if (paper.getCitation(Format.PLAIN_TEXT).size() < minimalCitations) {
 						minimalCitations = paper.getCitation(Format.PLAIN_TEXT).size();
 					}
 				}
-			}
 			hindex = minimalCitations;
 			if(hindex < 3) {
 				System.out.println(new LowHIndex("your hindex lesser than 3"));
@@ -94,9 +90,8 @@ public class ResearcherDecorator implements Researcher {
 		}
 		
 		public void newPaper(String name, 
-				Vector<ResearchPaper> citations,
 				int pages, String journal) {
-			papers.add(new ResearchPaper(name, citations, pages, journal));
+			papers.add(new ResearchPaper(name, pages, journal));
 			
 		}
 		public void newPaper(ResearchPaper rp) {

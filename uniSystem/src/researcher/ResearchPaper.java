@@ -9,7 +9,7 @@ import enums.Format;
 
 public class ResearchPaper implements Comparable<ResearchPaper> {
 	public String name;
-	public Vector<ResearchPaper> citations;
+	public Vector<ResearchPaper> citations = new Vector<ResearchPaper>();
 	public Vector<ResearcherDecorator> getAuthorsOfPaper(ResearchPaper paper) {
 	    return Data.getInstance().getResearcherDatabase().stream()
 	               .filter(researcher -> researcher.papers.contains(paper))
@@ -18,11 +18,9 @@ public class ResearchPaper implements Comparable<ResearchPaper> {
 	public int pages;
 	public String journal;
 	
-	public ResearchPaper(String name, 
-	Vector<ResearchPaper> citations,
+	public ResearchPaper(String name,
 	int pages, String journal) {
 		this.name = name;
-		this.citations = citations;
 		this.pages = pages;
 		this.journal = journal;
 	}
