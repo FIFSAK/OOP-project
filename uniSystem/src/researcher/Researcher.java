@@ -10,6 +10,5 @@ public interface Researcher {
 	public void newPaper(ResearchPaper rp);
 	public void newProject(ResearchProject rp);
 	public void newPaper(String name, 
-			Vector<ResearchPaper> citations,
 			int pages, String journal);
 }

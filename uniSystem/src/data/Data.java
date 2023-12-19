@@ -19,7 +19,7 @@ public class Data {
     private Vector<User> userDatabase = new Vector<User>();
     private Vector<Student> studentDatabase = new Vector<Student>();
     private Vector<Teacher> teacherDatabase = new Vector<Teacher>();
-    private Vector <Course> courseDatabase;
+    private Vector <Course> courseDatabase = new Vector<Course>();
     private Vector<ResearcherDecorator> researcherDatabase = new Vector<ResearcherDecorator>();
     
     private Data() {
@@ -55,4 +55,5 @@ public class Data {
 
 	public void addResearcherDatabase(ResearcherDecorator researcherDatabase) {
 		this.researcherDatabase.add(researcherDatabase);
-	}}
+	}
+	}
