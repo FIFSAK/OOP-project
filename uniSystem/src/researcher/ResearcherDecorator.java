@@ -1,5 +1,6 @@
 package researcher;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
@@ -12,7 +13,7 @@ import users.Student;
 import users.User;
 import users.Employee;
 
-public class ResearcherDecorator implements Researcher {	   
+public class ResearcherDecorator implements Researcher, Serializable {	   
 	    private User user;
 	    
 	    public Vector<ResearchProject> projects = new Vector<ResearchProject>();
@@ -38,7 +39,7 @@ public class ResearcherDecorator implements Researcher {
 	    	}
 	    	
 	    	return user;
-	    }
+	    } // доступ к предыдущим функциям до того как стал ресерчером
 
 		@Override
 		public void addProject(ResearchProject researchProject) {
@@ -69,7 +70,7 @@ public class ResearcherDecorator implements Researcher {
 			if(hindex < 3) {
 				System.out.println(new LowHIndex("your hindex lesser than 3"));
 			}
-		}
+		} // если каждая статья цитировалась минимум сколько то раз этот минимум и будет hindex
 		
 		public String toString() {
 			if(user instanceof Student) {

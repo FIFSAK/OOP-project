@@ -21,6 +21,9 @@ public class Data {
     private Vector<Teacher> teacherDatabase = new Vector<Teacher>();
     private Vector <Course> courseDatabase = new Vector<Course>();
     private Vector<ResearcherDecorator> researcherDatabase = new Vector<ResearcherDecorator>();
+    private Vector<ResearchPaper> researchPapersDatabase = new Vector<ResearchPaper>();
+    private Vector<ResearchProject> researchProjectDatabase = new Vector<ResearchProject>();
+
     
     private Data() {
         userDatabase = new Vector<>();
@@ -56,4 +59,21 @@ public class Data {
 	public void addResearcherDatabase(ResearcherDecorator researcherDatabase) {
 		this.researcherDatabase.add(researcherDatabase);
 	}
+	
+	public Vector<ResearchPaper> getResearchPaper() {
+		return researchPapersDatabase;
 	}
+
+	public void addResearchPaper(ResearchPaper researchPaper) {
+		this.researchPapersDatabase.add(researchPaper);
+	}
+	
+	
+	public Vector<ResearchProject> getResearchProject() {
+		return researchProjectDatabase;
+	}
+
+	public void addResearchProject(ResearchProject researchProject) {
+		this.researchProjectDatabase.add(researchProject);
+	}
+}
