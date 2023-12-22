@@ -54,7 +54,7 @@ public class test {
 //		System.out.println(studentResearcher.hindex);
 //		employeeResearcher.newPaper("AI", 10, "Anuar's jounal");
 
-
+		
 	}
 
 }

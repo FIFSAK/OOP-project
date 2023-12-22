@@ -1,6 +1,7 @@
 package researcher;
 
 import java.io.Serializable;
+
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
@@ -12,6 +13,10 @@ import enums.Format;
 import users.Student;
 import users.User;
 import users.Employee;
+/**
+ * The ResearcherDecorator class is a decorator for the User class, providing additional functionalities 
+ * related to managing research projects and papers. It implements the Researcher interface and is Serializable.
+ */
 
 public class ResearcherDecorator implements Researcher, Serializable {	   
 	    private User user;
@@ -21,14 +26,24 @@ public class ResearcherDecorator implements Researcher, Serializable {
 	    public Vector<ResearchPaper> papers = new Vector<ResearchPaper>();
 	    
 	    public double hindex;
-	    
+	    /**
+	     * Default constructor for creating an instance of ResearcherDecorator without a user.
+	     */
 	    public ResearcherDecorator () {}
-	    
+	    /**
+	     * Constructs a ResearcherDecorator with a specified user.
+	     * 
+	     * @param u The User object that is being decorated.
+	     */
 	    public ResearcherDecorator (User u) {
 	    	user = u;
 	    }
 	    
-	    
+	    /**
+	     * Provides access to the underlying User object.
+	     * 
+	     * @return The wrapped User object, either Student or Employee.
+	     */
 
 	    public User getWrapped(){
 	    	if(user instanceof Student) {	    		
@@ -71,7 +86,11 @@ public class ResearcherDecorator implements Researcher, Serializable {
 				System.out.println(new LowHIndex("your hindex lesser than 3"));
 			}
 		} // если каждая статья цитировалась минимум сколько то раз этот минимум и будет hindex
-		
+		/**
+	     * Returns a string representation of the ResearcherDecorator, including user details, projects, and H-index.
+	     * 
+	     * @return A string describing the ResearcherDecorator.
+	     */
 		public String toString() {
 			if(user instanceof Student) {
 				user = (Student) user;
