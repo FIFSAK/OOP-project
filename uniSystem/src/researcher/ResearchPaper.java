@@ -39,8 +39,16 @@ public class ResearchPaper implements Comparable<ResearchPaper>, Serializable {
 		 //добавляет каждый новый пейпер в бд
 	}
 	
-	public Vector<ResearchPaper> getCitation(Format f) {
-		return citations;
+	public String getCitation(Format f) {
+		if(f == Format.PLAIN_TEXT) {
+			return citations.toString();
+		}
+		String s = "name=" + "{" + this.name + "}\n" +
+				"citations=" + "{" + this.citations.toString() + "}\n" +
+				"Authors=" + "{" + this.getAuthorsOfPaper(this) + "}\n" +
+				"pages=" + "{" + this.pages + "}\n" +
+				"journal=" + "{" + this.journal + "}\n";
+		return s;
 	}
 
 	@Override
