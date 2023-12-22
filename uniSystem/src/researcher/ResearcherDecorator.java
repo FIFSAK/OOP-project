@@ -62,8 +62,8 @@ public class ResearcherDecorator implements Researcher, Serializable {
 		public void calculateHIndex() throws LowHIndex {
 			int minimalCitations = Integer.MAX_VALUE;
 				for(ResearchPaper paper: papers) {
-					if (paper.getCitation(Format.PLAIN_TEXT).size() < minimalCitations) {
-						minimalCitations = paper.getCitation(Format.PLAIN_TEXT).size();
+					if (paper.citations.size() < minimalCitations) {
+						minimalCitations = paper.citations.size();
 					}
 				}
 			hindex = minimalCitations;
