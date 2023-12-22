@@ -1,19 +1,20 @@
 package researcher;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
 import data.Data;
 
-public class ResearchProject {
+public class ResearchProject implements Serializable {
 
 	public String topic;
 	public Vector<ResearchPaper> publishedPapers = new Vector<ResearchPaper>();
 	public Vector<ResearcherDecorator> getParticipantsofProject(ResearchProject project) {
 	    return Data.getInstance().getResearcherDatabase().stream()
 	               .filter(researcher -> researcher.projects.contains(project))
-	               .collect(Collectors.toCollection(Vector::new));
+	               .collect(Collectors.toCollection(Vector::new));// сейм как в пейпере
 	}
     
 	
@@ -21,6 +22,16 @@ public class ResearchProject {
     	this.topic = topic;
     	this.publishedPapers = publishedPapers;
     }
+    {
+		if(Data.getInstance().getResearchProject().contains(this)) {
+			System.out.println("this paper already exist");
+		}
+		else {
+			Data.getInstance().addResearchProject(this);
+		}
+			
+		 //добавляет каждый новый пейпер в бд
+	}
     
     public String toString() {
     	return "Topic: " + topic + "publishedPapers: " + publishedPapers + "participant" + getParticipantsofProject(this);
