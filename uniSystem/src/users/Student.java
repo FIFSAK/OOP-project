@@ -1,5 +1,6 @@
 package users;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,9 @@ import course.Mark;
 import course.Transcript;
 import data.Data;
 import enums.Faculties;
+import enums.FamilyStatus;
+import enums.Gender;
+import researcher.ResearchPaper;
 import researcher.ResearcherDecorator;
 
 
@@ -31,7 +35,14 @@ public class Student extends User {
         this.yearOfStudy = 1;
         this.courseInfo = new HashMap<>();
     }
-
+     
+    public Student(String firstName, String lastName, String password, String login, String userId,
+			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
+			Gender category, String nationality, FamilyStatus familyStatus) {
+		super(firstName, lastName, password, login, userId, subscribedJournals, name, dateOfBirth, phoneNumber, iin, category,
+				nationality, familyStatus);
+		// TODO Auto-generated constructor stub
+	}
 
     public int getYearOfReceipt() {
 		return yearOfReceipt;
@@ -79,9 +90,9 @@ public class Student extends User {
         return teacher;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
+//    public void setTeacher(Teacher teacher) {
+//        this.teacher = teacher;
+//    }
 
     public Course getCourse() {
         return course;
@@ -192,5 +203,18 @@ public class Student extends User {
                 ", studentOrganization=" + studentOrganization +
                 '}';    
     }
+    
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        // Custom serialization logic if needed
+        out.defaultWriteObject();
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        // Custom deserialization logic if needed
+        in.defaultReadObject();
+    }
+
+
+	
     
 }

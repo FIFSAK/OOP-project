@@ -7,6 +7,10 @@ import enums.Gender;
 import researcher.ResearchPaper;
 
 public class Employee extends User {
+	
+	private String workDepartment;
+    private int salary;
+    private Date hireDate;
     
     public Employee(String firstName, String lastName, String password, String login, String userId,
 			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
@@ -20,10 +24,6 @@ public class Employee extends User {
 		super(login, password);
 		// TODO Auto-generated constructor stub
 	}
-
-	private String workDepartment;
-    private int salary;
-    private Date data;
     
     private String getWorkDepartment() {
         return this.workDepartment;
@@ -41,12 +41,12 @@ public class Employee extends User {
         this.salary = salary;
     }
  
-    public Date getData() {
-        return this.data;
+    public Date getHireDate() {
+        return this.hireDate;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setData(Date hireDate) {
+        this.hireDate = hireDate;
     }
     
     

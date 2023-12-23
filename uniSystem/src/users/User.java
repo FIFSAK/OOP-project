@@ -1,5 +1,6 @@
 package users;
 
+import java.io.*;
 import java.util.Date;
 
 
@@ -8,7 +9,7 @@ import additional.UserFactory;
 import enums.*;
 import researcher.ResearchPaper;
 
-public class User implements Comparable<User>, Observer{
+public class User implements Comparable<User>, Observer, Serializable{
 
     private String firstName;
     private String lastName;

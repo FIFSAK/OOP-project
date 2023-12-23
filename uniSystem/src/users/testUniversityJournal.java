@@ -1,8 +1,9 @@
 package users;
 
 import additional.*;
+import users.*;
 
-public class testUniversityJournal {
+public class testUniversityJournal{
 	UserFactory userFactory = new UserFactory();
     UniversityJournal universityJournal = new UniversityJournal();
 
@@ -10,7 +11,7 @@ public class testUniversityJournal {
     User employeeUser = userFactory.createUser("a.akturina.@kbtu.kz", "123456778");
 
     universityJournal.addObserver((Observer)studentUser);
-    universityJournal.addObserver(employeeUser)
+    universityJournal.addObserver(employeeUser);
 
     // Publish a new paper in the UniversityJournal
     universityJournal.publishNewPaper("New Research Paper on Observer Pattern");
