@@ -32,12 +32,12 @@ public class UserFactory {
 
     private String generateUserId(User u) {
         if(u.getUserType() == UserType.STUDENT) {
-        	u = (Student)u;
-        	return u.getYearOfReceipt()+"S"+studentCount; // TODO STUDENT METHOD AYAZHAN
+        	Student u1 = (Student)u;
+        	return u1.getYearOfReceipt()+"S"+studentCount; // TODO STUDENT METHOD AYAZHAN
         }
         else if(u.getUserType() == UserType.EMPLOYEE) {
-        	u = (Employee)u;
-        	return u.getDateOfEmployement()+"E"+employeeCount; // TODO EMPLOYEE METHOD AZIZA
+        	Employee u1 = (Employee)u;
+        	return u1.getDateOfEmployement()+"E"+employeeCount; // TODO EMPLOYEE METHOD AZIZA
         }
     }
 }
