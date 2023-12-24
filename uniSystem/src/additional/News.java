@@ -114,9 +114,6 @@ public class News {
         return Objects.hash(newsId);
     }
     
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
 
     // Operations
 

@@ -18,9 +18,9 @@ public class Manager extends Employee {
 
     public Manager(String firstName, String lastName, String password, String login, String userId,
 			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
-			Gender category, String nationality, FamilyStatus familyStatus) {
+			Gender category, String nationality, FamilyStatus familyStatus, Date dateOfEmployment) {
 		super(firstName, lastName, password, login, userId, subscribedJournals, name, dateOfBirth, phoneNumber, iin, category,
-				nationality, familyStatus);
+				nationality, familyStatus, dateOfEmployment);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,6 +35,7 @@ public class Manager extends Employee {
 //    private News news;
     private Date data;
     private Student student;
+	private News news;
 
     public ManagerType getType() {
         return this.type;
@@ -102,7 +103,7 @@ public class Manager extends Employee {
     public void viewStudents() {
     	Data
         .getInstance()
-        .getAllStudents()
+        .getAllStudent()
         .stream()
         .forEach(student -> System.out.println(student));
     }
@@ -110,7 +111,7 @@ public class Manager extends Employee {
     public void viewTeachers(List<Teacher> teachers) {
     	Data
         .getInstance()
-        .getAllTeachers()
+        .getAllTeacher()
         .stream()
         .forEach(student -> System.out.println(student));
     }

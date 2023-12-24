@@ -10,7 +10,7 @@ import researcher.ResearchPaper;
 
 public class Employee extends User implements Payable {
 
-	  private String workDepartment;
+	private String workDepartment;
     private int salary;
     private Date hireDate;
 
@@ -27,17 +27,16 @@ public class Employee extends User implements Payable {
 	}
 
 
-	private String workDepartment;
-    private int salary;
+
 //    private Date data;
     Date dateOfEmployment;
 
     
-    public Date getDateOfEmplyment(){
+    public Date getDateOfEmployment(){
 		return dateOfEmployment;
     }
     
-    public void setDateOfEmplyment(Date dateOfEmployment) {
+    public void setDateOfEmployment(Date dateOfEmployment) {
         this.dateOfEmployment = dateOfEmployment;
     }
     
@@ -71,7 +70,7 @@ public class Employee extends User implements Payable {
         employees.stream()
                  .filter(e -> e.getSalary() > 50000)
                  .forEach(System.out::println);
-
+    }
  
     public Date getHireDate() {
         return this.hireDate;

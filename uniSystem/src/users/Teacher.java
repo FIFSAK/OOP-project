@@ -36,7 +36,7 @@ public class Teacher extends Employee {
     private Student student;
 	private String viewCourses;
 
-    public String getViewCourses() {
+    public Set<Course> getViewCourses() {
         return this.viewCourses();
     }
 
