@@ -6,7 +6,11 @@ import enums.UserType;
 import users.Employee;
 import users.Student;
 import users.User;
+
+import java.time.LocalDateTime;
 import java.util.*;
+
+import data.Data;
 
 public class UserFactory {
     private static int studentCount = 1;
@@ -37,7 +41,8 @@ public class UserFactory {
         }
         else if(u.getUserType() == UserType.EMPLOYEE) {
         	Employee u1 = (Employee)u;
-        	return u1.getDateOfEmployement()+"E"+employeeCount; // TODO EMPLOYEE METHOD AZIZA
+        	return u1.getDateOfEmployment()+"E"+employeeCount; // TODO EMPLOYEE METHOD AZIZA
         }
+        return LocalDateTime.now().getYear() + "U" + Data.getInstance().getAllUsers().size();
     }
 }

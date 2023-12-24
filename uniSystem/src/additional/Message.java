@@ -12,6 +12,7 @@ public class Message {
     private User receiver;
     private String content;
     private Date dateSent;
+    private List<Attachment> attachments;
     
     public Message(User sender, User receiver, String content, Date dateSent, List<Attachment> attachments) {
         this.sender = sender;
