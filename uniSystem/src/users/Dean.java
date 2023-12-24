@@ -28,11 +28,10 @@ public class Dean extends Employee {
         this.data = data;
     }
     
-    
-    
-
-                                 
-    
+    public void signRequest(Request request) {
+        
+    	request.setSigned(true);
+    }
     
 }
 
