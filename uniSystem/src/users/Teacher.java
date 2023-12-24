@@ -15,15 +15,14 @@ public class Teacher extends Employee {
 
     public Teacher(String firstName, String lastName, String password, String login, String userId,
 			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
-			Gender category, String nationality, FamilyStatus familyStatus) {
+			Gender category, String nationality, FamilyStatus familyStatus, Date dateOfEmployment) {
 		super(firstName, lastName, password, login, userId, subscribedJournals, name, dateOfBirth, phoneNumber, iin, category,
-				nationality, familyStatus);
+				nationality, familyStatus, dateOfEmployment);
 		// TODO Auto-generated constructor stub
 	}
 
 	public Teacher(String login, String password) {
 		super(login, password);
-		// TODO Auto-generated constructor stub
 	}
 
 	private Set<Course> courses;
@@ -38,7 +37,7 @@ public class Teacher extends Employee {
 	private String viewCourses;
 
     public String getViewCourses() {
-        return this.getViewCourses();
+        return this.viewCourses();
     }
 
     private Set<Course> getCourses() {

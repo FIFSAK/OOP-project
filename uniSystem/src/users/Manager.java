@@ -1,7 +1,10 @@
 package users;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
+import data.*;
 
 
 import additional.News;
@@ -29,7 +32,7 @@ public class Manager extends Employee {
 	private ManagerType type;
     private Course course;
     private Teacher teacher;
-    private News news;
+//    private News news;
     private Date data;
     private Student student;
 
@@ -79,6 +82,37 @@ public class Manager extends Employee {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+    
+    public void createNews() {
+    	
+    }
+    
+    ArrayList<News> newsList = new ArrayList<News>();
+    
+    public void manageNews(News news, String title ) {
+        int index = newsList.indexOf(news);
+        if (title != null) {
+            News _news = newsList.get(index);
+            _news.setTopic(title);
+            newsList.set(index, _news);
+        }
+    }
+    
+    public void viewStudents() {
+    	Data
+        .getInstance()
+        .getAllStudents()
+        .stream()
+        .forEach(student -> System.out.println(student));
+    }
+    
+    public void viewTeachers(List<Teacher> teachers) {
+    	Data
+        .getInstance()
+        .getAllTeachers()
+        .stream()
+        .forEach(student -> System.out.println(student));
     }
 
     // Operations

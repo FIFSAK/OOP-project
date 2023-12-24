@@ -3,6 +3,7 @@ package additional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import users.*;
 
@@ -16,6 +17,14 @@ public class News {
     private List<Comment> comments;
     private Manager manager;
     private Comment comment;
+    
+    String newsId;
+//    String topic;
+    
+    News(String newsId, String title) {
+        this.newsId = newsId;
+        this.title = title;
+    }
 
     public News(String title, String content, Date datePublished, String topic, boolean isPinned) {
         this.title = title;
@@ -34,13 +43,13 @@ public class News {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
+//    public String getContent() {
+//        return content;
+//    }
+//
+//    public void setContent(String content) {
+//        this.content = content;
+//    }
 
     public Date getDatePublished() {
         return datePublished;
@@ -93,6 +102,21 @@ public class News {
     public void setComment(Comment comment) {
         this.comment = comment;
     }
+    
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        News news = (News) o;
+        return Objects.equals(newsId, news.newsId);
+    }
+
+    public int hashCode() {
+        return Objects.hash(newsId);
+    }
+    
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
 
     // Operations
 
@@ -101,18 +125,18 @@ public class News {
         return "";
     }
 
-    public boolean equals(Object obj) {
-        // TODO: Implement equals method
-        return false;
-    }
-
-    public int compareTo(News news) {
-        // TODO: Implement compareTo method
-        return 0;
-    }
-
-    public int hashCode() {
-        // TODO: Implement hashCode method
-        return 0;
-    }
+//    public boolean equals(Object obj) {
+//        // TODO: Implement equals method
+//        return false;
+//    }
+//
+//    public int compareTo(News news) {
+//        // TODO: Implement compareTo method
+//        return 0;
+//    }
+//
+//    public int hashCode() {
+//        // TODO: Implement hashCode method
+//        return 0;
+//    }
 }
