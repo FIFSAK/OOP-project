@@ -1,14 +1,15 @@
 package users;
 
+import java.io.*;
 import java.util.Date;
-import java.util.Observer;
+
 
 import additional.Comment;
 import additional.UserFactory;
 import enums.*;
 import researcher.ResearchPaper;
 
-public class User implements Comparable<User> {
+public class User implements Comparable<User>, Observer, Serializable{
 
     private String firstName;
     private String lastName;
@@ -25,7 +26,6 @@ public class User implements Comparable<User> {
     private String nationality;
     private FamilyStatus familyStatus;
     private UserFactory userFactory;
-    @SuppressWarnings("deprecation")
 	private Observer observer;
     private Comment comment;
     
@@ -200,7 +200,6 @@ public class User implements Comparable<User> {
                 ", login='" + login + '\'' +
                 ", userId='" + userId + '\'' +
                 ", userType=" + userType +
-                // Include other fields as needed
                 '}';
     }
 
@@ -222,7 +221,13 @@ public class User implements Comparable<User> {
     // compareTo method
     @Override
     public int compareTo(User otherUser) {
-        // Implement comparison logic based on your requirements
         return userId.compareTo(otherUser.userId);
     }
+
+	@Override
+	 public void update(String latestPaper) {
+        // Implement actions to be performed when the user is notified of a new paper
+        System.out.println("User " + login + " received an update: " + latestPaper);
+    }
+
 }

@@ -1,8 +1,8 @@
 package test;
 
 import additional.UserFactory;
-import enums.UserType;
-import users.User;
+import enums.*;
+import users.*;
 
 public class Main {
 	public static void main(String[] args) {

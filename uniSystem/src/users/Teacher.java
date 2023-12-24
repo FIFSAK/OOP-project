@@ -2,7 +2,7 @@ package users;
 
 import java.util.Date;
 import java.util.Set;
-import java.util.Vector;
+import java.util.List;
 
 import course.Course;
 import enums.FamilyStatus;
@@ -28,7 +28,7 @@ public class Teacher extends Employee {
 	private Set<Course> courses;
     private Student viewStudents;
     private TeacherType post;
-    private Vector<Student> students;
+    private List<Student> students;
     private Course course;
     private ResearcherDecorator researcherDecorator;
     private Manager manager;
@@ -40,24 +40,12 @@ public class Teacher extends Employee {
         return this.viewCourses();
     }
 
-    public void setViewCourses(String viewCourses) {
-        this.viewCourses = viewCourses;
-    }
-
     private Set<Course> getCourses() {
         return this.courses;
     }
 
     private void setCourses(Set<Course> courses) {
         this.courses = courses;
-    }
-
-    public Student getViewStudents() {
-        return this.viewStudents;
-    }
-
-    public void setViewStudents(Student viewStudents) {
-        this.viewStudents = viewStudents;
     }
 
     public TeacherType getPost() {
@@ -68,11 +56,11 @@ public class Teacher extends Employee {
         this.post = post;
     }
 
-    public Vector<Student> getStudents() {
+    public List<Student> getStudents() {
         return this.students;
     }
 
-    public void setStudents(Vector<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
@@ -90,10 +78,6 @@ public class Teacher extends Employee {
 
     public void setData(Date data) {
         this.data = data;
-    }
-
-    public Course getCourse() {
-        return this.course;
     }
 
     public void setCourse(Course course) {
@@ -132,5 +116,9 @@ public class Teacher extends Employee {
     public Employee getDepartment() {
         return null;
     }
+
+	public Object receiveRating(double rating) {
+		return null;
+	}
 }
 

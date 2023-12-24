@@ -1,5 +1,6 @@
 package additional;
 
+import researcher.ResearchProject;
 import users.GraduateStudent;
 
 public class DissertationProject {
@@ -8,7 +9,7 @@ public class DissertationProject {
     private String main;
     private GraduateStudent graduateStudent;
     
-    public DissertationProject(String thesis, String main, GraduateStudent graduateStudent) {
+    public DissertationProject() {
         this.thesis = thesis;
         this.main = main;
         this.graduateStudent = graduateStudent;
@@ -47,4 +48,9 @@ public class DissertationProject {
         // TODO: Implement logic to review the thesis
         return "";
     }
+
+	public void addResearchProject(ResearchProject researchProject) {
+		// TODO Auto-generated method stub
+		
+	}
 }

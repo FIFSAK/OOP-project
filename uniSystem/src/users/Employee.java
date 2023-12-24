@@ -7,7 +7,13 @@ import enums.FamilyStatus;
 import enums.Gender;
 import researcher.ResearchPaper;
 
+
 public class Employee extends User implements Payable {
+
+	  private String workDepartment;
+    private int salary;
+    private Date hireDate;
+
     
     public Employee(String firstName, String lastName, String password, String login, String userId,
 			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
@@ -20,10 +26,12 @@ public class Employee extends User implements Payable {
 		super(login, password);
 	}
 
+
 	private String workDepartment;
     private int salary;
 //    private Date data;
     Date dateOfEmployment;
+
     
     public Date getDateOfEmplyment(){
 		return dateOfEmployment;
@@ -40,6 +48,7 @@ public class Employee extends User implements Payable {
     public void setSalary(int salary) {
         this.salary = salary;
     }
+
     
     private String getWorkDepartment() {
         return this.workDepartment;
@@ -62,6 +71,14 @@ public class Employee extends User implements Payable {
         employees.stream()
                  .filter(e -> e.getSalary() > 50000)
                  .forEach(System.out::println);
+
+ 
+    public Date getHireDate() {
+        return this.hireDate;
+    }
+
+    public void setData(Date hireDate) {
+        this.hireDate = hireDate;
     }
     
     

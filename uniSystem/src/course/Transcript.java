@@ -1,70 +1,38 @@
 package course;
 
-public class Transcript {
-    
-    /**
-    * @generated
-    */
-    private  overallGPA;
-    
-    /**
-    * @generated
-    */
-    private Mark marks;
-    
-    
-    /**
-    * @generated
-    */
-    private Mark mark;
-    
-    
+import java.util.HashMap;
+import java.util.Map;
 
-    /**
-    * @generated
-    */
-    private  getOverallGPA() {
-        return this.overallGPA;
+public class Transcript {
+    private Map<Course, Mark> courseMarks;
+
+    public Transcript() {
+        courseMarks = new HashMap<>();
     }
-    
-    /**
-    * @generated
-    */
-    private  setOverallGPA(invalid overallGPA) {
-        this.overallGPA = overallGPA;
+
+    public void addMark(Course course, Mark mark) {
+        courseMarks.put(course, mark);
     }
-    
-    
-    /**
-    * @generated
-    */
-    private Mark getMarks() {
-        return this.marks;
+
+    public double totalGPA() {
+        double totalWeightedGPA = 0.0;
+        double totalCredits = 0.0;
+
+        for (Map.Entry<Course, Mark> entry : courseMarks.entrySet()) {
+            Course course = entry.getKey();
+            Mark mark = entry.getValue();
+
+            double courseGPA = mark.getGPA(); 
+            int courseCredits = course.getCreditsAmount();
+
+            totalWeightedGPA += courseGPA * courseCredits;
+            totalCredits += courseCredits;
+        }
+
+        if (totalCredits == 0.0) {
+            return 0.0; 
+        }
+
+        return totalWeightedGPA / totalCredits;
     }
-    
-    /**
-    * @generated
-    */
-    private Mark setMarks(Mark marks) {
-        this.marks = marks;
-    }
-    
-    
-    
-    /**
-    * @generated
-    */
-    public Mark getMark() {
-        return this.mark;
-    }
-    
-    /**
-    * @generated
-    */
-    public Mark setMark(Mark mark) {
-        this.mark = mark;
-    }
-    
-    
-    
 }
