@@ -87,22 +87,22 @@ public class Student extends User {
     }
 
 
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
+//
+//    public Teacher getTeacher() {
+//        return teacher;
+//    }
 
 //    public void setTeacher(Teacher teacher) {
 //        this.teacher = teacher;
 //    }
 
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+//    public Course getCourse() {
+//        return course;
+//    }
+//
+//    public void setCourse(Course course) {
+//        this.course = course;
+//    }
 
     public StudentOrganisation getStudentOrganization() {
         return studentOrganization;
@@ -149,20 +149,7 @@ public class Student extends User {
             System.out.println(course.getNameCourse());
         }
     }
- // TODO final result need
-//    public void viewSchedule() {   
-//         for (HashMap.Entry<Course, Mark> entry : courseInfo.entrySet()) {
-//             Course enrolledCourse = entry.getKey();
-//             Teacher courseTeacher = enrolledCourse.getInstructors().get(0);
-//
-//
-//             for (String scheduleEntry : enrolledCourse.getSchedule()) {
-//                 System.out.println(scheduleEntry);
-//             }
-//
-//             System.out.println();
-//        }
-//    }
+
     
     public void viewSchedule() {
         for (HashMap.Entry<Course, Mark> entry : courseInfo.entrySet()) {
