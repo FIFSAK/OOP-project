@@ -37,13 +37,13 @@ public class GraduateStudent extends Student implements Researcher {
     }
 
   
-    public void addProject(ResearchProject researchProject) {
-        // TODO
-    	 if (dissertationProject == null) {
-             dissertationProject = new DissertationProject();
-         }
-         dissertationProject.addResearchProject(researchProject);
-    }
+//    public void addProject(ResearchProject researchProject) {
+//        // TODO
+//    	 if (dissertationProject == null) {
+//             dissertationProject = new DissertationProject();
+//         }
+//         dissertationProject.addResearchProject(researchProject);
+//    }
 
    
     public String printPapers(String sortType) {
@@ -80,7 +80,6 @@ public class GraduateStudent extends Student implements Researcher {
 
 
 	
-=======
 
 
 	@Override
@@ -103,7 +102,21 @@ public class GraduateStudent extends Student implements Researcher {
 	}
 
 	@Override
-	public void newPaper(String name, Vector<ResearchPaper> citations, int pages, String journal) {
+    public void newPaper(String name, int pages, String journal) {
+		// TODO Auto-generated method stub
+	};
+
+
+	@Override
+	public void joinProject(String topic) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void joinPaper(String name) {
 		// TODO Auto-generated method stub
 		
 	}
