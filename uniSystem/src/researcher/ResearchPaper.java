@@ -27,9 +27,11 @@ public class ResearchPaper implements Comparable<ResearchPaper>, Serializable {
 	               .collect(Collectors.toCollection(Vector::new));
 	}//проверяет все у всех ресерчеров есть ли данный пейпер
 	
-	
+	public Vector<ResearchPaper> iMCitating = new Vector<ResearchPaper>();
 	public int pages;
 	public String journal;
+	public String text;
+	
 	 /**
      * Constructs a new ResearchPaper with the given details and adds it to the database if it doesn't already exist.
      * 
@@ -38,10 +40,11 @@ public class ResearchPaper implements Comparable<ResearchPaper>, Serializable {
      * @param journal The journal in which the research paper is published.
      */
 	public ResearchPaper(String name,
-	int pages, String journal) {
+	int pages, String journal, String text) {
 		this.name = name;
 		this.pages = pages;
 		this.journal = journal;
+		this.text = text;
 		
 	}
 	{
@@ -91,7 +94,7 @@ public class ResearchPaper implements Comparable<ResearchPaper>, Serializable {
 	@Override
 	public String toString() {
 		return "ResearchPaper [name=" + name + ", citations=" + citations + ", authors=" + getAuthorsOfPaper(this) + ", pages=" + pages
-				+ ", journal=" + journal + "]";
+				+ ", journal=" + journal + ", text= " + text + "]";
 	}
 	 /**
      * Generates a hash code for the ResearchPaper.
@@ -118,7 +121,7 @@ public class ResearchPaper implements Comparable<ResearchPaper>, Serializable {
 			return false;
 		ResearchPaper other = (ResearchPaper) obj;
 		return Objects.equals(citations, other.citations) && Objects.equals(journal, other.journal)
-				&& Objects.equals(name, other.name) && pages == other.pages;
+				&& Objects.equals(name, other.name) && pages == other.pages && text.equals(other.text);
 	}
 	 /**
      * Adds a citation to this research paper.
@@ -129,6 +132,7 @@ public class ResearchPaper implements Comparable<ResearchPaper>, Serializable {
 	public void cite(ResearchPaper cp) throws PaperCantCiteYourself {
 		if(this != cp) {			
 			cp.citations.add(this);
+			iMCitating.add(cp);
 			return;
 		}
 		System.out.println(new PaperCantCiteYourself("PaperCantCiteyourself"));

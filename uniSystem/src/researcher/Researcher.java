@@ -64,7 +64,7 @@ public interface Researcher {
      * @param pages The number of pages in the paper.
      * @param journal The journal in which the paper is published.
      */
-    public void newPaper(String name, int pages, String journal);
+    public void newPaper(String name, int pages, String journal, String text);
     
     public void joinPaper(String name);
 }

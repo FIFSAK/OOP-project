@@ -13,6 +13,7 @@ import javax.security.auth.login.LoginException;
 import data.Data;
 import enums.Format;
 import users.Student;
+import users.Teacher;
 import users.User;
 import users.Employee;
 /**
@@ -53,6 +54,9 @@ public class ResearcherDecorator implements Researcher, Serializable {
 	    	}
 	    	if(user instanceof Employee) {	    		
 	    		return (Employee) user;
+	    	}
+	    	if(user instanceof Teacher) {
+	    		return (Teacher) user;
 	    	}
 	    	
 	    	return user;
@@ -149,9 +153,9 @@ public class ResearcherDecorator implements Researcher, Serializable {
 		}
 		
 		public void newPaper(String name, 
-				int pages, String journal) {
+				int pages, String journal, String text) {
 			if(! Data.getInstance().getResearchPaper().stream().anyMatch(n -> n.name.equals(name))) {
-				ResearchPaper rp = new ResearchPaper(name, pages, journal);
+				ResearchPaper rp = new ResearchPaper(name, pages, journal, text);
 				papers.add(rp);
 				Data.getInstance().addResearchPaper(rp);
 				System.out.println("succes"); 
