@@ -20,12 +20,13 @@ public class Course {
     private Faculties faculty;
     private String description;
     private int creditsAmount;
+
     // Конструктор, геттеры и сеттеры
 
     public Course(String codeCourse, String nameCourse, Faculties faculty) {
         this.codeCourse = codeCourse;
         this.faculty = faculty;
-        this.instructors = new ArrayList<>();
+//        this.instructors = new ArrayList<>();
         this.lessons = new ArrayList<>();
     }
     
@@ -34,7 +35,7 @@ public class Course {
         this(codeCourse, nameCourse, faculty);
         this.creditsAmount = creditsAmount;
         this.prerequisites = new ArrayList<>(prerequisites);
-        this.instructors = new ArrayList<>(instructors);
+//        this.instructors = new ArrayList<>(instructors);
     }
 
     public String getCodeCourse() {
@@ -81,19 +82,19 @@ public class Course {
         this.creditsAmount = creditsAmount;
     }
 
-    public List<Teacher> getInstructors() {
-        return new ArrayList<>(instructors);
-    }
-
-    public void setInstructors(List<Teacher> instructors) {
-        this.instructors = new ArrayList<>(instructors);
-    }
+//    public List<Teacher> getInstructors() {
+//        return new ArrayList<>(instructors);
+//    }
+//
+//    public void setInstructors(List<Teacher> instructors) {
+//        this.instructors = new ArrayList<>(instructors);
+//    }
 
     // Операции
 
-    public void addInstructor(Teacher instructor) {
-        this.instructors.add(instructor);
-    }
+//    public void addInstructor(Teacher instructor) {
+//        this.instructors.add(instructor);
+//    }
     
     public int getTotalDuration() {
         int totalDuration = 0;

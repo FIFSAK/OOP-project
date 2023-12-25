@@ -1,7 +1,10 @@
 package users;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
+import data.*;
 
 
 import additional.News;
@@ -15,9 +18,9 @@ public class Manager extends Employee {
 
     public Manager(String firstName, String lastName, String password, String login, String userId,
 			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
-			Gender category, String nationality, FamilyStatus familyStatus) {
+			Gender category, String nationality, FamilyStatus familyStatus, Date dateOfEmployment) {
 		super(firstName, lastName, password, login, userId, subscribedJournals, name, dateOfBirth, phoneNumber, iin, category,
-				nationality, familyStatus);
+				nationality, familyStatus, dateOfEmployment);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,9 +32,10 @@ public class Manager extends Employee {
 	private ManagerType type;
     private Course course;
     private Teacher teacher;
-    private News news;
+//    private News news;
     private Date data;
     private Student student;
+	private News news;
 
     public ManagerType getType() {
         return this.type;
@@ -79,6 +83,37 @@ public class Manager extends Employee {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+    
+    public void createNews() {
+    	
+    }
+    
+    ArrayList<News> newsList = new ArrayList<News>();
+    
+    public void manageNews(News news, String title ) {
+        int index = newsList.indexOf(news);
+        if (title != null) {
+            News _news = newsList.get(index);
+            _news.setTopic(title);
+            newsList.set(index, _news);
+        }
+    }
+    
+    public void viewStudents() {
+    	Data
+        .getInstance()
+        .getAllStudent()
+        .stream()
+        .forEach(student -> System.out.println(student));
+    }
+    
+    public void viewTeachers(List<Teacher> teachers) {
+    	Data
+        .getInstance()
+        .getAllTeacher()
+        .stream()
+        .forEach(student -> System.out.println(student));
     }
 
     // Operations

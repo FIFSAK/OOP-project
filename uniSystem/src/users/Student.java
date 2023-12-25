@@ -86,17 +86,23 @@ public class Student extends User {
         this.courseInfo = courseInfo;
     }
 
-//    public Teacher getTeacher() {
-//        return teacher;
+
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+//    public void setTeacher(Teacher teacher) {
+//        this.teacher = teacher;
 //    }
-//
-//    public Course getCourse() {
-//        return course;
-//    }
-//
-//    public void setCourse(Course course) {
-//        this.course = course;
-//    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
     public StudentOrganisation getStudentOrganization() {
         return studentOrganization;
@@ -223,16 +229,11 @@ public class Student extends User {
     }
     
     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
-     
+
         out.defaultWriteObject();
     }
 
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
-     
         in.defaultReadObject();
     }
-
-
-	
-    
 }

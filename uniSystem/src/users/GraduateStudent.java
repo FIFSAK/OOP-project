@@ -77,14 +77,20 @@ public class GraduateStudent extends Student implements Researcher {
 //        }
 //    }
 
+
+
 	
+=======
+
+
+	@Override
 	public void newProject(String topic, Vector<ResearchPaper> publishedPapers,
 			Vector<ResearcherDecorator> participants) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	
+	@Override
 	public void newPaper(ResearchPaper rp) {
 		// TODO Auto-generated method stub
 		
@@ -101,4 +107,5 @@ public class GraduateStudent extends Student implements Researcher {
 		// TODO Auto-generated method stub
 		
 	}
+
 }

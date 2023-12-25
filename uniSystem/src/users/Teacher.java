@@ -2,7 +2,7 @@ package users;
 
 import java.util.Date;
 import java.util.Set;
-import java.util.Vector;
+import java.util.List;
 
 import course.Course;
 import enums.FamilyStatus;
@@ -15,21 +15,20 @@ public class Teacher extends Employee {
 
     public Teacher(String firstName, String lastName, String password, String login, String userId,
 			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
-			Gender category, String nationality, FamilyStatus familyStatus) {
+			Gender category, String nationality, FamilyStatus familyStatus, Date dateOfEmployment) {
 		super(firstName, lastName, password, login, userId, subscribedJournals, name, dateOfBirth, phoneNumber, iin, category,
-				nationality, familyStatus);
+				nationality, familyStatus, dateOfEmployment);
 		// TODO Auto-generated constructor stub
 	}
 
 	public Teacher(String login, String password) {
 		super(login, password);
-		// TODO Auto-generated constructor stub
 	}
 
 	private Set<Course> courses;
     private Student viewStudents;
     private TeacherType post;
-    private Vector<Student> students;
+    private List<Student> students;
     private Course course;
     private ResearcherDecorator researcherDecorator;
     private Manager manager;
@@ -37,12 +36,8 @@ public class Teacher extends Employee {
     private Student student;
 	private String viewCourses;
 
-    public String getViewCourses() {
-        return this.getViewCourses();
-    }
-
-    public void setViewCourses(String viewCourses) {
-        this.viewCourses = viewCourses;
+    public Set<Course> getViewCourses() {
+        return this.viewCourses();
     }
 
     private Set<Course> getCourses() {
@@ -53,14 +48,6 @@ public class Teacher extends Employee {
         this.courses = courses;
     }
 
-    public Student getViewStudents() {
-        return this.viewStudents;
-    }
-
-    public void setViewStudents(Student viewStudents) {
-        this.viewStudents = viewStudents;
-    }
-
     public TeacherType getPost() {
         return this.post;
     }
@@ -69,11 +56,11 @@ public class Teacher extends Employee {
         this.post = post;
     }
 
-    public Vector<Student> getStudents() {
+    public List<Student> getStudents() {
         return this.students;
     }
 
-    public void setStudents(Vector<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
@@ -91,10 +78,6 @@ public class Teacher extends Employee {
 
     public void setData(Date data) {
         this.data = data;
-    }
-
-    public Course getCourse() {
-        return this.course;
     }
 
     public void setCourse(Course course) {

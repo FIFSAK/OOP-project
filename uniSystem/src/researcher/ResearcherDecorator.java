@@ -1,18 +1,26 @@
 package researcher;
 
+import java.io.Serializable;
+
 import java.util.Collections;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Vector;
 
 import javax.security.auth.login.LoginException;
 
+import data.Data;
 import enums.Format;
 import users.Student;
 import users.User;
 import users.Employee;
+/**
+ * The ResearcherDecorator class is a decorator for the User class, providing additional functionalities 
+ * related to managing research projects and papers. It implements the Researcher interface and is Serializable.
+ */
 
-public class ResearcherDecorator implements Researcher {	   
+public class ResearcherDecorator implements Researcher, Serializable {	   
 	    private User user;
 	    
 	    public Vector<ResearchProject> projects = new Vector<ResearchProject>();
@@ -20,14 +28,24 @@ public class ResearcherDecorator implements Researcher {
 	    public Vector<ResearchPaper> papers = new Vector<ResearchPaper>();
 	    
 	    public double hindex;
-	    
+	    /**
+	     * Default constructor for creating an instance of ResearcherDecorator without a user.
+	     */
 	    public ResearcherDecorator () {}
-	    
+	    /**
+	     * Constructs a ResearcherDecorator with a specified user.
+	     * 
+	     * @param u The User object that is being decorated.
+	     */
 	    public ResearcherDecorator (User u) {
 	    	user = u;
 	    }
 	    
-	    
+	    /**
+	     * Provides access to the underlying User object.
+	     * 
+	     * @return The wrapped User object, either Student or Employee.
+	     */
 
 	    public User getWrapped(){
 	    	if(user instanceof Student) {	    		
@@ -38,13 +56,33 @@ public class ResearcherDecorator implements Researcher {
 	    	}
 	    	
 	    	return user;
-	    }
+	    } // доступ к предыдущим функциям до того как стал ресерчером
 
 		@Override
-		public void addProject(ResearchProject researchProject) {
-			// TODO Auto-generated method stub
-			projects.add(researchProject);
-			
+		public void joinProject(String topic) {
+		    Optional<ResearchProject> matchingProject = Data.getInstance().getResearchProject().stream()
+		                                                     .filter(n -> n.topic.equals(topic))
+		                                                     .findFirst();
+
+		    if (matchingProject.isPresent()) {
+		        // Add the found project to the projects vector
+		        projects.add(matchingProject.get());
+		    } else {
+		        System.out.println("Not existing project");
+		    }
+		}
+		@Override
+		public void joinPaper(String name) {
+		    Optional<ResearchPaper> matchingPaper = Data.getInstance().getResearchPaper().stream()
+		                                                     .filter(n -> n.name.equals(name))
+		                                                     .findFirst();
+
+		    if (matchingPaper.isPresent()) {
+		        // Add the found project to the projects vector
+		        papers.add(matchingPaper.get());
+		    } else {
+		        System.out.println("Not existing project");
+		    }
 		}
 		@Override
 		public String printPapers(String sortType) {
@@ -59,22 +97,22 @@ public class ResearcherDecorator implements Researcher {
 		}
 		@Override
 		public void calculateHIndex() throws LowHIndex {
-			Set<ResearchPaper> s = null;
 			int minimalCitations = Integer.MAX_VALUE;
-			for(ResearchProject project: projects) {
-				for(ResearchPaper paper: project.getPapers()) {
-					s.add(paper);
-					if (paper.getCitation(Format.PLAIN_TEXT).size() < minimalCitations) {
-						minimalCitations = paper.getCitation(Format.PLAIN_TEXT).size();
+				for(ResearchPaper paper: papers) {
+					if (paper.citations.size() < minimalCitations) {
+						minimalCitations = paper.citations.size();
 					}
 				}
-			}
 			hindex = minimalCitations;
 			if(hindex < 3) {
 				System.out.println(new LowHIndex("your hindex lesser than 3"));
 			}
-		}
-		
+		} // если каждая статья цитировалась минимум сколько то раз этот минимум и будет hindex
+		/**
+	     * Returns a string representation of the ResearcherDecorator, including user details, projects, and H-index.
+	     * 
+	     * @return A string describing the ResearcherDecorator.
+	     */
 		public String toString() {
 			if(user instanceof Student) {
 				user = (Student) user;
@@ -86,21 +124,54 @@ public class ResearcherDecorator implements Researcher {
 		}
 		
 		public void newProject(String topic, Vector<ResearchPaper> publishedPapers, Vector<ResearcherDecorator> participants) {
-			projects.add(new ResearchProject(topic, publishedPapers, participants));
+			if(!Data.getInstance().getResearchProject().stream().anyMatch(n -> n.topic.equals(topic))) {
+				ResearchProject rp = new ResearchProject(topic, publishedPapers, participants);
+				projects.add(rp);
+				Data.getInstance().addResearchProject(rp);
+				System.out.println("succes"); 
+			}
+			else {
+				System.out.println("this project already exist");
+
+			}
 		}
 		
 		public void newProject(ResearchProject rp) {
-			projects.add(rp);
+			if(! Data.getInstance().getResearchProject().stream().anyMatch(n -> n.equals(rp))) {
+				projects.add(rp);
+				Data.getInstance().addResearchProject(rp);
+				System.out.println("succes"); 
+			}
+			else {
+				System.out.println("this project already exist");
+
+			}
 		}
 		
 		public void newPaper(String name, 
-				Vector<ResearchPaper> citations,
 				int pages, String journal) {
-			papers.add(new ResearchPaper(name, citations, pages, journal));
+			if(! Data.getInstance().getResearchPaper().stream().anyMatch(n -> n.name.equals(name))) {
+				ResearchPaper rp = new ResearchPaper(name, pages, journal);
+				papers.add(rp);
+				Data.getInstance().addResearchPaper(rp);
+				System.out.println("succes"); 
+			}
+			else {
+				System.out.println("this project already exist");
+
+			}
 			
 		}
 		public void newPaper(ResearchPaper rp) {
-			papers.add(rp);
+			if(! Data.getInstance().getResearchPaper().stream().anyMatch(n -> n.equals(rp))) {
+				papers.add(rp);
+				System.out.println("succes"); 
+				Data.getInstance().addResearchPaper(rp);
+			}
+			else {
+				System.out.println("this project already exist");
+
+			}
 			
 		}
 
