@@ -45,12 +45,11 @@ public class ResearchPaper implements Comparable<ResearchPaper>, Serializable {
 		
 	}
 	{
-		if(Data.getInstance().getResearchPaper().contains(this)) {
-			System.out.println("this paper already exist");
-		}
-		else {
-			Data.getInstance().addResearchPaper(this);
-		}
+//		if(Data.getInstance().getResearchPaper().stream().anyMatch(n -> n.name.equals(name))) {
+//		}
+//		else {
+//			Data.getInstance().addResearchPaper(this);
+//		}
 			
 		 //добавляет каждый новый пейпер в бд
 	}

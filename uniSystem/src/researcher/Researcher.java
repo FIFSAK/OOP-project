@@ -14,7 +14,7 @@ public interface Researcher {
      * 
      * @param researchProject The ResearchProject object to be added.
      */
-    public void addProject(ResearchProject researchProject);
+    public void joinProject(String topic);
 
     /**
      * Prints the details of published papers.
@@ -39,6 +39,7 @@ public interface Researcher {
      * @param topic The topic of the new research project.
      * @param publishedPapers A vector of published papers related to the project.
      * @param participants A vector of researchers participating in the project.
+     * @return 
      */
     public void newProject(String topic, Vector<ResearchPaper> publishedPapers, Vector<ResearcherDecorator> participants);
         
@@ -64,4 +65,6 @@ public interface Researcher {
      * @param journal The journal in which the paper is published.
      */
     public void newPaper(String name, int pages, String journal);
+    
+    public void joinPaper(String name);
 }

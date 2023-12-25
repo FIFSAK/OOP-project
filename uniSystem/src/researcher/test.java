@@ -31,7 +31,14 @@ public class test {
 		ResearcherDecorator employeeResearcher = new ResearcherDecorator(employee);
 		Data.getInstance().addResearcherDatabase(employeeResearcher);
 		ResearchPaper rp = new ResearchPaper("AI", 10, "Anuar's jounal");
-		System.out.println(Data.getInstance().getResearchPaper());
+		System.out.println("aaaaaaaaaaaa");
+		studentResearcher.newPaper(rp);
+		employeeResearcher.newPaper(rp);
+		System.out.println(rp.getAuthorsOfPaper(rp).size());
+		employeeResearcher.joinPaper("AI");
+		System.out.println(rp.getAuthorsOfPaper(rp).size());
+
+//		System.out.println(Data.getInstance().getResearchPaper());
 //		ResearchPaper rp1 = new ResearchPaper("A2", 10, "Anuar's jounal");
 //		ResearchPaper rp2 = new ResearchPaper("A3", 10, "Anuar's jounal");
 //		ResearchPaper rp3 = new ResearchPaper("A4", 10, "Anuar's jounal");
