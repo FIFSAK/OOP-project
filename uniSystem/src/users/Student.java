@@ -1,5 +1,6 @@
 package users;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,9 @@ import course.Mark;
 import course.Transcript;
 import data.Data;
 import enums.Faculties;
+import enums.FamilyStatus;
+import enums.Gender;
+import researcher.ResearchPaper;
 import researcher.ResearcherDecorator;
 
 
@@ -21,8 +25,8 @@ public class Student extends User {
     private int yearOfReceipt;
     private StudentOrganisation organisation;
     private HashMap<Course, Mark> courseInfo;
-    private Teacher teacher;
-    private Course course;
+    private List<Teacher> teacher;
+//    private List<Course> course;
     private StudentOrganisation studentOrganization;
 
     public Student(String login, String password) {
@@ -31,7 +35,14 @@ public class Student extends User {
         this.yearOfStudy = 1;
         this.courseInfo = new HashMap<>();
     }
-
+     
+    public Student(String firstName, String lastName, String password, String login, String userId,
+			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
+			Gender category, String nationality, FamilyStatus familyStatus) {
+		super(firstName, lastName, password, login, userId, subscribedJournals, name, dateOfBirth, phoneNumber, iin, category,
+				nationality, familyStatus);
+		// TODO Auto-generated constructor stub
+	}
 
     public int getYearOfReceipt() {
 		return yearOfReceipt;
@@ -75,21 +86,17 @@ public class Student extends User {
         this.courseInfo = courseInfo;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+//    public Teacher getTeacher() {
+//        return teacher;
+//    }
+//
+//    public Course getCourse() {
+//        return course;
+//    }
+//
+//    public void setCourse(Course course) {
+//        this.course = course;
+//    }
 
     public StudentOrganisation getStudentOrganization() {
         return studentOrganization;
@@ -105,10 +112,12 @@ public class Student extends User {
         for (HashMap.Entry<Course, Mark> entry : courseInfo.entrySet()) {
             Course course = entry.getKey();
             Mark mark = entry.getValue();
-            transcript.addCourseMark(course.getNameCourse(), mark);
+            transcript.addMark(course, mark);
         }
         return transcript;
     }
+    
+
 
     public void viewTranscript() {
         Transcript transcript = generateTranscript();
@@ -149,6 +158,29 @@ public class Student extends User {
 //        }
 //    }
     
+    public void viewSchedule() {
+        for (HashMap.Entry<Course, Mark> entry : courseInfo.entrySet()) {
+            Course enrolledCourse = entry.getKey();
+            List<Teacher> courseTeachers = enrolledCourse.getInstructors();
+
+            System.out.println("Course: " + enrolledCourse.getNameCourse());
+
+            for (Teacher courseTeacher : courseTeachers) {
+                System.out.println("Teacher: " + courseTeacher.getName());
+            }
+
+//            System.out.println("Schedule:");
+//            for (String scheduleEntry : enrolledCourse.getSchedule()) {  // should be method getSchedule in Course
+//                System.out.println(scheduleEntry);
+//            }
+
+            System.out.println();
+        }
+    }
+
+    
+
+    
     
     public Course registerToCourse(Course course) {
     	courseInfo.put(course,null);
@@ -161,6 +193,7 @@ public class Student extends User {
         }
     }
     
+    
     public void joinStudentOrganization(StudentOrganisation organization) {
     	this.studentOrganization = organization;
         organization.addMember(this);
@@ -169,17 +202,13 @@ public class Student extends User {
     	 if (studentOrganization != null) {
              studentOrganization.removeMember(this);
          } 
-    	
+    }
     public void becomeHeadOfOrganization(StudentOrganisation organization) {
     	this.studentOrganization=organization;
         organization.setHead(this);
     }
     
-//    public static List<Student> getCourses(Course course) {
-//        return Data.getInstance().getAllUsers().
-//                filter(s -> s.courseInfo.containsKey(course))
-//                .collect(Collectors.toList());
-//    }
+
     public String toString() {
     	return super.toString()+
     			"Student{" +
@@ -188,9 +217,22 @@ public class Student extends User {
                 ", organisation=" + organisation +
                 ", courseInfo=" + courseInfo +
                 ", teacher=" + teacher +
-                ", course=" + course +
+//                ", course=" + course +
                 ", studentOrganization=" + studentOrganization +
                 '}';    
     }
+    
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+     
+        out.defaultWriteObject();
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+     
+        in.defaultReadObject();
+    }
+
+
+	
     
 }

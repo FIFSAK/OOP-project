@@ -1,11 +1,14 @@
 package users;
 
 import java.io.InvalidClassException;
+import java.util.Vector;
 
 import additional.DissertationProject;
 import enums.GraduateStudentType;
+import researcher.ResearchPaper;
 import researcher.ResearchProject;
 import researcher.Researcher;
+import researcher.ResearcherDecorator;
 
 public class GraduateStudent extends Student implements Researcher {
 
@@ -53,24 +56,49 @@ public class GraduateStudent extends Student implements Researcher {
         // TODO: Implement h-index calculation
     }
 
-	public Researcher getSupervisor() {
-		return supervisor;
+//	public Researcher getSupervisor() {
+//		return supervisor;
+//	}
+
+//	public void setSupervisor(Researcher supervisor){
+//		try {
+//            setSupervisor(supervisor);
+//            this.supervisor = supervisor;
+//        } catch (InvalidSupervisorException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+	
+//	private void validateSupervisor(Researcher supervisor) throws InvalidSupervisorException {
+//        if (studentType == GraduateStudentType.MASTER || studentType == GraduateStudentType.PHD) {
+//            if (supervisor.calculateHIndex() < 3) {
+//                throw new InvalidSupervisorException("Supervisor must have an h-index >= 3 ");
+//            }
+//        }
+//    }
+
+	
+	public void newProject(String topic, Vector<ResearchPaper> publishedPapers,
+			Vector<ResearcherDecorator> participants) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	public void setSupervisor(Researcher supervisor){
-		try {
-            setSupervisor(supervisor);
-            this.supervisor = supervisor;
-        } catch (InvalidSupervisorException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 	
-	private void validateSupervisor(Researcher supervisor) throws InvalidSupervisorException {
-        if (studentType == GraduateStudentType.MASTER || studentType == GraduateStudentType.PHD) {
-            if (supervisor.calculateHIndex() < 3) {
-                throw new InvalidSupervisorException("Supervisor must have an h-index >= 3 ");
-            }
-        }
-    }
+	public void newPaper(ResearchPaper rp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void newProject(ResearchProject rp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void newPaper(String name, Vector<ResearchPaper> citations, int pages, String journal) {
+		// TODO Auto-generated method stub
+		
+	}
 }
