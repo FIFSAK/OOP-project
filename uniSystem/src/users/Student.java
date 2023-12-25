@@ -25,8 +25,8 @@ public class Student extends User {
     private int yearOfReceipt;
     private StudentOrganisation organisation;
     private HashMap<Course, Mark> courseInfo;
-    private Teacher teacher;
-    private Course course;
+    private List<Teacher> teacher;
+//    private List<Course> course;
     private StudentOrganisation studentOrganization;
 
     public Student(String login, String password) {
@@ -86,6 +86,8 @@ public class Student extends User {
         this.courseInfo = courseInfo;
     }
 
+
+
     public Teacher getTeacher() {
         return teacher;
     }
@@ -120,6 +122,8 @@ public class Student extends User {
         }
         return transcript;
     }
+    
+
 
     public void viewTranscript() {
         Transcript transcript = generateTranscript();
@@ -160,6 +164,29 @@ public class Student extends User {
 //        }
 //    }
     
+    public void viewSchedule() {
+        for (HashMap.Entry<Course, Mark> entry : courseInfo.entrySet()) {
+            Course enrolledCourse = entry.getKey();
+            List<Teacher> courseTeachers = enrolledCourse.getInstructors();
+
+            System.out.println("Course: " + enrolledCourse.getNameCourse());
+
+            for (Teacher courseTeacher : courseTeachers) {
+                System.out.println("Teacher: " + courseTeacher.getName());
+            }
+
+//            System.out.println("Schedule:");
+//            for (String scheduleEntry : enrolledCourse.getSchedule()) {  // should be method getSchedule in Course
+//                System.out.println(scheduleEntry);
+//            }
+
+            System.out.println();
+        }
+    }
+
+    
+
+    
     
     public Course registerToCourse(Course course) {
     	courseInfo.put(course,null);
@@ -171,6 +198,7 @@ public class Student extends User {
             System.out.println(instructor.getName());
         }
     }
+    
     
     public void joinStudentOrganization(StudentOrganisation organization) {
     	this.studentOrganization = organization;
@@ -186,11 +214,7 @@ public class Student extends User {
         organization.setHead(this);
     }
     
-//    public static List<Student> getCourses(Course course) {
-//        return Data.getInstance().getAllUsers().
-//                filter(s -> s.courseInfo.containsKey(course))
-//                .collect(Collectors.toList());
-//    }
+
     public String toString() {
     	return super.toString()+
     			"Student{" +
@@ -199,22 +223,17 @@ public class Student extends User {
                 ", organisation=" + organisation +
                 ", courseInfo=" + courseInfo +
                 ", teacher=" + teacher +
-                ", course=" + course +
+//                ", course=" + course +
                 ", studentOrganization=" + studentOrganization +
                 '}';    
     }
     
     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
-        // Custom serialization logic if needed
+
         out.defaultWriteObject();
     }
 
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
-        // Custom deserialization logic if needed
         in.defaultReadObject();
     }
-
-
-	
-    
 }
