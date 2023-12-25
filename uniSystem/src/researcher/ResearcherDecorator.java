@@ -4,11 +4,13 @@ import java.io.Serializable;
 
 import java.util.Collections;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Vector;
 
 import javax.security.auth.login.LoginException;
 
+import data.Data;
 import enums.Format;
 import users.Student;
 import users.User;
@@ -57,10 +59,30 @@ public class ResearcherDecorator implements Researcher, Serializable {
 	    } // доступ к предыдущим функциям до того как стал ресерчером
 
 		@Override
-		public void addProject(ResearchProject researchProject) {
-			// TODO Auto-generated method stub
-			projects.add(researchProject);
-			
+		public void joinProject(String topic) {
+		    Optional<ResearchProject> matchingProject = Data.getInstance().getResearchProject().stream()
+		                                                     .filter(n -> n.topic.equals(topic))
+		                                                     .findFirst();
+
+		    if (matchingProject.isPresent()) {
+		        // Add the found project to the projects vector
+		        projects.add(matchingProject.get());
+		    } else {
+		        System.out.println("Not existing project");
+		    }
+		}
+		@Override
+		public void joinPaper(String name) {
+		    Optional<ResearchPaper> matchingPaper = Data.getInstance().getResearchPaper().stream()
+		                                                     .filter(n -> n.name.equals(name))
+		                                                     .findFirst();
+
+		    if (matchingPaper.isPresent()) {
+		        // Add the found project to the projects vector
+		        papers.add(matchingPaper.get());
+		    } else {
+		        System.out.println("Not existing project");
+		    }
 		}
 		@Override
 		public String printPapers(String sortType) {
@@ -102,20 +124,54 @@ public class ResearcherDecorator implements Researcher, Serializable {
 		}
 		
 		public void newProject(String topic, Vector<ResearchPaper> publishedPapers, Vector<ResearcherDecorator> participants) {
-			projects.add(new ResearchProject(topic, publishedPapers, participants));
+			if(!Data.getInstance().getResearchProject().stream().anyMatch(n -> n.topic.equals(topic))) {
+				ResearchProject rp = new ResearchProject(topic, publishedPapers, participants);
+				projects.add(rp);
+				Data.getInstance().addResearchProject(rp);
+				System.out.println("succes"); 
+			}
+			else {
+				System.out.println("this project already exist");
+
+			}
 		}
 		
 		public void newProject(ResearchProject rp) {
-			projects.add(rp);
+			if(! Data.getInstance().getResearchProject().stream().anyMatch(n -> n.equals(rp))) {
+				projects.add(rp);
+				Data.getInstance().addResearchProject(rp);
+				System.out.println("succes"); 
+			}
+			else {
+				System.out.println("this project already exist");
+
+			}
 		}
 		
 		public void newPaper(String name, 
 				int pages, String journal) {
-			papers.add(new ResearchPaper(name, pages, journal));
+			if(! Data.getInstance().getResearchPaper().stream().anyMatch(n -> n.name.equals(name))) {
+				ResearchPaper rp = new ResearchPaper(name, pages, journal);
+				papers.add(rp);
+				Data.getInstance().addResearchPaper(rp);
+				System.out.println("succes"); 
+			}
+			else {
+				System.out.println("this project already exist");
+
+			}
 			
 		}
 		public void newPaper(ResearchPaper rp) {
-			papers.add(rp);
+			if(! Data.getInstance().getResearchPaper().stream().anyMatch(n -> n.equals(rp))) {
+				papers.add(rp);
+				System.out.println("succes"); 
+				Data.getInstance().addResearchPaper(rp);
+			}
+			else {
+				System.out.println("this project already exist");
+
+			}
 			
 		}
 

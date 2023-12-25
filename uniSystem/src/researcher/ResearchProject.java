@@ -39,12 +39,11 @@ public class ResearchProject implements Serializable {
     	this.publishedPapers = publishedPapers;
     }
     {
-		if(Data.getInstance().getResearchProject().contains(this)) {
-			System.out.println("this paper already exist");
-		}
-		else {
-			Data.getInstance().addResearchProject(this);
-		}
+//		if(Data.getInstance().getResearchProject().stream().anyMatch(n -> n.topic.equals(topic))) {
+//		}
+//		else {
+//			Data.getInstance().addResearchProject(this);
+//		}
 			
 		 //добавляет каждый новый пейпер в бд
 	}
