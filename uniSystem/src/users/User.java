@@ -1,6 +1,8 @@
 package users;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -123,16 +125,23 @@ public class User implements Comparable<User>, Observer, Serializable{
                     String newPassword = reader.readLine();
                     setPassword(newPassword);
                     break;
-                case 5:
-                    // Handle Date of Birth input
-                    // You may want to use SimpleDateFormat to parse the input
+                case 4:
+                    System.out.println("Enter new date of birth (format: dd/MM/yyyy):");
+                    String dateString = reader.readLine();
+                    try {
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                        Date newDateOfBirth = formatter.parse(dateString);
+                        setDateOfBirth(newDateOfBirth);
+                    } catch (ParseException e) {
+                        System.out.println("Invalid date format. Please use dd/MM/yyyy format.");
+                    }
                     break;
-                case 6:
+                case 5:
                     System.out.println("Enter new phone number:");
                     String newPhoneNumber = reader.readLine();
                     setPhoneNumber(newPhoneNumber);
                     break;
-                case 10:
+                case 6:
                     System.out.println("Enter new family status (SINGLE/MARRIED/OTHER):");
                     String newFamilyStatusStr = reader.readLine().toUpperCase();
                     FamilyStatus newFamilyStatus = FamilyStatus.valueOf(newFamilyStatusStr);
