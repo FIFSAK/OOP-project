@@ -11,7 +11,6 @@ public class Comment {
     private User author;
     private CommentType attribute;
     private News news;
-    private User user;
 
     public Comment(String content, Date date, User author) {
         this.content = content;
@@ -35,8 +34,8 @@ public class Comment {
         this.date = date;
     }
 
-    public User getAuthor() {
-        return author;
+    public String getAuthor() {
+        return author.getLogin();
     }
 
     public void setAuthor(User author) {
@@ -57,14 +56,6 @@ public class Comment {
 
     public void setNews(News news) {
         this.news = news;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     // Operations

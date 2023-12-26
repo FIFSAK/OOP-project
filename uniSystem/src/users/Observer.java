@@ -3,5 +3,5 @@ package users;
 import java.util.Date;
 
 public interface Observer {
-    void update(String latestPaper);
+    void update();
 }
