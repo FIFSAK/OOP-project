@@ -30,7 +30,7 @@ public class test {
 		Data.getInstance().addResearcherDatabase(studentResearcher);
 		ResearcherDecorator employeeResearcher = new ResearcherDecorator(employee);
 		Data.getInstance().addResearcherDatabase(employeeResearcher);
-		ResearchPaper rp = new ResearchPaper("AI", 10, "Anuar's jounal");
+		ResearchPaper rp = new ResearchPaper("AI", 10, "Anuar's jounal", "aadfsadfasdfsa");
 		System.out.println("aaaaaaaaaaaa");
 		studentResearcher.newPaper(rp);
 		employeeResearcher.newPaper(rp);
@@ -61,7 +61,8 @@ public class test {
 //		System.out.println(studentResearcher.hindex);
 //		employeeResearcher.newPaper("AI", 10, "Anuar's jounal");
 
-		
+		System.out.println("Қазақ болып, тумағанда нетер ем?\r\n"
+				+ "Бұл жалғаннан бақыт таппай өтер ем");
 	}
 
 }

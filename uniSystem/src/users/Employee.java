@@ -12,7 +12,7 @@ public class Employee extends User implements Payable {
 
 	private String workDepartment;
     private int salary;
-    private Date hireDate;
+    private Date dateOfEmployment;
 
     
     public Employee(String firstName, String lastName, String password, String login, String userId,
@@ -25,12 +25,6 @@ public class Employee extends User implements Payable {
 	public Employee(String login, String password) {
 		super(login, password);
 	}
-
-
-
-//    private Date data;
-    Date dateOfEmployment;
-
     
     public Date getDateOfEmployment(){
 		return dateOfEmployment;
@@ -49,36 +43,14 @@ public class Employee extends User implements Payable {
     }
 
     
-    private String getWorkDepartment() {
+    public String getWorkDepartment() {
         return this.workDepartment;
     }
   
-    private void setWorkDepartment(String workDepartment) {
+    public void setWorkDepartment(String workDepartment) {
         this.workDepartment = workDepartment;
     }
 
- 
-//    public Date getData() {
-//        return this.data;
-//    }
-//
-//    public void setData(Date data) {
-//        this.data = data;
-//    }
-    
-    public static void processEmployees(List<Employee> employees) {
-        employees.stream()
-                 .filter(e -> e.getSalary() > 50000)
-                 .forEach(System.out::println);
-    }
- 
-    public Date getHireDate() {
-        return this.hireDate;
-    }
-
-    public void setData(Date hireDate) {
-        this.hireDate = hireDate;
-    }
     
     
 }
