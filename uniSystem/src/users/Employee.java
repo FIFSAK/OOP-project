@@ -56,30 +56,27 @@ public class Employee extends User implements Payable {
 
     
     
-    public void applicationToTechSupport() {
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//    public void applicationToTechSupport() {
+//        try {
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//
+//            // Prompt the user to enter the application content
+//            System.out.println("Enter your application to tech support:");
+//            String applicationContent = reader.readLine();
+//
+//            // Create a message with the application content
+//            Message application = new Message(applicationContent);
+//
+//            // Send the application message
+//            sendMessage(application);
+//
+//            // Additional processing if needed
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-            // Prompt the user to enter the application content
-            System.out.println("Enter your application to tech support:");
-            String applicationContent = reader.readLine();
 
-            // Create a message with the application content
-            Message application = new Message(applicationContent);
-
-            // Send the application message
-            sendMessage(application);
-
-            // Additional processing if needed
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-	private void sendMessage(Message application) {
-		Order techOrder = new ()
-		
-	}
 
     
 }

@@ -38,7 +38,7 @@ public class TechSupport {
 
 	public void viewDoneAndAcceptedOrders() {
 		orders.stream()
-		.filter(order -> order.orderStatus == OrderStatus.ACCEPTED)
+		.filter(order -> order.getOrderStatus() == OrderStatus.ACCEPTED)
         .map(order -> {
         	order.changeOrderStatus(OrderStatus.DONE);
             return order;
