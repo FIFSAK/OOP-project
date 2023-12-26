@@ -29,6 +29,7 @@ public class Student extends User {
     private StudentOrganisation studentOrganization;
     private Set<Teacher> instructors;
     private String diplomaProject; 
+    private double GPA;
 
     public Student(String login, String password) {
         super(login, password);
@@ -36,6 +37,7 @@ public class Student extends User {
         this.courseInfo = new HashMap<>();
         this.instructors = new HashSet<>();
         this.diplomaProject = "";
+        this.GPA = 0.0;
     }
 
     public Student(String firstName, String lastName, String password, String login, 
@@ -44,6 +46,28 @@ public class Student extends User {
         super(firstName, lastName, password, login, 
         		dateOfBirth, phoneNumber, iin, category,
                 nationality, familyStatus);
+    }
+    
+    public void calculateAverageGPA() {
+        double totalGPA = 0.0;
+        int count = 0;
+
+        for (Mark mark : courseInfo.values()) {
+            if (mark != null) {
+                totalGPA += mark.getGPA();
+                count++;
+            }
+        }
+
+        if (count > 0) {
+            this.GPA = totalGPA / count;
+        } else {
+            this.GPA = 0.0; 
+        }
+    }
+    
+    public double getAvgGPA() {
+    	return this.GPA;
     }
 
     public int getYearOfReceipt() {
@@ -128,9 +152,9 @@ public class Student extends User {
         }
     }
 
-    public void rateTeacher(Teacher teacher, double rating) {
-        teacher.receiveRating(rating);
-    }
+//    public void rateTeacher(Teacher teacher, double rating) {
+//        teacher.receiveRating(rating);
+//    }
 
     public void viewCourses() {
         for (Course course : courseInfo.keySet()) {

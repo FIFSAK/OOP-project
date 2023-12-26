@@ -3,8 +3,10 @@ package users;
 import java.util.Date;
 import java.util.Set;
 import java.util.List;
+import java.util.Optional;
 
 import course.Course;
+import data.Data;
 import enums.FamilyStatus;
 import enums.Gender;
 import enums.TeacherType;
@@ -16,12 +18,7 @@ public class Teacher extends Employee {
 	private Set<Course> courses;
     private TeacherType post;
     private List<Student> students;
-    private Course course;
     private ResearcherDecorator researcherDecorator;
-    private Manager manager;
-    private Date data;
-    private Student student;
-	private String viewCourses;
 
     public Teacher(String firstName, String lastName, String password, String login, String userId,
 			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
@@ -34,12 +31,6 @@ public class Teacher extends Employee {
 	public Teacher(String login, String password) {
 		super(login, password);
 	}
-
-	
-
-    public Set<Course> getViewCourses() {
-        return this.viewCourses();
-    }
 
     public Set<Course> getCourses() {
         return this.courses;
@@ -73,53 +64,50 @@ public class Teacher extends Employee {
         this.researcherDecorator = researcherDecorator;
     }
 
-    public Date getData() {
-        return this.data;
+
+    public void viewStudents() {
+        try {
+            System.out.println("List of Students:");
+
+            Data.getInstance().getAllStudent().forEach(student -> System.out.println("- " + student.getFirstName() + " " + student.getLastName()));
+
+            System.out.println("End of Student List.");
+        } catch (Exception e) {
+            System.out.println("Error viewing students.");
+            e.printStackTrace();
+        }
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void viewCourses() {
+        try {
+            System.out.println("List of Courses:");
+
+            if (courses != null && !courses.isEmpty()) {
+                courses.forEach(course -> System.out.println("- " + course.getNameCourse()));
+            } else {
+                System.out.println("No courses available.");
+            }
+
+            System.out.println("End of Course List.");
+        } catch (Exception e) {
+            System.out.println("Error viewing courses.");
+            e.printStackTrace();
+        }
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public Student infoAboutStudent(String name, String surname) {
+        List<Student> students = Data.getInstance().getAllStudent();
+
+        Optional<Student> foundStudent = students.stream()
+                .filter(student -> student.getFirstName().equalsIgnoreCase(name) &&
+                                   student.getLastName().equalsIgnoreCase(surname))
+                .findFirst();
+
+        return foundStudent.orElse(null);
     }
 
-    public Manager getManager() {
-        return this.manager;
+	public void addCourse(Course course) {
+        this.courses.add(course);
     }
-
-    public void setManager(Manager manager) {
-        this.manager = manager;
-    }
-
-    public Student getStudent() {
-        return this.student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-
-    public void viewStudent() {
-        return;
-    }
-
-    public Set<Course> viewCourses() {
-        return null;
-    }
-
-    public Student infoAboutStudents() {
-        return null;
-    }
-
-    public Employee getDepartment() {
-        return null;
-    }
-
-	public Object receiveRating(double rating) {
-		return null;
-	}
 }
 
