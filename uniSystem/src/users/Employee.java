@@ -46,28 +46,15 @@ public class Employee extends User implements Payable {
     }
 
     
-    private String getWorkDepartment() {
+    public String getWorkDepartment() {
         return this.workDepartment;
     }
   
-    private void setWorkDepartment(String workDepartment) {
+    public void setWorkDepartment(String workDepartment) {
         this.workDepartment = workDepartment;
     }
 
- 
-//    public Date getData() {
-//        return this.data;
-//    }
-//
-//    public void setData(Date data) {
-//        this.data = data;
-//    }
     
-    public static void processEmployees(List<Employee> employees) {
-        employees.stream()
-                 .filter(e -> e.getSalary() > 50000)
-                 .forEach(System.out::println);
-    }
     
     public void applicationToTechSupport() {
         try {
@@ -93,5 +80,6 @@ public class Employee extends User implements Payable {
 		Order techOrder = new ()
 		
 	}
+
     
 }
