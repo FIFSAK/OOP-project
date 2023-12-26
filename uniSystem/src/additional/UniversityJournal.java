@@ -1,19 +1,26 @@
 package additional;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import users.*;
 import java.util.List;
 
+import data.Data;
+import researcher.ResearchPaper;
+
 public class UniversityJournal {
-    private List<Observer> observers;
-    private String latestPaper;
+    Data data = Data.getInstance();
+    private List<User> observers;
+    private List<ResearchPaper> researchPapers ;
 
     public UniversityJournal() {
-        this.observers = new ArrayList<>();
+        this.observers = data.getAllUsers();
+        this.researchPapers = data.getResearchPaper();
     }
 
     public void addObserver(Observer observer) {
-        observers.add(observer);
+        observers.add((User) observer);
     }
 
     public void removeObserver(Observer observer) {
@@ -22,12 +29,16 @@ public class UniversityJournal {
 
     public void notifyObservers() {
         for (Observer observer : observers) {
-            observer.update(latestPaper);
+            observer.update();
         }
     }
 
-    public void publishNewPaper(String paper) {
-        this.latestPaper = paper;
+    public void publishNewPaper(ResearchPaper paper) {
+        this.researchPapers.add(0, paper); // Add the new paper to the beginning of the list
         notifyObservers();
+    }
+
+    public List<ResearchPaper> getResearchPapers() {
+        return Collections.unmodifiableList(researchPapers);
     }
 }
