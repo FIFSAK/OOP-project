@@ -19,8 +19,8 @@ public class Manager extends Employee {
     public Manager(String firstName, String lastName, String password, String login, String userId,
 			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
 			Gender category, String nationality, FamilyStatus familyStatus, Date dateOfEmployment) {
-		super(firstName, lastName, password, login, userId, subscribedJournals, name, dateOfBirth, phoneNumber, iin, category,
-				nationality, familyStatus, dateOfEmployment);
+    	super(firstName, lastName, password, login, dateOfBirth, phoneNumber, iin, category,
+				nationality, familyStatus);
 		// TODO Auto-generated constructor stub
 	}
 
