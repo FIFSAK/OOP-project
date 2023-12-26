@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 import enums.OrderStatus;
 
-public class TechSupportSpecialist {
+public class TechSupport {
 	
-	private static TechSupportSpecialist instance;
+	private static TechSupport instance;
     private ArrayList<Order> orders;
 
-    private TechSupportSpecialist() {
+    private TechSupport() {
         orders = new ArrayList<>();
     }
 
-    public static TechSupportSpecialist getInstance() {
+    public static TechSupport getInstance() {
         if (instance == null) {
-            instance = new TechSupportSpecialist();
+            instance = new TechSupport();
         }
         return instance;
     }

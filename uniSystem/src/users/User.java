@@ -2,14 +2,14 @@ package users;
 
 import java.io.*;
 import java.util.Date;
-
-
-import additional.Comment;
-import additional.UserFactory;
+import additional.*;
+import data.Data;
 import enums.*;
-import researcher.ResearchPaper;
+import researcher.*;
 
 public class User implements Comparable<User>, Observer, Serializable{
+	
+	Data data = Data.getInstance();
 
     private String firstName;
     private String lastName;
@@ -17,12 +17,11 @@ public class User implements Comparable<User>, Observer, Serializable{
     private String login;
     private String userId;
     private UserType userType;
-    private ResearchPaper subscribedJournals;
-    private String name;
+    private UniversityJournal subscribedJournals = new UniversityJournal();
     private Date dateOfBirth;
     private String phoneNumber;
     private int iin;
-    private Gender category;
+    private Gender gender;
     private String nationality;
     private FamilyStatus familyStatus;
     private UserFactory userFactory;
@@ -34,21 +33,17 @@ public class User implements Comparable<User>, Observer, Serializable{
         this.password = password;
     }
 
-    public User(String firstName, String lastName, String password, String login, String userId,
-            ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber,
-            int iin, Gender category, String nationality, FamilyStatus familyStatus) {
+    public User(String firstName, String lastName, String password, String login,
+            Date dateOfBirth, String phoneNumber,
+            int iin, Gender gender, String nationality, FamilyStatus familyStatus) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.login = login;
-        this.userId = userId;
-//        this.userType = userType;
-        this.subscribedJournals = subscribedJournals;
-        this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.phoneNumber = phoneNumber;
         this.iin = iin;
-        this.category = category;
+        this.gender = gender;
         this.nationality = nationality;
         this.familyStatus = familyStatus;
     }
@@ -102,23 +97,7 @@ public class User implements Comparable<User>, Observer, Serializable{
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
-
-    public ResearchPaper getSubscribedJournals() {
-        return subscribedJournals;
-    }
-
-    public void setSubscribedJournals(ResearchPaper subscribedJournals) {
-        this.subscribedJournals = subscribedJournals;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -143,12 +122,12 @@ public class User implements Comparable<User>, Observer, Serializable{
         this.iin = iin;
     }
 
-    public Gender getCategory() {
-        return category;
+    public Gender getGender() {
+        return gender;
     }
 
     public void setCategory(Gender category) {
-        this.category = category;
+        this.gender = category;
     }
 
     public String getNationality() {
@@ -166,32 +145,16 @@ public class User implements Comparable<User>, Observer, Serializable{
     public void setFamilyStatus(FamilyStatus familyStatus) {
         this.familyStatus = familyStatus;
     }
-
-    public UserFactory getUserFactory() {
-        return userFactory;
+    
+    public void viewNews() {
+    	for(News newss: data.getAllNews()) {
+    		System.out.println(newss);
+    	}
     }
-
-    public void setUserFactory(UserFactory userFactory) {
-        this.userFactory = userFactory;
+    
+    public void viewUniversityJournal() {
+    	
     }
-
-    public Observer getObserver() {
-        return observer;
-    }
-
-    public void setObserver(Observer observer) {
-        this.observer = observer;
-    }
-
-    public Comment getComment() {
-        return comment;
-    }
-
-    public void setComment(Comment comment) {
-        this.comment = comment;
-    }
-
-    // toString method
     @Override
     public String toString() {
         return "User{" +

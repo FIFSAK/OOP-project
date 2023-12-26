@@ -1,8 +1,10 @@
 package additional;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import users.*;
 
 import users.*;
 
@@ -12,14 +14,16 @@ public class Message {
     private User receiver;
     private String content;
     private Date dateSent;
-    private List<Attachment> attachments;
     
-    public Message(User sender, User receiver, String content, Date dateSent, List<Attachment> attachments) {
+    public Message(User sender, User receiver, String content, Date dateSent) {
         this.sender = sender;
         this.receiver = receiver;
         this.content = content;
         this.dateSent = dateSent;
-        this.attachments = attachments;
+    }
+    
+    public Message(String content) {
+        this.content = content;
     }
 
     public User getSender() {
@@ -53,25 +57,6 @@ public class Message {
     public void setDateSent(Date dateSent) {
         this.dateSent = dateSent;
     }
+    
 
-    public List<Attachment> getAttachments() {
-        return attachments;
-    }
-
-    public void setAttachments(List<Attachment> attachments) {
-        this.attachments = attachments;
-    }
-
-    public void addAttachment(Attachment attachment) {
-        if (this.attachments == null) {
-            this.attachments = new ArrayList<>();
-        }
-        this.attachments.add(attachment);
-    }
-
-    public void removeAttachment(Attachment attachment) {
-        if (this.attachments != null) {
-            this.attachments.remove(attachment);
-        }
-    }
 }
