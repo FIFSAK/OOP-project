@@ -40,13 +40,13 @@ public class TestData {
         }
 
         // Сохраняем в файл
-        data.saveToFile("C:\\Users\\Lenovo\\OneDrive\\Рабочий стол\\datas.out");
+        data.saveToFile("C:\\Users\\Admin\\Desktop\\OOP-project");
 
         // Обнуляем экземпляр Data, чтобы проверить восстановление
         data = null;
 
         // Загружаем из файла
-        data = Data.loadFromFile("C:\\Users\\Lenovo\\OneDrive\\Рабочий стол\\datas.out");
+        data = Data.loadFromFile("C:\\Users\\Admin\\Desktop\\OOP-project");
 
         // Выводим информацию о пользователях после десериализации
         System.out.println("Users after deserialization:");
