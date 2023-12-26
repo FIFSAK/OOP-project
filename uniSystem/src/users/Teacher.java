@@ -42,7 +42,7 @@ public class Teacher extends Employee {
         return this.viewCourses();
     }
 
-    private Set<Course> getCourses() {
+    public Set<Course> getCourses() {
         return this.courses;
     }
 
