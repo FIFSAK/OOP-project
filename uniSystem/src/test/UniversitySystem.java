@@ -33,6 +33,7 @@ public class UniversitySystem {
 	        System.out.println("4. View University Journal");
 	        System.out.println("5. Subscribe to Journal");
 	        System.out.println("6. Logout");
+	        System.out.println("7. View comments");
 	        System.out.println("Enter your choice:");
 
 	        try {
@@ -56,7 +57,11 @@ public class UniversitySystem {
 //	                    user.subscribeToJournal(subscribedJournals);
 	                    break;
 	                case 6:
+	                	logOut();
 	                    return; // Exit from user menu
+	                case 7:
+//	                	user.viewComments private method
+	                    return; 
 	                default:
 	                    System.out.println("Invalid choice. Please try again.");
 	            }
@@ -66,12 +71,119 @@ public class UniversitySystem {
 	    }
 	}
 	public void menuStudent(Student student) {
-		
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	    int choice;
+
+	    while (true) {
+	        System.out.println("Student Menu:");
+	        System.out.println("1. View Personal Information");
+	        System.out.println("2. Edit Personal Information");
+	        System.out.println("3. View Courses");
+	        System.out.println("4. Register for a Course");
+	        System.out.println("5. View Transcript");
+	        System.out.println("6. View Marks");
+	        System.out.println("7. Rate a Teacher");
+	        System.out.println("8. View Schedule");
+	        System.out.println("9. Join Student Organization");
+	        System.out.println("10. Leave Student Organization");
+	        System.out.println("11. Become Head of Organization");
+	        System.out.println("12. Logout");
+	        System.out.println("Enter your choice:");
+
+	        try {
+	            choice = Integer.parseInt(reader.readLine());
+
+	            switch (choice) {
+	                case 1:
+	                    System.out.println(student.toString());
+	                    break;
+	                case 2:
+	                    student.editData();
+	                    break;
+	                case 3:
+	                    student.viewCourses();
+	                    break;
+	                case 4:
+	                    // Logic to register for a course
+	                    break;
+	                case 5:
+	                    student.viewTranscript();
+	                    break;
+	                case 6:
+	                    student.viewMarks();
+	                    break;
+	                case 7:
+	                    // Logic to rate a teacher
+	                    break;
+	                case 8:
+	                    student.viewSchedule();
+	                    break;
+	                case 9:
+	                    // Logic to join student organization
+	                    break;
+	                case 10:
+	                    // Logic to leave student organization
+	                    break;
+	                case 11:
+	                    // Logic to become head of organization
+	                    break;
+	                case 12:
+	                    return; // Exit from student menu
+	                default:
+	                    System.out.println("Invalid choice. Please try again.");
+	            }
+	        } catch (IOException | NumberFormatException e) {
+	            System.out.println("An error occurred. Please try again.");
+	        }
+	    }
 	}
 	
 	public void menuEmployee(Employee employee) {
+	    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	    int choice;
 
+	    while (true) {
+	        System.out.println("Employee Menu:");
+	        System.out.println("1. View Personal Information");
+	        System.out.println("2. Edit Personal Information");
+	        System.out.println("3. View Work Details");
+	        System.out.println("4. Edit Work Details");
+	        System.out.println("5. Send Application to Tech Support");
+	        System.out.println("6. Logout");
+	        System.out.println("Enter your choice:");
+
+	        try {
+	            choice = Integer.parseInt(reader.readLine());
+
+	            switch (choice) {
+	                case 1:
+	                    System.out.println(employee.toString());
+	                    break;
+	                case 2:
+	                    employee.editData();
+	                    break;
+	                case 3:
+	                    System.out.println("Work Department: " + employee.getWorkDepartment());
+	                    System.out.println("Salary: " + employee.getSalary());
+	                    System.out.println("Date of Employment: " + employee.getDateOfEmployment());
+	                    break;
+	                case 4:
+	                    // Logic to edit work details
+	                    break;
+	                case 5:
+	                    // employee.applicationToTechSupport(); // Uncomment and implement this method
+	                    break;
+	                case 6:
+	                    return; // Exit from employee menu
+	                default:
+	                    System.out.println("Invalid choice. Please try again.");
+	            }
+	        } catch (IOException | NumberFormatException e) {
+	            System.out.println("An error occurred. Please try again.");
+	        }
+	    }
 	}
+
 
 	public void logIn() {
 		changeLanguage();
@@ -79,10 +191,10 @@ public class UniversitySystem {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 		try {
-			System.out.println(messages.getString("enterLogin"));
+//			System.out.println(messages.getString("enterLogin"));
 			String login = reader.readLine();
 
-			System.out.println(messages.getString("enterPassword"));
+//			System.out.println(messages.getString("enterPassword"));
 			String password = reader.readLine();
 
 			// Use the UserFactory to create or retrieve the user
