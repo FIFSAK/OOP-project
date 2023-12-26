@@ -3,10 +3,11 @@ package users;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
-import additional.*;
+import additional.StudentOrganisation;
 import course.Course;
 import course.Mark;
 import course.Transcript;
@@ -17,7 +18,6 @@ import enums.Gender;
 import researcher.ResearchPaper;
 import researcher.ResearcherDecorator;
 
-
 public class Student extends User {
 
     private Faculties faculty;
@@ -25,36 +25,36 @@ public class Student extends User {
     private int yearOfReceipt;
     private StudentOrganisation organisation;
     private HashMap<Course, Mark> courseInfo;
-    private List<Teacher> teacher;
-//    private List<Course> course;
+    private List<Teacher> teachers;
     private StudentOrganisation studentOrganization;
+    private Set<Teacher> instructors;
+    private String diplomaProject; 
 
     public Student(String login, String password) {
         super(login, password);
-        this.faculty = Faculties.BS;
         this.yearOfStudy = 1;
         this.courseInfo = new HashMap<>();
+        this.instructors = new HashSet<>();
+        this.diplomaProject = "";
     }
-     
-    public Student(String firstName, String lastName, String password, String login, String userId,
-			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
-			Gender category, String nationality, FamilyStatus familyStatus) {
-		super(firstName, lastName, password, login, userId, subscribedJournals, name, dateOfBirth, phoneNumber, iin, category,
-				nationality, familyStatus);
-		// TODO Auto-generated constructor stub
-	}
+
+    public Student(String firstName, String lastName, String password, String login, 
+    			Date dateOfBirth, String phoneNumber, 
+    			int iin, Gender category, String nationality, FamilyStatus familyStatus) {
+        super(firstName, lastName, password, login, 
+        		dateOfBirth, phoneNumber, iin, category,
+                nationality, familyStatus);
+    }
 
     public int getYearOfReceipt() {
-		return yearOfReceipt;
-	}
+        return yearOfReceipt;
+    }
 
+    public void setYearOfReceipt(int yearOfReceipt) {
+        this.yearOfReceipt = yearOfReceipt;
+    }
 
-	public void setYearOfReceipt(int yearOfReceipt) {
-		this.yearOfReceipt = yearOfReceipt;
-	}
-
-
-	public Faculties getFaculty() {
+    public Faculties getFaculty() {
         return faculty;
     }
 
@@ -86,24 +86,6 @@ public class Student extends User {
         this.courseInfo = courseInfo;
     }
 
-
-//
-//    public Teacher getTeacher() {
-//        return teacher;
-//    }
-
-//    public void setTeacher(Teacher teacher) {
-//        this.teacher = teacher;
-//    }
-
-//    public Course getCourse() {
-//        return course;
-//    }
-//
-//    public void setCourse(Course course) {
-//        this.course = course;
-//    }
-
     public StudentOrganisation getStudentOrganization() {
         return studentOrganization;
     }
@@ -111,7 +93,13 @@ public class Student extends User {
     public void setStudentOrganization(StudentOrganisation studentOrganization) {
         this.studentOrganization = studentOrganization;
     }
-
+    
+    public String getDiplomaProject() {
+        return diplomaProject;
+    }
+    public void setDiplomaProject(String diplomaProject) {
+        this.diplomaProject = diplomaProject;
+    }
 
     private Transcript generateTranscript() {
         Transcript transcript = new Transcript();
@@ -122,8 +110,6 @@ public class Student extends User {
         }
         return transcript;
     }
-    
-
 
     public void viewTranscript() {
         Transcript transcript = generateTranscript();
@@ -133,6 +119,7 @@ public class Student extends User {
     public Transcript getTranscript() {
         return generateTranscript();
     }
+
     public void viewMarks() {
         for (HashMap.Entry<Course, Mark> entry : courseInfo.entrySet()) {
             String courseName = entry.getKey().getNameCourse();
@@ -140,83 +127,82 @@ public class Student extends User {
             System.out.println("Course: " + courseName + ", Mark: " + mark);
         }
     }
-   //TODO receive teacher
-    public void rateTeacher(Teacher teacher,double rating){
-        teacher.receiveRating(rating); 
+
+    public void rateTeacher(Teacher teacher, double rating) {
+        teacher.receiveRating(rating);
     }
+
     public void viewCourses() {
         for (Course course : courseInfo.keySet()) {
             System.out.println(course.getNameCourse());
         }
     }
 
-    
     public void viewSchedule() {
         for (HashMap.Entry<Course, Mark> entry : courseInfo.entrySet()) {
             Course enrolledCourse = entry.getKey();
-            List<Teacher> courseTeachers = enrolledCourse.getInstructors();
+            List<Teacher> courseTeachers = (List<Teacher>) enrolledCourse.getInstructors();
 
             System.out.println("Course: " + enrolledCourse.getNameCourse());
 
             for (Teacher courseTeacher : courseTeachers) {
-                System.out.println("Teacher: " + courseTeacher.getName());
+                System.out.println("Teacher: " + courseTeacher.getFirstName());
             }
-
-//            System.out.println("Schedule:");
-//            for (String scheduleEntry : enrolledCourse.getSchedule()) {  // should be method getSchedule in Course
-//                System.out.println(scheduleEntry);
-//            }
 
             System.out.println();
         }
     }
 
-    
+    public void registerToCourse(Course course) {
+        Data data = Data.getInstance();
 
-    
-    
-    public Course registerToCourse(Course course) {
-    	courseInfo.put(course,null);
-    	return course;
+        courseInfo.put(course, null);
+
+        for (Teacher teacher : data.getAllTeacher()) {
+            if (teacher.getCourses().contains(course)) {
+                instructors.add(teacher);
+            }
+        }
     }
+
     public void viewInfoAboutTeachers(Course course) {
         List<Teacher> instructors = (List<Teacher>) course.getInstructors();
         for (Teacher instructor : instructors) {
-            System.out.println(instructor.getName());
+            System.out.println(instructor.getFirstName());
         }
     }
-    
-    
+
     public void joinStudentOrganization(StudentOrganisation organization) {
-    	this.studentOrganization = organization;
+        this.studentOrganization = organization;
         organization.addMember(this);
     }
+
     public void leaveStudentOrganization(StudentOrganisation organization) {
-    	 if (studentOrganization != null) {
-             studentOrganization.removeMember(this);
-         } 
+        if (studentOrganization != null) {
+            studentOrganization.removeMember(this);
+        }
     }
+
     public void becomeHeadOfOrganization(StudentOrganisation organization) {
-    	this.studentOrganization=organization;
+        this.studentOrganization = organization;
         organization.setHead(this);
     }
-    
 
+    @Override
     public String toString() {
-    	return super.toString()+
-    			"Student{" +
+        return super.toString() +
+                "Student{" +
                 "faculty=" + faculty +
                 ", yearOfStudy=" + yearOfStudy +
                 ", organisation=" + organisation +
                 ", courseInfo=" + courseInfo +
-                ", teacher=" + teacher +
-//                ", course=" + course +
+                ", teachers=" + teachers +
                 ", studentOrganization=" + studentOrganization +
-                '}';    
+                ", diplomaProject='" + diplomaProject + '\'' +
+                '}';
     }
-    
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
 
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
     }
 
