@@ -12,6 +12,17 @@ import researcher.ResearchPaper;
 import researcher.ResearcherDecorator;
 
 public class Teacher extends Employee {
+	
+	private Set<Course> courses;
+    public void viewStudents;
+    private TeacherType post;
+    private List<Student> students;
+    private Course course;
+    private ResearcherDecorator researcherDecorator;
+    private Manager manager;
+    private Date data;
+    private Student student;
+	private String viewCourses;
 
     public Teacher(String firstName, String lastName, String password, String login, String userId,
 			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,
@@ -25,16 +36,7 @@ public class Teacher extends Employee {
 		super(login, password);
 	}
 
-	private Set<Course> courses;
-    private Student viewStudents;
-    private TeacherType post;
-    private List<Student> students;
-    private Course course;
-    private ResearcherDecorator researcherDecorator;
-    private Manager manager;
-    private Date data;
-    private Student student;
-	private String viewCourses;
+	
 
     public Set<Course> getViewCourses() {
         return this.viewCourses();
@@ -101,8 +103,8 @@ public class Teacher extends Employee {
     }
 
 
-    public Student viewStudent() {
-        return null;
+    public void viewStudent() {
+        return;
     }
 
     public Set<Course> viewCourses() {

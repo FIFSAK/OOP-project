@@ -11,6 +11,7 @@ package data;
 import java.io.*;
 import java.util.*;
 
+import additional.*;
 import course.*;
 import researcher.*;
 import users.*;
@@ -26,6 +27,7 @@ public class Data implements Serializable {
     private Vector<ResearcherDecorator> researcherDatabase;
     private Vector<ResearchPaper> researchPapersDatabase;
     private Vector<ResearchProject> researchProjectDatabase;
+    private Vector<News> newsDatabase; 
 
     /**
      * Private constructor to initialize empty databases.
@@ -38,6 +40,7 @@ public class Data implements Serializable {
         researcherDatabase = new Vector<>();
         researchPapersDatabase = new Vector<>();
         researchProjectDatabase = new Vector<>();
+        newsDatabase = new Vector<>();
     }
 
     /**
@@ -51,6 +54,24 @@ public class Data implements Serializable {
         }
         return instance;
     }
+    
+    /**
+     * Retrieves the database of news.
+     * 
+     * @return Vector containing all news.
+     */
+    public Vector<News> getAllNews() {
+        return newsDatabase;
+    }
+    
+    /**
+     * Adds news to the news database.
+     * 
+     * @param news The News object to be added.
+     */
+    public void addNews(News news) {
+        this.newsDatabase.add(news);
+    }
 
     /**
      * Retrieves all users stored in the database.
@@ -59,6 +80,15 @@ public class Data implements Serializable {
      */
     public Vector<User> getAllUsers() {
         return userDatabase;
+    }
+    
+    /**
+     * Adds a user to the user database.
+     * 
+     * @param user The User object to be added.
+     */
+    public void addUser(User user) {
+        this.userDatabase.add(user);
     }
 
     /**
@@ -69,6 +99,15 @@ public class Data implements Serializable {
     public Vector<Student> getAllStudent() {
         return studentDatabase;
     }
+    
+    /**
+     * Adds a student to the student database.
+     * 
+     * @param student The Student object to be added.
+     */
+    public void addStudent(Student student) {
+        this.studentDatabase.add(student);
+    }
 
     /**
      * Retrieves all teachers stored in the database.
@@ -77,6 +116,15 @@ public class Data implements Serializable {
      */
     public Vector<Teacher> getAllTeacher() {
         return teacherDatabase;
+    }
+    
+    /**
+     * Adds a teacher to the teacher database.
+     * 
+     * @param teacher The Teacher object to be added.
+     */
+    public void addTeacher(Teacher teacher) {
+        this.teacherDatabase.add(teacher);
     }
 
     /**
@@ -131,6 +179,15 @@ public class Data implements Serializable {
      */
     public void addResearchProject(ResearchProject researchProject) {
         this.researchProjectDatabase.add(researchProject);
+    }
+    
+    public User getUserByLogin(String login) {
+        for (User user : userDatabase) {
+            if (user.getLogin().equals(login)) {
+                return user;
+            }
+        }
+        return null; // User not found
     }
 
     /**
