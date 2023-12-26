@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import data.Data;
 import enums.DayOfWeek;
 import enums.Faculties;
 import enums.LessonType;
@@ -20,13 +22,14 @@ public class Course {
     private Faculties faculty;
     private String description;
     private int creditsAmount;
+    public List<Teacher> instructors;
 
     // Конструктор, геттеры и сеттеры
 
     public Course(String codeCourse, String nameCourse, Faculties faculty) {
         this.codeCourse = codeCourse;
         this.faculty = faculty;
-//        this.instructors = new ArrayList<>();
+        this.instructors = new ArrayList<>();
         this.lessons = new ArrayList<>();
     }
     
@@ -82,19 +85,15 @@ public class Course {
         this.creditsAmount = creditsAmount;
     }
 
-//    public List<Teacher> getInstructors() {
-//        return new ArrayList<>(instructors);
-//    }
-//
-//    public void setInstructors(List<Teacher> instructors) {
-//        this.instructors = new ArrayList<>(instructors);
-//    }
+    public List<Teacher> getInstructors() {
+        return Data.getInstance().getAllTeacher().stream()
+                .filter(teacher -> teacher.getCourses().contains(this))
+                .collect(Collectors.toList());
+    }
 
-    // Операции
-
-//    public void addInstructor(Teacher instructor) {
-//        this.instructors.add(instructor);
-//    }
+    public void addInstructor(Teacher instructor) {
+        this.instructors.add(instructor);
+    }
     
     public int getTotalDuration() {
         int totalDuration = 0;
