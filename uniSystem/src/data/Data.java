@@ -28,6 +28,7 @@ public class Data implements Serializable {
     private Vector<ResearchPaper> researchPapersDatabase;
     private Vector<ResearchProject> researchProjectDatabase;
     private Vector<News> newsDatabase; 
+    private Vector<StudentOrganisation> studentOrganizationDatabase;
 
     /**
      * Private constructor to initialize empty databases.
@@ -41,6 +42,7 @@ public class Data implements Serializable {
         researchPapersDatabase = new Vector<>();
         researchProjectDatabase = new Vector<>();
         newsDatabase = new Vector<>();
+        studentOrganizationDatabase = new Vector<>();
     }
 
     /**
@@ -222,4 +224,20 @@ public class Data implements Serializable {
 	public Vector<Course> getAllCourses() {
 		return this.courseDatabase;
 	}
+
+	public Vector<StudentOrganisation> getStudentOrganizationDatabase() {
+		return studentOrganizationDatabase;
+	}
+
+	public void setStudentOrganizationDatabase(Vector<StudentOrganisation> studentOrganizationDatabase) {
+		this.studentOrganizationDatabase = studentOrganizationDatabase;
+	}
+	public void addStudentOrganizationDatabase(StudentOrganisation sorg) {
+	    if (this.studentOrganizationDatabase == null) {
+	        System.out.println("studentOrganizationDatabase is null, initializing now.");
+	        this.studentOrganizationDatabase = new Vector<>();
+	    }
+	    this.studentOrganizationDatabase.add(sorg);
+	}
+
 }

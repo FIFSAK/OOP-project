@@ -34,7 +34,7 @@ public class ResearchProject implements Serializable {
      * @param publishedPapers A vector of ResearchPaper objects associated with the project.
      * @param participants A vector of ResearcherDecorator objects participating in the project.
      */
-    public ResearchProject(String topic, Vector<ResearchPaper> publishedPapers, Vector<ResearcherDecorator> participants) {
+    public ResearchProject(String topic) {
     	this.topic = topic;
     	this.publishedPapers = publishedPapers;
     }

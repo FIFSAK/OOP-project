@@ -2,7 +2,9 @@ package additional;
 
 import java.io.Serializable;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
+import data.Data;
 import users.Student;
 
 public class StudentOrganisation implements Serializable{
@@ -11,17 +13,26 @@ public class StudentOrganisation implements Serializable{
     * @generated
     */
     private Student head;
+    public String name;
+    public static Vector<Student> getMembersOfOrganizationByName(StudentOrganisation std) {
+        return Data.getInstance().getAllStudent().stream()
+            .filter(s -> s.getStudentOrganization().contains(std))
+            .collect(Collectors.toCollection(Vector::new));
+    }
     
-    /**
+        
+    
+    public StudentOrganisation(String name) {
+		super();
+		this.name = name;
+	}
+    
+    public String toString() {
+    	return "NAME" + name;
+    }
+	/**
     * @generated
     */
-    private Vector<Student> members;
-    
-    
-    /**
-    * @generated
-    */
-    private Student student;
     
     
 
@@ -43,41 +54,18 @@ public class StudentOrganisation implements Serializable{
     /**
     * @generated
     */
-    public Vector<Student> getMembers() {
-        return this.members;
-    }
-    
-    /**
-    * @generated
-    */
-    public void setMembers(Vector<Student> members) {
-        this.members = members;
-    }
-    
     
     
     /**
     * @generated
     */
-    public Student getStudent() {
-        return this.student;
-    }
+   
     
     /**
     * @generated
     */
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+    
 
-	public void addMember(Student student2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void removeMember(Student student2) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
 

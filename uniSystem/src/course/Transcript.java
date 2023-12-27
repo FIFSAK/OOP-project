@@ -43,11 +43,13 @@ public class Transcript implements Serializable{
             Course course = entry.getKey();
             Mark mark = entry.getValue();
 
-            double courseGPA = mark.getGPA();
-            int courseCredits = course.getCreditsAmount();
+            if (mark != null) {
+                double courseGPA = mark.getGPA();
+                int courseCredits = course.getCreditsAmount();
 
-            totalWeightedGPA += courseGPA * courseCredits;
-            totalCredits += courseCredits;
+                totalWeightedGPA += courseGPA * courseCredits;
+                totalCredits += courseCredits;
+            }
         }
 
         if (totalCredits == 0.0) {
@@ -56,4 +58,25 @@ public class Transcript implements Serializable{
 
         return totalWeightedGPA / totalCredits;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder transcriptInfo = new StringBuilder("Transcript:\n");
+
+        for (Map.Entry<Course, Mark> entry : courseMarks.entrySet()) {
+            Course course = entry.getKey();
+            Mark mark = entry.getValue();
+
+            transcriptInfo.append("Course: ").append(course.getNameCourse())
+                          .append(" (Code: ").append(course.getCodeCourse())
+                          .append(", Credits: ").append(course.getCreditsAmount())
+                          .append(") - Mark: ").append(mark)
+                          .append("\n");
+        }
+
+        transcriptInfo.append("Total GPA: ").append(totalGPA());
+
+        return transcriptInfo.toString();
+    }
+
 }

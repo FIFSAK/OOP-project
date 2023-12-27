@@ -41,7 +41,7 @@ public interface Researcher {
      * @param participants A vector of researchers participating in the project.
      * @return 
      */
-    public void newProject(String topic, Vector<ResearchPaper> publishedPapers, Vector<ResearcherDecorator> participants);
+    public void newProject(String topic);
         
     /**
      * Adds a new research project.

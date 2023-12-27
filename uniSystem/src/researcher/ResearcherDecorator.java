@@ -93,20 +93,30 @@ public class ResearcherDecorator implements Researcher, Serializable {
 			if(sortType == "by citations") {				
 				Collections.sort(papers, new PaperCitationComparator());
 			}
+			else if(sortType == "text") {
+				Collections.sort(papers, new TextComparator());
+			}
 			String p = "";
 			for(ResearchPaper cur: papers) {
 				p += cur.toString();
 			}
+			System.out.println(p);
 			return p;
 		}
 		@Override
 		public void calculateHIndex() throws LowHIndex {
 			int minimalCitations = Integer.MAX_VALUE;
+			if(papers.size()==0) {
+				minimalCitations = 0;
+			}
+			else {
 				for(ResearchPaper paper: papers) {
 					if (paper.citations.size() < minimalCitations) {
 						minimalCitations = paper.citations.size();
 					}
 				}
+			}
+				
 			hindex = minimalCitations;
 			if(hindex < 3) {
 				System.out.println(new LowHIndex("your hindex lesser than 3"));
@@ -127,9 +137,9 @@ public class ResearcherDecorator implements Researcher, Serializable {
 			return user.toString() + " projects: " + projects.toString() + " hindex: " +hindex;
 		}
 		
-		public void newProject(String topic, Vector<ResearchPaper> publishedPapers, Vector<ResearcherDecorator> participants) {
+		public void newProject(String topic) {
 			if(!Data.getInstance().getResearchProject().stream().anyMatch(n -> n.topic.equals(topic))) {
-				ResearchProject rp = new ResearchProject(topic, publishedPapers, participants);
+				ResearchProject rp = new ResearchProject(topic);
 				projects.add(rp);
 				Data.getInstance().addResearchProject(rp);
 				System.out.println("succes"); 

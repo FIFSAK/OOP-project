@@ -414,7 +414,7 @@ public class User implements Comparable<User>, Observer, Serializable{
      *
      * @param news The news article for which comments should be displayed.
      */
-    private void viewComments(News news) {
+    public void viewComments(News news) {
         List<Comment> comments = news.getComments();
         if (comments.isEmpty()) {
             System.out.println("No comments available.");
