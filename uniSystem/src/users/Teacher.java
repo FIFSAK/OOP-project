@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 import course.Course;
+import course.Mark;
 import data.Data;
 import enums.FamilyStatus;
 import enums.Gender;
+import enums.Grade;
 import enums.TeacherType;
 import researcher.ResearchPaper;
 import researcher.ResearcherDecorator;
@@ -207,5 +209,76 @@ public class Teacher extends Employee {
 	public void addCourse(Course course) {
         this.courses.add(course);
     }
+	
+	public void putMark(String studentFirstName, String studentLastName, Course course,
+            double secondAttestation, double firstAttestation, double finalExam) {
+// Find the student by name and surname
+Optional<Student> optionalStudent = students.stream()
+    .filter(student -> student.getFirstName().equalsIgnoreCase(studentFirstName) &&
+                       student.getLastName().equalsIgnoreCase(studentLastName))
+    .findFirst();
+
+// Check if the student is found
+if (optionalStudent.isPresent()) {
+Student student = optionalStudent.get();
+
+// Check if the teacher teaches the specified course
+if (!courses.contains(course)) {
+    System.out.println("Error: Teacher does not teach this course.");
+    return;
+}
+
+// Create a new Mark object with the associated course
+Mark mark = new Mark();
+mark.setSecondAttestation(secondAttestation);
+mark.setFirstAttestation(firstAttestation);
+mark.setFinalExam(finalExam);
+
+// Calculate and set the GPA
+mark.calculateGPA();
+
+// Set the grade based on your logic
+mark.setGrade(determineGrade(mark.getGPA()));
+
+// Associate the Mark object with the student and course
+student.addMarkForCourse(course, mark);
+
+System.out.println("Marks added successfully for " + student.getFirstName() + " " + student.getLastName() +
+        " in course " + course.getNameCourse() + ". Grade: " + mark.getGrade());
+} else {
+System.out.println("Error: Student with name " + studentFirstName + " " + studentLastName + " not found.");
+}
+}
+
+private Grade determineGrade(double GPA) {
+// Your logic to determine the Grade based on GPA
+// Example logic (you may adjust this based on your grading scale)
+if (GPA >= 3.7) {
+return Grade.A;
+} else if (GPA >= 3.3) {
+return Grade.A_M;
+} else if (GPA >= 3.0) {
+return Grade.B_P;
+} else if (GPA >= 2.7) {
+return Grade.B;
+} else if (GPA >= 2.3) {
+return Grade.B_M;
+} else if (GPA >= 2.0) {
+return Grade.C_P;
+} else if (GPA >= 1.7) {
+return Grade.C;
+} else if (GPA >= 1.3) {
+return Grade.C_M;
+} else if (GPA >= 1.0) {
+return Grade.D_P;
+} else if (GPA >= 0.7) {
+return Grade.D;
+} else if (GPA >= 0.0) {
+return Grade.D_M;
+} else {
+return Grade.F;
+}
+}
+
 }
 

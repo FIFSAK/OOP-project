@@ -430,4 +430,22 @@ public class Student extends User {
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
     }
+    
+    /**
+     * Adds a mark for the specified course.
+     *
+     * @param course The course for which to add the mark.
+     * @param mark   The mark to add.
+     */
+    public void addMarkForCourse(Course course, Mark mark) {
+        // Check if the student is enrolled in the specified course
+        if (courseInfo.containsKey(course)) {
+            // Associate the mark with the course
+            courseInfo.put(course, mark);
+            // Calculate and update the average GPA for the student
+            calculateAverageGPA();
+        } else {
+            System.out.println("Error: Student is not enrolled in the course.");
+        }
+    }
 }
