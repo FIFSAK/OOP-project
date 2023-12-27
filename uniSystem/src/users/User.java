@@ -43,7 +43,7 @@ public class User implements Comparable<User>, Observer, Serializable{
     private UserFactory userFactory;
 	private Observer observer;
     private Comment comment;
-    private ResourceBundle messages;
+    public ResourceBundle messages;
     
     /**
      * Default constructor for the `User` class.
@@ -520,7 +520,10 @@ public class User implements Comparable<User>, Observer, Serializable{
      * Update method called when the user receives a notification about new papers in the subscribed journal.
      */
     public void update() {
-        System.out.println("Observer " + this.firstName + " " + this.lastName + " received an update. New papers are available!");
+        System.out.println(String.format(messages.getString("observerUpdateMessage"), this.firstName, this.lastName));
+        System.out.println(data.getAllNews().size() + " New papers are available!");
+        
+
     }
 
  }
