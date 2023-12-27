@@ -79,14 +79,5 @@ public class StudentOrganisation implements Serializable{
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-    
-    
-    
-
-    //                          Operations                                  
-    
-    
 }
 

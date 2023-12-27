@@ -1,3 +1,6 @@
+/**
+ * The Faculties enum represents different faculties.
+ */
 package enums;
 
 import java.io.Serializable;
