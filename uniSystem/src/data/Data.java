@@ -218,4 +218,8 @@ public class Data implements Serializable {
             return null;
         }
     }
+
+	public Vector<Course> getAllCourses() {
+		return this.courseDatabase;
+	}
 }
