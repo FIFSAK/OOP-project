@@ -157,9 +157,9 @@ public class GraduateStudent extends Student implements Researcher, Serializable
 
 
 	@Override
-	public void newProject(String topic, Vector<ResearchPaper> publishedPapers, Vector<ResearcherDecorator> participants) {
+	public void newProject(String topic) {
 		if(!Data.getInstance().getResearchProject().stream().anyMatch(n -> n.topic.equals(topic))) {
-			ResearchProject rp = new ResearchProject(topic, publishedPapers, participants);
+			ResearchProject rp = new ResearchProject(topic);
 			projects.add(rp);
 			Data.getInstance().addResearchProject(rp);
             printMessage("successMessage");
