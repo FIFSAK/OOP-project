@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Set;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import course.Course;
 import course.Mark;
@@ -26,6 +27,8 @@ public class Teacher extends Employee implements Serializable{
     private TeacherType post;
     private List<Student> students;
     private ResearcherDecorator researcherDecorator;
+    private ResourceBundle messages;
+
     
     /**
      * Constructor to initialize a Teacher with specified attributes.
@@ -53,6 +56,11 @@ public class Teacher extends Employee implements Serializable{
 				nationality, familyStatus);
 		// TODO Auto-generated constructor stub
 	}
+    
+    private void printMessage(String key, Object... args) {
+        String message = messages.getString(key);
+        System.out.println(args.length > 0 ? String.format(message, args) : message);
+    }
     
     /**
      * Constructor to create a Teacher with specified login and password.
@@ -152,13 +160,13 @@ public class Teacher extends Employee implements Serializable{
 
     public void viewStudents() {
         try {
-            System.out.println("List of Students:");
+            printMessage("studentListHeader");
 
             Data.getInstance().getAllStudent().forEach(student -> System.out.println("- " + student.getFirstName() + " " + student.getLastName()));
 
-            System.out.println("End of Student List.");
+            printMessage("endOfStudentList");
         } catch (Exception e) {
-            System.out.println("Error viewing students.");
+            printMessage("errorViewingStudents");
             e.printStackTrace();
         }
     }
@@ -169,17 +177,17 @@ public class Teacher extends Employee implements Serializable{
 
     public void viewCourses() {
         try {
-            System.out.println("List of Courses:");
+            printMessage("courseListHeader");
 
             if (courses != null && !courses.isEmpty()) {
                 courses.forEach(course -> System.out.println("- " + course.getNameCourse()));
             } else {
-                System.out.println("No courses available.");
+                printMessage("noCoursesAvailable");
             }
 
-            System.out.println("End of Course List.");
+            printMessage("endOfCourseList");
         } catch (Exception e) {
-            System.out.println("Error viewing courses.");
+            printMessage("errorViewingCourses");
             e.printStackTrace();
         }
     }
@@ -227,7 +235,7 @@ Student student = optionalStudent.get();
 
 // Check if the teacher teaches the specified course
 if (!courses.contains(course)) {
-    System.out.println("Error: Teacher does not teach this course.");
+    printMessage("errorCourseNotTaught");
     return;
 }
 
@@ -246,10 +254,10 @@ mark.setGrade(determineGrade(mark.getGPA()));
 // Associate the Mark object with the student and course
 student.addMarkForCourse(course, mark);
 
-System.out.println("Marks added successfully for " + student.getFirstName() + " " + student.getLastName() +
-        " in course " + course.getNameCourse() + ". Grade: " + mark.getGrade());
+printMessage("marksAddedSuccessfully", student.getFirstName(), student.getLastName(),
+        course.getNameCourse(), mark.getGrade());
 } else {
-System.out.println("Error: Student with name " + studentFirstName + " " + studentLastName + " not found.");
+    printMessage("errorStudentNotFound", studentFirstName, studentLastName);
 }
 }
 

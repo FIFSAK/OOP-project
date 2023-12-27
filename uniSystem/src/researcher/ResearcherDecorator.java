@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.Vector;
 
@@ -29,6 +30,8 @@ public class ResearcherDecorator implements Researcher, Serializable {
 	    public Vector<ResearchPaper> papers = new Vector<ResearchPaper>();
 	    
 	    public double hindex;
+	    private ResourceBundle messages;
+
 	    /**
 	     * Default constructor for creating an instance of ResearcherDecorator without a user.
 	     */
@@ -62,6 +65,10 @@ public class ResearcherDecorator implements Researcher, Serializable {
 	    	return user;
 	    } // доступ к предыдущим функциям до того как стал ресерчером
 
+	    private void printMessage(String key, Object... args) {
+	        String message = messages.getString(key);
+	        System.out.println(args.length > 0 ? String.format(message, args) : message);
+	    }
 		@Override
 		public void joinProject(String topic) {
 		    Optional<ResearchProject> matchingProject = Data.getInstance().getResearchProject().stream()
@@ -71,8 +78,10 @@ public class ResearcherDecorator implements Researcher, Serializable {
 		    if (matchingProject.isPresent()) {
 		        // Add the found project to the projects vector
 		        projects.add(matchingProject.get());
+	            printMessage("joinProjectSuccess", matchingProject.get().topic);
+
 		    } else {
-		        System.out.println("Not existing project");
+	            printMessage("joinProjectNotExist");
 		    }
 		}
 		@Override
@@ -85,8 +94,7 @@ public class ResearcherDecorator implements Researcher, Serializable {
 		        // Add the found project to the projects vector
 		        papers.add(matchingPaper.get());
 		    } else {
-		        System.out.println("Not existing project");
-		    }
+		    	printMessage("joinProjectNotExist");		    }
 		}
 		@Override
 		public String printPapers(String sortType) {
@@ -109,9 +117,9 @@ public class ResearcherDecorator implements Researcher, Serializable {
 				}
 			hindex = minimalCitations;
 			if(hindex < 3) {
-				System.out.println(new LowHIndex("your hindex lesser than 3"));
+		    	printMessage("lowHIndexError");		    }
 			}
-		} // если каждая статья цитировалась минимум сколько то раз этот минимум и будет hindex
+		 // если каждая статья цитировалась минимум сколько то раз этот минимум и будет hindex
 		/**
 	     * Returns a string representation of the ResearcherDecorator, including user details, projects, and H-index.
 	     * 
@@ -132,52 +140,51 @@ public class ResearcherDecorator implements Researcher, Serializable {
 				ResearchProject rp = new ResearchProject(topic, publishedPapers, participants);
 				projects.add(rp);
 				Data.getInstance().addResearchProject(rp);
-				System.out.println("succes"); 
+	            printMessage("successMessage");
 			}
 			else {
-				System.out.println("this project already exist");
+	            printMessage("projectAlreadyExistError");
 
 			}
 		}
-		
+
+		@Override
+		public void newPaper(ResearchPaper rp) {
+			if(! Data.getInstance().getResearchPaper().stream().anyMatch(n -> n.equals(rp))) {
+				papers.add(rp);
+	            printMessage("successMessage");
+				Data.getInstance().addResearchPaper(rp);
+			}
+			else {
+	            printMessage("paperAlreadyExistError");
+
+			}
+		}
+
+		@Override
 		public void newProject(ResearchProject rp) {
 			if(! Data.getInstance().getResearchProject().stream().anyMatch(n -> n.equals(rp))) {
 				projects.add(rp);
 				Data.getInstance().addResearchProject(rp);
-				System.out.println("succes"); 
+	            printMessage("successMessage");
 			}
 			else {
-				System.out.println("this project already exist");
-
-			}
+	            printMessage("projectAlreadyExistError");
+			}		
 		}
-		
-		public void newPaper(String name, 
-				int pages, String journal, String text) {
+
+		@Override
+	    public void newPaper(String name, int pages, String journal, String text) {
 			if(! Data.getInstance().getResearchPaper().stream().anyMatch(n -> n.name.equals(name))) {
 				ResearchPaper rp = new ResearchPaper(name, pages, journal, text);
 				papers.add(rp);
 				Data.getInstance().addResearchPaper(rp);
-				System.out.println("succes"); 
+	            printMessage("successMessage");
 			}
 			else {
-				System.out.println("this project already exist");
+	            printMessage("paperAlreadyExistError");
 
-			}
-			
-		}
-		public void newPaper(ResearchPaper rp) {
-			if(! Data.getInstance().getResearchPaper().stream().anyMatch(n -> n.equals(rp))) {
-				papers.add(rp);
-				System.out.println("succes"); 
-				Data.getInstance().addResearchPaper(rp);
-			}
-			else {
-				System.out.println("this project already exist");
-
-			}
-			
-		}
+			}	};
 
 		@Override
 		public int hashCode() {

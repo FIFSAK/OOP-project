@@ -1,8 +1,6 @@
 package users;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,6 +23,8 @@ public class Manager extends Employee implements Serializable{
 
 
 	private ManagerType type;
+    private ResourceBundle messages;
+
 	
 	/**
      * Constructs a new Manager object with the specified personal and employment details.
@@ -101,24 +101,29 @@ public class Manager extends Employee implements Serializable{
     /**
      * Allows the manager to create news by providing details such as title, content, topic, and whether it is pinned.
      */
+    
+    private void printMessage(String key, Object... args) {
+        String message = messages.getString(key);
+        System.out.println(args.length > 0 ? String.format(message, args) : message);
+    }
 
     public void createNews() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         try {
-            System.out.println("Enter news title:");
+            printMessage("enterNewsTitle");
             String title = reader.readLine();
 
-            System.out.println("Enter news content:");
+            printMessage("enterNewsContent");
             String content = reader.readLine();
 
             // You might generate the date programmatically or take it as input
             Date datePublished = new Date();
 
-            System.out.println("Enter news topic:");
+            printMessage("enterNewsTopic");
             String topic = reader.readLine();
 
-            System.out.println("Is news pinned? (true/false):");
+            printMessage("isNewsPinned");
             boolean isPinned = Boolean.parseBoolean(reader.readLine());
 
             // Create a new News object
@@ -127,7 +132,7 @@ public class Manager extends Employee implements Serializable{
             // Add the news to the list
             Data.getInstance().addNews(news);
 
-            System.out.println("News created successfully!");
+            printMessage("newsCreatedSuccessfully");
         } catch (IOException e) {
             System.out.println("Error reading input. News creation failed.");
             e.printStackTrace();
@@ -141,11 +146,11 @@ public class Manager extends Employee implements Serializable{
     public void manageNews() {
         try {
             // Display available news
-            System.out.println("Available News:");
+            printMessage("availableNewsHeader");
             Data.getInstance().getAllNews().forEach(news -> System.out.println("- " + news.getTitle()));
 
             // Get the title of the news to manage
-            System.out.print("Enter the title of the news you want to manage: ");
+            printMessage("enterNewsTitleToManage");
             String newsTitle = new BufferedReader(new InputStreamReader(System.in)).readLine();
 
             // Find the news by title
@@ -156,24 +161,24 @@ public class Manager extends Employee implements Serializable{
 
             if (newsToManage != null) {
                 // Display current details of the selected news
-                System.out.println("Current Topic: " + newsToManage.getTopic());
+                printMessage("currentTopic", newsToManage.getTopic());
 
                 // Get the new topic from the user
-                System.out.print("Enter the new topic (or press Enter to keep the current topic): ");
+                printMessage("enterNewTopic");
                 String newTopic = new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
 
                 if (!newTopic.isEmpty()) {
                     // Update the topic
                     newsToManage.setTopic(newTopic);
-                    System.out.println("News topic updated successfully!");
+                    printMessage("newsTopicUpdatedSuccessfully");
                 } else {
-                    System.out.println("No changes made. Keeping the current topic.");
+                    printMessage("noChangesMade");
                 }
             } else {
-                System.out.println("News with the given title not found.");
+                printMessage("newsNotFoundWithTitle", newsTitle);
             }
         } catch (IOException e) {
-            System.out.println("Error reading input. News management failed.");
+            printMessage("errorReadingInput");
             e.printStackTrace();
         }
     }
@@ -184,13 +189,13 @@ public class Manager extends Employee implements Serializable{
     
     public void viewStudents() {
         try {
-            System.out.println("List of Students:");
+            printMessage("studentListHeader");
 
             Data.getInstance().getAllStudent().forEach(student -> System.out.println("- " + student.getFirstName() + " " + student.getLastName()));
 
-            System.out.println("End of Student List.");
+            printMessage("endOfStudentList");
         } catch (Exception e) {
-            System.out.println("Error viewing students.");
+            printMessage("errorViewingStudents");
             e.printStackTrace();
         }
     }
@@ -243,11 +248,11 @@ public class Manager extends Employee implements Serializable{
     public boolean assignCourse() {
         try {
             // Display available teachers
-            System.out.println("Available Teachers:");
+            printMessage("availableTeachersHeader");
             Data.getInstance().getAllTeacher().forEach(teacher -> System.out.println("- " + teacher.getFirstName()));
 
             // Get the name of the teacher to assign the course
-            System.out.print("Enter the name of the teacher to assign the course: ");
+            printMessage("enterTeacherNameToAssignCourse");
             String teacherName = new BufferedReader(new InputStreamReader(System.in)).readLine();
 
             // Find the teacher by name
@@ -257,11 +262,11 @@ public class Manager extends Employee implements Serializable{
 
             if (foundTeacher.isPresent()) {
                 // Display available courses
-                System.out.println("Available Courses:");
+                printMessage("availableCoursesHeader");
                 Data.getInstance().getAllCourses().forEach(course -> System.out.println("- " + course.getNameCourse()));
 
                 // Get the name of the course to assign
-                System.out.print("Enter the name of the course to assign: ");
+                printMessage("enterCourseNameToAssign");
                 String courseName = new BufferedReader(new InputStreamReader(System.in)).readLine();
 
                 // Find the course by name
@@ -275,16 +280,16 @@ public class Manager extends Employee implements Serializable{
                     Course course = foundCourse.get();
 
                     teacher.addCourse(course);
-                    System.out.println("Course assigned successfully.");
+                    printMessage("courseAssignedSuccessfully");
                     return true;
                 } else {
-                    System.out.println("Course not found.");
+                    printMessage("courseNotFound");
                 }
             } else {
-                System.out.println("Teacher not found.");
+                printMessage("teacherNotFound");
             }
         } catch (IOException e) {
-            System.out.println("Error reading input. Course assignment failed.");
+            printMessage("errorReadingInput");
             e.printStackTrace();
         }
 
@@ -297,7 +302,7 @@ public class Manager extends Employee implements Serializable{
 
     public void academicReportPerformance() {
         try {
-            System.out.println("Generating Academic Performance Report...");
+            printMessage("generatingAcademicPerformanceReport");
 
             // Fetch student data from the data instance
             List<Student> students = Data.getInstance().getAllStudent();
@@ -308,7 +313,7 @@ public class Manager extends Employee implements Serializable{
                     .average()
                     .orElse(0.0);
 
-            System.out.println("Average GPA: " + averageGPA);
+            printMessage("averageGPA", averageGPA);
 
             // Rank students based on GPA (descending order)
             List<Student> rankedStudents = students.stream()
@@ -316,23 +321,23 @@ public class Manager extends Employee implements Serializable{
                     .collect(Collectors.toList());
 
             // Display the ranking
-            System.out.println("Student Ranking based on GPA:");
+            printMessage("studentRankingHeader");
             for (int i = 0; i < rankedStudents.size(); i++) {
                 Student student = rankedStudents.get(i);
-                System.out.println((i + 1) + ". " + student.getFirstName() + " - GPA: " + student.getAvgGPA());
+                printMessage("studentRankingItem", i + 1, student.getFirstName(), student.getAvgGPA());
             }
 
             // Compare each student's GPA with the average GPA
-            System.out.println("Comparison with Average GPA:");
+            printMessage("comparisonWithAverageGPAHeader");
             for (Student student : students) {
                 String comparison = (student.getAvgGPA() > averageGPA) ? "Above Average" : "Below Average";
-                System.out.println(student.getFirstName() + " - GPA: " + student.getAvgGPA() + " - " + comparison);
+                printMessage("comparisonWithAverageGPAItem", student.getFirstName(), student.getAvgGPA(), comparison);
             }
 
-            System.out.println("Academic Performance Report generated successfully.");
+            printMessage("academicPerformanceReportGeneratedSuccessfully");
 
         } catch (Exception e) {
-            System.out.println("Error generating Academic Performance Report.");
+            printMessage("errorGeneratingAcademicPerformanceReport");
             e.printStackTrace();
         }
     }
