@@ -375,6 +375,10 @@ public class User implements Comparable<User>, Observer, Serializable{
         this.familyStatus = familyStatus;
     }
     
+    /**
+     * Allows the user to view the latest news and optionally view comments for each news article.
+     */
+    
     public void viewNews() {
         Vector<News> newsList = data.getAllNews(); // Assuming data is an instance of Data
 
@@ -404,6 +408,12 @@ public class User implements Comparable<User>, Observer, Serializable{
             }
         }
     }
+    
+    /**
+     * Displays comments for a given news article.
+     *
+     * @param news The news article for which comments should be displayed.
+     */
     private void viewComments(News news) {
         List<Comment> comments = news.getComments();
         if (comments.isEmpty()) {
@@ -417,6 +427,10 @@ public class User implements Comparable<User>, Observer, Serializable{
             }
         }
     }
+    
+    /**
+     * Displays the contents of the university journal, including details of research papers.
+     */
     
     public void viewUniversityJournal() {
         List<ResearchPaper> researchPapers = data.getResearchPaper(); // Assuming data is an instance of Data

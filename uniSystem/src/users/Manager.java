@@ -10,32 +10,94 @@ import course.*;
 import enums.*;
 import researcher.*;
 
+/**
+ * The Manager class represents a manager in the university, extending the Employee class.
+ * It provides functionalities for managing news, viewing students, and performing various operations
+ * related to student and teacher information.
+ */
+
 public class Manager extends Employee {
+	
+    /** The type of the manager. */
+
 
 	private ManagerType type;
+	
+	/**
+     * Constructs a new Manager object with the specified personal and employment details.
+     *
+     * @param firstName      The first name of the manager.
+     * @param lastName       The last name of the manager.
+     * @param login          The login ID of the manager.
+     * @param password       The password of the manager.
+     * @param dateOfBirth    The date of birth of the manager.
+     * @param phoneNumber    The phone number of the manager.
+     * @param iin            The Individual Identification Number (IIN) of the manager.
+     * @param gender         The gender of the manager.
+     * @param nationality    The nationality of the manager.
+     * @param familyStatus   The family status of the manager.
+     */
 	
 	public Manager(String firstName, String lastName, String login, String password, Date dateOfBirth,
             String phoneNumber, int iin, Gender gender, String nationality, FamilyStatus familyStatus) {
 		super(firstName,lastName, login, password, dateOfBirth, phoneNumber,iin, gender,  nationality,familyStatus  );
 	}
 	
+	/**
+     * Constructs a new Manager object with the specified personal and employment details,
+     * including the manager type.
+     *
+     * @param firstName      The first name of the manager.
+     * @param lastName       The last name of the manager.
+     * @param login          The login ID of the manager.
+     * @param password       The password of the manager.
+     * @param dateOfBirth    The date of birth of the manager.
+     * @param phoneNumber    The phone number of the manager.
+     * @param iin            The Individual Identification Number (IIN) of the manager.
+     * @param gender         The gender of the manager.
+     * @param nationality    The nationality of the manager.
+     * @param familyStatus   The family status of the manager.
+     * @param managerType    The type of the manager.
+     */
+	
 	public Manager(String firstName, String lastName, String login, String password, Date dateOfBirth,
             String phoneNumber, int iin, Gender gender, String nationality, FamilyStatus familyStatus, ManagerType managerType) {
 		super(firstName,lastName, login, password, dateOfBirth, phoneNumber,iin, gender,  nationality,familyStatus  );
 		this.type = managerType;
 	}
-
+	/**
+     * Constructs a new Manager object with the specified login and password.
+     *
+     * @param login     The login ID of the manager.
+     * @param password  The password of the manager.
+     */
 	public Manager(String login, String password) {
 		super(login, password);
 	}
+	
+	/**
+     * Gets the type of the manager.
+     *
+     * @return The type of the manager.
+     */
 
     public ManagerType getType() {
         return this.type;
     }
+    
+    /**
+     * Sets the type of the manager.
+     *
+     * @param type The type of the manager.
+     */
 
     public void setType(ManagerType type) {
         this.type = type;
     }
+    
+    /**
+     * Allows the manager to create news by providing details such as title, content, topic, and whether it is pinned.
+     */
 
     public void createNews() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -68,6 +130,10 @@ public class Manager extends Employee {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * Allows the manager to manage existing news by updating the topic.
+     */
     
     public void manageNews() {
         try {
@@ -109,6 +175,10 @@ public class Manager extends Employee {
         }
     }
     
+    /**
+     * Displays a list of students.
+     */
+    
     public void viewStudents() {
         try {
             System.out.println("List of Students:");
@@ -122,8 +192,13 @@ public class Manager extends Employee {
         }
     }
 
-    // Operations
-
+    /**
+     * Retrieves information about a specific student.
+     *
+     * @param name     The first name of the student.
+     * @param surname  The last name of the student.
+     * @return The Student object if found, otherwise null.
+     */
     public Student infoAboutStudent(String name, String surname) {
         List<Student> students = Data.getInstance().getAllStudent();
 
@@ -134,6 +209,14 @@ public class Manager extends Employee {
 
         return foundStudent.orElse(null);
     }
+    
+    /**
+     * Retrieves information about a specific teacher.
+     *
+     * @param name     The first name of the teacher.
+     * @param surname  The last name of the teacher.
+     * @return The Teacher object if found, otherwise null.
+     */
 
     public Teacher infoAboutTeacher(String name, String surname) {
         // Fetch teacher data from the data instance
@@ -147,6 +230,12 @@ public class Manager extends Employee {
 
         return foundTeacher.orElse(null);
     }
+    
+    /**
+     * Assigns a course to a teacher.
+     *
+     * @return True if the course is successfully assigned, otherwise false.
+     */
 
     public boolean assignCourse() {
         try {
@@ -198,6 +287,10 @@ public class Manager extends Employee {
 
         return false;
     }
+    
+    /**
+     * Generates an academic performance report for students.
+     */
 
     public void academicReportPerformance() {
         try {

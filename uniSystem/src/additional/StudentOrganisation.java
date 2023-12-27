@@ -78,14 +78,5 @@ public class StudentOrganisation {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-    
-    
-    
-
-    //                          Operations                                  
-    
-    
 }
 
