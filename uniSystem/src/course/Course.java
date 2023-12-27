@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import data.Data;
@@ -30,6 +31,13 @@ public class Course implements Serializable{
     private String description;
     private int creditsAmount;
     public List<Teacher> instructors;
+    private ResourceBundle messages;
+    
+    private void printMessage(String key, Object... args) {
+        String message = messages.getString(key);
+        System.out.println(args.length > 0 ? String.format(message, args) : message);
+    }
+
 
     /**
      * Constructor for creating a basic Course instance with code, name, and faculty.
@@ -203,18 +211,18 @@ public class Course implements Serializable{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         try {
-            System.out.println("Enter lesson information:");
+            printMessage("addLessonPrompt");
 
-            System.out.print("Lesson Type (lecture/seminar/laboratory): ");
+            System.out.print(messages.getString("lessonTypePrompt"));
             LessonType lessonType = LessonType.valueOf(reader.readLine().toUpperCase());
 
-            System.out.print("Lesson Duration (in minutes): ");
+            System.out.print(messages.getString("lessonDurationPrompt"));
             int duration = Integer.parseInt(reader.readLine());
 
-            System.out.print("Lesson Frequency (times per week): ");
+            System.out.print(messages.getString("lessonFrequencyPrompt"));
             int frequency = Integer.parseInt(reader.readLine());
 
-            System.out.print("Days of the week (comma-separated): ");
+            System.out.print(messages.getString("daysOfWeekPrompt"));
             String[] daysOfWeek = reader.readLine().split(",");
             List<DayOfWeek> lessonDays = new ArrayList<>();
             for (String day : daysOfWeek) {
@@ -225,10 +233,14 @@ public class Course implements Serializable{
             Lesson lesson = new Lesson(lessonType, duration, frequency, lessonDays);
             lessons.add(lesson);
 
-            System.out.println("Lesson information added successfully!");
+            printMessage("lessonAddedSuccess");
         } catch (IOException | IllegalArgumentException e) {
+            printMessage("lessonAddError");
+
             e.printStackTrace();  // Error handling (may need improvement)
         }
+        
+
     }
 
     // Other methods, if necessary

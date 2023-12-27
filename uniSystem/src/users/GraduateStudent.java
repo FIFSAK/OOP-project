@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 import java.util.Collections;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.Vector;
 
 import additional.DissertationProject;
@@ -29,7 +30,12 @@ public class GraduateStudent extends Student implements Researcher, Serializable
 	private GraduateStudentType studentType;
     private DissertationProject dissertationProject;
     private Researcher supervisor;
+    private ResourceBundle messages;
     
+    private void printMessage(String key, Object... args) {
+        String message = messages.getString(key);
+        System.out.println(args.length > 0 ? String.format(message, args) : message);
+    }
     
     
     public Vector<ResearchProject> projects = new Vector<ResearchProject>();
@@ -120,7 +126,7 @@ public class GraduateStudent extends Student implements Researcher, Serializable
 		}
 		hindex = minimalCitations;
 		if(hindex < 3) {
-			System.out.println(new LowHIndex("your hindex lesser than 3"));
+            printMessage("lowHIndexError", hindex);
 		}
     }
 
@@ -156,10 +162,10 @@ public class GraduateStudent extends Student implements Researcher, Serializable
 			ResearchProject rp = new ResearchProject(topic, publishedPapers, participants);
 			projects.add(rp);
 			Data.getInstance().addResearchProject(rp);
-			System.out.println("succes"); 
+            printMessage("successMessage");
 		}
 		else {
-			System.out.println("this project already exist");
+            printMessage("projectAlreadyExistError");
 
 		}
 	}
@@ -168,11 +174,11 @@ public class GraduateStudent extends Student implements Researcher, Serializable
 	public void newPaper(ResearchPaper rp) {
 		if(! Data.getInstance().getResearchPaper().stream().anyMatch(n -> n.equals(rp))) {
 			papers.add(rp);
-			System.out.println("succes"); 
+            printMessage("successMessage");
 			Data.getInstance().addResearchPaper(rp);
 		}
 		else {
-			System.out.println("this project already exist");
+            printMessage("paperAlreadyExistError");
 
 		}
 	}
@@ -182,10 +188,10 @@ public class GraduateStudent extends Student implements Researcher, Serializable
 		if(! Data.getInstance().getResearchProject().stream().anyMatch(n -> n.equals(rp))) {
 			projects.add(rp);
 			Data.getInstance().addResearchProject(rp);
-			System.out.println("succes"); 
+            printMessage("successMessage");
 		}
 		else {
-			System.out.println("this project already exist");
+            printMessage("projectAlreadyExistError");
 		}		
 	}
 
@@ -195,10 +201,10 @@ public class GraduateStudent extends Student implements Researcher, Serializable
 			ResearchPaper rp = new ResearchPaper(name, pages, journal, text);
 			papers.add(rp);
 			Data.getInstance().addResearchPaper(rp);
-			System.out.println("succes"); 
+            printMessage("successMessage");
 		}
 		else {
-			System.out.println("this project already exist");
+            printMessage("paperAlreadyExistError");
 
 		}	};
 
@@ -216,8 +222,10 @@ public class GraduateStudent extends Student implements Researcher, Serializable
 		if (matchingProject.isPresent()) {
 		// Add the found project to the projects vector
 		projects.add(matchingProject.get());
+        printMessage("joinedProjectMessage");
+
 		} else {
-		System.out.println("Not existing project");
+            printMessage("notExistingProjectError");
 		}
 	}
 
@@ -236,8 +244,10 @@ public class GraduateStudent extends Student implements Researcher, Serializable
 		if (matchingPaper.isPresent()) {
 		// Add the found project to the projects vector
 		papers.add(matchingPaper.get());
+        printMessage("joinedPaperMessage");
+
 		} else {
-		System.out.println("Not existing project");
+            printMessage("notExistingPaperError");
 		}
 		
 	}

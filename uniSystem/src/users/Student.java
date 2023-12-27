@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import additional.StudentOrganisation;
@@ -37,6 +38,13 @@ public class Student extends User implements Serializable{
     private Set<Teacher> instructors;
     private String diplomaProject; 
     private double GPA;
+    private ResourceBundle messages;
+    
+    private void printMessage(String key, Object... args) {
+        String message = messages.getString(key);
+        System.out.println(args.length > 0 ? String.format(message, args) : message);
+    }
+
     
     /**
      * Constructs a new Student with the given login and password.
@@ -313,10 +321,10 @@ public class Student extends User implements Serializable{
             Course enrolledCourse = entry.getKey();
             List<Teacher> courseTeachers = (List<Teacher>) enrolledCourse.getInstructors();
 
-            System.out.println("Course: " + enrolledCourse.getNameCourse());
+            printMessage("courseName", enrolledCourse.getNameCourse());
 
             for (Teacher courseTeacher : courseTeachers) {
-                System.out.println("Teacher: " + courseTeacher.getFirstName());
+                printMessage("teacherName", courseTeacher.getFirstName());
             }
 
             System.out.println();
@@ -447,8 +455,10 @@ public class Student extends User implements Serializable{
             courseInfo.put(course, mark);
             // Calculate and update the average GPA for the student
             calculateAverageGPA();
+            printMessage("markAddedSuccessfully");
+
         } else {
-            System.out.println("Error: Student is not enrolled in the course.");
+            printMessage("studentNotEnrolledInCourseError");
         }
     }
 }

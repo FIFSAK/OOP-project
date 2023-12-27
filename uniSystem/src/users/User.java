@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Vector;
 
 import additional.*;
@@ -42,6 +43,7 @@ public class User implements Comparable<User>, Observer, Serializable{
     private UserFactory userFactory;
 	private Observer observer;
     private Comment comment;
+    private ResourceBundle messages;
     
     /**
      * Default constructor for the `User` class.
@@ -95,64 +97,73 @@ public class User implements Comparable<User>, Observer, Serializable{
      * The user is prompted to choose which information to edit through the console.
      */
     
+    private void printMessage(String key, Object... args) {
+        String message = messages.getString(key);
+        System.out.println(args.length > 0 ? String.format(message, args) : message);
+    }
+    
+    public void displayEditOptions() {
+        System.out.println(messages.getString("editOptionsPrompt"));
+        System.out.println(messages.getString("optionFirstName"));
+        System.out.println(messages.getString("optionLastName"));
+        System.out.println(messages.getString("optionPassword"));
+        System.out.println(messages.getString("optionDateOfBirth"));
+        System.out.println(messages.getString("optionPhoneNumber"));
+        System.out.println(messages.getString("optionFamilyStatus"));
+    }
+
+    
 
     public void editData() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
-            System.out.println("Select an option to edit:");
-            System.out.println("1. First Name");
-            System.out.println("2. Last Name");
-            System.out.println("3. Password");
-            System.out.println("4. Date of Birth");
-            System.out.println("5. Phone Number");
-            System.out.println("6. Family Status");
-
+        	displayEditOptions();
+           
             int choice = Integer.parseInt(reader.readLine());
 
             switch (choice) {
                 case 1:
-                    System.out.println("Enter new first name:");
-                    String newFirstName = reader.readLine();
+                	printMessage("enterNewFirstName");                    String newFirstName = reader.readLine();
                     setFirstName(newFirstName);
                     break;
                 case 2:
-                    System.out.println("Enter new last name:");
+                    printMessage("enterNewLastName");
                     String newLastName = reader.readLine();
                     setLastName(newLastName);
                     break;
                 case 3:
-                    System.out.println("Enter new password:");
+                    printMessage("enterNewPassword");
                     String newPassword = reader.readLine();
                     setPassword(newPassword);
                     break;
                 case 4:
-                    System.out.println("Enter new date of birth (format: dd/MM/yyyy):");
+                    printMessage("enterNewDateOfBirthFormat");
                     String dateString = reader.readLine();
                     try {
                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                         Date newDateOfBirth = formatter.parse(dateString);
                         setDateOfBirth(newDateOfBirth);
                     } catch (ParseException e) {
-                        System.out.println("Invalid date format. Please use dd/MM/yyyy format.");
+                        printMessage("invalidDateFormat");
                     }
                     break;
                 case 5:
-                    System.out.println("Enter new phone number:");
+                    printMessage("enterNewPhoneNumber");
                     String newPhoneNumber = reader.readLine();
                     setPhoneNumber(newPhoneNumber);
                     break;
                 case 6:
-                    System.out.println("Enter new family status (SINGLE/MARRIED/OTHER):");
+                    printMessage("enterNewFamilyStatus");
                     String newFamilyStatusStr = reader.readLine().toUpperCase();
                     FamilyStatus newFamilyStatus = FamilyStatus.valueOf(newFamilyStatusStr);
                     setFamilyStatus(newFamilyStatus);
                     break;
 
                 default:
-                    System.out.println("Invalid choice");
+                    printMessage("invalidChoice");
             }
 
-            System.out.println("User data updated successfully!");
+            printMessage("userDataUpdatedSuccessfully");
         } catch (IOException e) {
             e.printStackTrace();
         }}
@@ -383,16 +394,17 @@ public class User implements Comparable<User>, Observer, Serializable{
         Vector<News> newsList = data.getAllNews(); // Assuming data is an instance of Data
 
         if (newsList.isEmpty()) {
-            System.out.println("No news available.");
+        	System.out.println(messages.getString("noNewsAvailable"));
         } else {
-            System.out.println("Latest News:");
+        	System.out.println(messages.getString("latestNews"));
+
             for (int i = 0; i < newsList.size(); i++) {
                 News news = newsList.get(i);
-                System.out.println((i + 1) + ". Title: " + news.getTitle());
-                System.out.println("   Content: " + news.getContent());
+                System.out.println((i + 1) + ". " + messages.getString("title") + ": " + news.getTitle());
+                System.out.println("   " + messages.getString("content") + ": " + news.getContent());
 
                 // Option to view comments
-                System.out.println("   Do you want to view comments? (Y/N)");
+                System.out.println("   " + messages.getString("viewCommentsPrompt"));
                 try {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                     String choice = reader.readLine();
@@ -408,6 +420,8 @@ public class User implements Comparable<User>, Observer, Serializable{
             }
         }
     }
+
+    
     
     /**
      * Displays comments for a given news article.
@@ -417,12 +431,12 @@ public class User implements Comparable<User>, Observer, Serializable{
     private void viewComments(News news) {
         List<Comment> comments = news.getComments();
         if (comments.isEmpty()) {
-            System.out.println("No comments available.");
+            printMessage("noCommentsAvailable");
         } else {
-            System.out.println("Comments:");
+            printMessage("commentsHeader");
             for (Comment comment : comments) {
-                System.out.println("   User: " + comment.getAuthor());
-                System.out.println("   Comment: " + comment.getContent());
+                printMessage("commentAuthor", comment.getAuthor());
+                printMessage("commentContent", comment.getContent());
                 System.out.println("   ---------------");
             }
         }
@@ -436,16 +450,16 @@ public class User implements Comparable<User>, Observer, Serializable{
         List<ResearchPaper> researchPapers = data.getResearchPaper(); // Assuming data is an instance of Data
 
         if (researchPapers.isEmpty()) {
-            System.out.println("University journal is empty.");
+            printMessage("universityJournalEmpty");
         } else {
-            System.out.println("University Journal:");
+            printMessage("universityJournalHeader");
             for (ResearchPaper paper : researchPapers) {
-                System.out.println("Title: " + paper.name);
-                System.out.println("Authors: " + paper.getAuthorsOfPaper(paper));
-                System.out.println("Pages: " + paper.pages);
-                System.out.println("Journal: " + paper.journal);
-                System.out.println("Text: " + paper.text);
-                System.out.println("Citations: " + paper.getCitation(Format.PLAIN_TEXT)); 
+                printMessage("paperTitle", paper.name);
+                printMessage("paperAuthors", paper.getAuthorsOfPaper(paper));
+                printMessage("paperPages", paper.pages);
+                printMessage("paperJournal", paper.journal);
+                printMessage("paperText", paper.text);
+                printMessage("paperCitations", paper.getCitation(Format.PLAIN_TEXT));
             }
         }
     }
