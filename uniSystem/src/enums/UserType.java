@@ -1,6 +1,8 @@
 package enums;
 
-public enum UserType {
+import java.io.Serializable;
+
+public enum UserType implements Serializable{
 	EMPLOYEE, STUDENT, DEFAULT, MASTER, PHD
 
 }

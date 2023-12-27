@@ -1,10 +1,11 @@
 package additional;
 
+import java.io.Serializable;
 import java.util.Vector;
 
 import users.Student;
 
-public class StudentOrganisation {
+public class StudentOrganisation implements Serializable{
     
     /**
     * @generated

@@ -1,5 +1,6 @@
 package users;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import java.util.List;
@@ -11,7 +12,7 @@ import enums.TeacherType;
 import researcher.ResearchPaper;
 import researcher.ResearcherDecorator;
 
-public class Teacher extends Employee {
+public class Teacher extends Employee implements Serializable{
 	
 	private Set<Course> courses;
     private TeacherType post;

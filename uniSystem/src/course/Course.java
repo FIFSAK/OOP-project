@@ -3,6 +3,7 @@ package course;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ import enums.LessonType;
 import users.*;
 
 
-public class Course {
+public class Course implements Serializable{
     private String codeCourse;
     private String nameCourse;
     private List<Course> prerequisites; // Список курсов-пререквизитов
@@ -28,6 +29,7 @@ public class Course {
 
     public Course(String codeCourse, String nameCourse, Faculties faculty) {
         this.codeCourse = codeCourse;
+        this.nameCourse = nameCourse;
         this.faculty = faculty;
         this.instructors = new ArrayList<>();
         this.lessons = new ArrayList<>();

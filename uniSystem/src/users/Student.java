@@ -1,6 +1,7 @@
 package users;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,7 +19,7 @@ import enums.Gender;
 import researcher.ResearchPaper;
 import researcher.ResearcherDecorator;
 
-public class Student extends User {
+public class Student extends User implements Serializable{
 
     private Faculties faculty;
     private int yearOfStudy;

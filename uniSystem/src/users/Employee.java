@@ -10,7 +10,7 @@ import enums.Gender;
 import researcher.ResearchPaper;
 
 
-public class Employee extends User implements Payable {
+public class Employee extends User implements Payable, Serializable{
 
 	private String workDepartment;
     private int salary;

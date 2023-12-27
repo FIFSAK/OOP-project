@@ -1,9 +1,11 @@
 package additional;
 
+import java.io.Serializable;
+
 import researcher.ResearchProject;
 import users.GraduateStudent;
 
-public class DissertationProject {
+public class DissertationProject implements Serializable {
     
     private String thesis;
     private String main;

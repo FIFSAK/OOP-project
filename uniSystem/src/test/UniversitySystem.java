@@ -4,7 +4,9 @@ import java.io.*;
 import java.util.*;
 
 import additional.*;
+import course.Course;
 import data.Data;
+import enums.Faculties;
 import enums.UserType;
 import users.*;
 
@@ -104,8 +106,29 @@ public class UniversitySystem {
 	                    student.viewCourses();
 	                    break;
 	                case 4:
-	                    // Logic to register for a course
+	                    System.out.println("Enter codeCourse:");
+	                    String codeCourse = reader.readLine();
+	                    System.out.println("Enter nameCourse:");
+	                    String nameCourse = reader.readLine();
+	                    System.out.println("Choose faculty (SITE, BS, SEOGI, SG, ISE, SMSGT, SAM, SCE, KMA):");
+	                    String facultyInput = reader.readLine().toUpperCase();
+
+	                    Faculties faculty;
+	                    if (facultyInput.equals("SITE")) {
+	                        faculty = Faculties.SITE;
+	                    } else if (facultyInput.equals("BS")) {
+	                        faculty = Faculties.BS;
+	                    } else if (facultyInput.equals("SEOGI")) {
+	                        faculty = Faculties.SEOGI;
+	                    } // Add other faculties here
+	                    else {
+	                        System.out.println("Invalid faculty. Please try again.");
+	                        break;
+	                    }
+
+	                    student.registerToCourse(new Course(codeCourse, nameCourse, faculty));
 	                    break;
+
 	                case 5:
 	                    student.viewTranscript();
 	                    break;
@@ -202,13 +225,15 @@ public class UniversitySystem {
 			if (user instanceof Student) {
 				Student student = (Student) user;
 				menuStudent(student);
+				return;
 
-			} else if (user instanceof Student) {
+			} else if (user instanceof Employee) {
 				Employee employee = (Employee) user;
 				menuEmployee(employee);
+				return;
 			}
 			menuUser(user);
-			
+			return;
 //			System.out.println(messages.getString("loginSuccess"));
 		} catch (IOException e) {
 			e.printStackTrace();

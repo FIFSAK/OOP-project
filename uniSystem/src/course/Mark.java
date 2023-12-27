@@ -3,10 +3,13 @@ package course;
 import users.*;
 import enums.*;
 import researcher.*;
+
+import java.io.Serializable;
+
 import additional.*;
 import course.*;
 
-public class Mark {
+public class Mark implements Serializable{
     
     private double secondAttestation;
     private double firstAttestation;

@@ -1,6 +1,7 @@
 package users;
 
 import java.io.InvalidClassException;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Vector;
@@ -15,7 +16,7 @@ import researcher.ResearchProject;
 import researcher.Researcher;
 import researcher.ResearcherDecorator;
 
-public class GraduateStudent extends Student implements Researcher {
+public class GraduateStudent extends Student implements Researcher, Serializable {
 
 	private GraduateStudentType studentType;
     private DissertationProject dissertationProject;

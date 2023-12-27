@@ -1,6 +1,8 @@
 package enums;
 
-public enum TeacherType {
+import java.io.Serializable;
+
+public enum TeacherType implements Serializable{
     LECTURER,
     SENIOR_LECTURER,
     ASSISTANT_PROFESSOR,

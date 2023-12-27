@@ -1,5 +1,6 @@
 package users;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.xml.crypto.Data;
@@ -9,7 +10,7 @@ import enums.FamilyStatus;
 import enums.Gender;
 import researcher.ResearchPaper;
 
-public class Dean extends Employee {
+public class Dean extends Employee implements Serializable {
    
 	public Dean(String firstName, String lastName, String password, String login,
 			Date dateOfBirth, String phoneNumber, int iin,

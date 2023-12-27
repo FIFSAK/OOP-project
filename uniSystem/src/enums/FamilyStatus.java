@@ -1,5 +1,7 @@
 package enums;
 
-public enum FamilyStatus {
+import java.io.Serializable;
+
+public enum FamilyStatus implements Serializable{
 
 }

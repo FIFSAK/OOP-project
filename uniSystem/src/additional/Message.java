@@ -8,7 +8,7 @@ import users.*;
 
 import users.*;
 
-public class Message {
+public class Message implements Serializable {
     
     private User sender;
     private User receiver;

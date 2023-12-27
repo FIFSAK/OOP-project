@@ -1,10 +1,11 @@
 package additional;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import users.User;
 
-public class Comment {
+public class Comment implements Serializable {
     
     private String content;
     private Date date;

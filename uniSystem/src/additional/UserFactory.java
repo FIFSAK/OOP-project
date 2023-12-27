@@ -7,12 +7,13 @@ import users.Employee;
 import users.Student;
 import users.User;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 
 import data.Data;
 
-public class UserFactory {
+public class UserFactory implements Serializable{
     private static int studentCount = 1;
     private static int employeeCount = 1;
 

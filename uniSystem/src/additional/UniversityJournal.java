@@ -1,5 +1,6 @@
 package additional;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -9,7 +10,7 @@ import java.util.List;
 import data.Data;
 import researcher.ResearchPaper;
 
-public class UniversityJournal {
+public class UniversityJournal implements Serializable{
     Data data = Data.getInstance();
     private List<User> observers;
     private List<ResearchPaper> researchPapers ;

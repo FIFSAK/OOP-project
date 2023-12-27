@@ -1,5 +1,6 @@
 package additional;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Objects;
 
 import users.*;
 
-public class News {
+public class News implements Serializable{
     
     private String title;
     private String content;

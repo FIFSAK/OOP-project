@@ -1,5 +1,6 @@
 package users;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ import enums.Gender;
 import enums.ManagerType;
 import researcher.ResearchPaper;
 
-public class Manager extends Employee {
+public class Manager extends Employee implements Serializable{
 
     public Manager(String firstName, String lastName, String password, String login, String userId,
 			ResearchPaper subscribedJournals, String name, Date dateOfBirth, String phoneNumber, int iin,

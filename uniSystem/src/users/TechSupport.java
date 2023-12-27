@@ -1,10 +1,11 @@
 package users;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import enums.OrderStatus;
 
-public class TechSupport {
+public class TechSupport implements Serializable{
 	
 	private static TechSupport instance;
     private ArrayList<Order> orders;

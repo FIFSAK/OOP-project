@@ -1,10 +1,11 @@
 package users;
 
+import java.io.Serializable;
 import java.util.Objects;
 import enums.OrderStatus;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Order {
+public class Order implements Serializable{
     private static int orderIdCounter = 1;
 
     private int orderId;

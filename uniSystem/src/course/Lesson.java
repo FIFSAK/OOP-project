@@ -3,13 +3,14 @@ package course;
 import users.*;
 import enums.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import additional.*;
 import course.*;
 
-public class Lesson {
+public class Lesson implements Serializable{
     private LessonType lessonType;
     private int duration; // Продолжительность одного урока (в минутах)
     private int frequency; // Сколько раз в неделю проводится урок
